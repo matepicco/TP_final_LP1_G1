@@ -127,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cDragon.cpp" />
+    <ClCompile Include="cFormaAtaque.h" />
     <ClCompile Include="TP_final_LP1_G1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cDragon.h" />
+    <ClInclude Include="cJinete.h" />
+    <ClInclude Include="cVikingo.h" />
+    <ClInclude Include="Headers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
