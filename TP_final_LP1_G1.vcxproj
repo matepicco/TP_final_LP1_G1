@@ -128,8 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cDragon.cpp" />
+    <ClCompile Include="cFormaAtaque.cpp" />
     <ClCompile Include="cFormaAtaque.h" />
-    <ClCompile Include="TP_final_LP1_G1.cpp" />
+    <ClCompile Include="cJinete.cpp" />
+    <ClCompile Include="cVikingo.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDragon.h" />
