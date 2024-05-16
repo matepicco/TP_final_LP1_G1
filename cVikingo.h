@@ -1,28 +1,28 @@
 #pragma once
-#include "cVikingo.h"
+#include "Headers.h"
 
-class cJinete :public cVikingo
+class cDragon;
+
+class cVikingo
 {
 private:
-	string nombreJ;
-	string apodoD;
-	time_t fechaNac;
-	string caractFisicasJ;
-	eResultado TrainResult;
-	cDragon* dragon;
+	string nombreV;
+	string apellidoV;
+	string posicionV;
+	unsigned int DragonesEliminados;
 
 public:
-	cJinete(string nom, time_t fecha, string caracfisic);
-	~cJinete();
-	string get_nombreJ();
-	void incorporarDragon(cDragon* ptrDragon);
-	void trabajarBerk();
-	void atacarDragones();
-	void domar();
-	eResultado get_trainresult();
-	string get_apodo();
-	string get_caracteristicas();
-	void set_trainresult(eResultado resultado);
+	cVikingo(string nombrev, string apellidov, string posicionv, unsigned int dragoneliminado);
+	string get_nombreV();
+	string get_apellido();
+	string get_posicionV();
+	unsigned int get_DragonesEliminados();
+	void set_posicionV(string pos);
+	void set_DragonesEliminados(unsigned int dragoneseliminados);
+	void trabajar();
+	void atacarDragones(cDragon* objD);
+	unsigned int DragonesTerminados(cDragon* objD);
 
-	~cJinete();
+	~cVikingo();
+
 };
