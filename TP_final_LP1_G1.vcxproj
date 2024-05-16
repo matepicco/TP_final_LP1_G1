@@ -131,12 +131,14 @@
     <ClCompile Include="cFormaAtaque.cpp" />
     <ClCompile Include="cFormaAtaque.h" />
     <ClCompile Include="cJinete.cpp" />
+    <ClCompile Include="cStoico.cpp" />
     <ClCompile Include="cVikingo.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDragon.h" />
     <ClInclude Include="cJinete.h" />
+    <ClInclude Include="cStoico.h" />
     <ClInclude Include="cVikingo.h" />
     <ClInclude Include="Headers.h" />
   </ItemGroup>
