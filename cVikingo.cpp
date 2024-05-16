@@ -1,5 +1,9 @@
 #include "cVikingo.h"
 
+cVikingo::cVikingo()
+{
+}
+
 cVikingo::cVikingo(string nombrev, string apellidov, string posicionv, unsigned int dragoneliminado)
 {
     this->nombreV = nombrev;
@@ -45,13 +49,14 @@ void cVikingo::trabajar()
 
 void cVikingo::atacarDragones(cDragon* objD)
 {
-    //atacandooooooooooooo
+    //chachacha..................
+
+    if()
 }
 
-unsigned int cVikingo::DragonesTerminados(cDragon* objD)
+unsigned int cVikingo::TerminarDragon()
 {
-    //eeeeeeeeeeeeeeeeeeeeeee nose que hace
-    return 0;
+    this->DragonesEliminados++;
 }
 
 cVikingo::~cVikingo()

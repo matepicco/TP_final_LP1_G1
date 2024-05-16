@@ -13,7 +13,7 @@ private:
 	bool domadoD;
 	cFormaAtaque* formaataque;
 
-	list <cFormaAtaque*> listaformaataque;
+	list <cFormaAtaque*> listaformaataque;// para mi pincho lista, solo tiene una forma
 
 public:
 	cDragon(string nombred, string caracteristicad, string tamaniod, string colord, bool estadod, bool domadod);
@@ -29,6 +29,7 @@ public:
 	void set_estado(bool estado);
 	bool get_domado();
 	void set_domado(bool domado);
+	void adquirirAtaque(cFormaAtaque* ataque);
 
 	~cDragon();
 };

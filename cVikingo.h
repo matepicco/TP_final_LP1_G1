@@ -9,9 +9,10 @@ private:
 	string nombreV;
 	string apellidoV;
 	string posicionV;
-	unsigned int DragonesEliminados;
+	unsigned int DragonesEliminados;//Esto enrealidad en el TP aparece como un Enum, tipo positivo negativo
 
 public:
+	cVikingo();
 	cVikingo(string nombrev, string apellidov, string posicionv, unsigned int dragoneliminado);
 	string get_nombreV();
 	string get_apellido();
@@ -21,7 +22,7 @@ public:
 	void set_DragonesEliminados(unsigned int dragoneseliminados);
 	void trabajar();
 	void atacarDragones(cDragon* objD);
-	unsigned int DragonesTerminados(cDragon* objD);
+	unsigned int TerminarDragon();
 
 	~cVikingo();
 };

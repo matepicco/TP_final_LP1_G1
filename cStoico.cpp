@@ -1,18 +1,60 @@
 #include "cStoico.h"
 
+
 cStoico::cStoico()
 {
-	this->listaVikingos = list<cVikingo*>(); //auspicia mati larrosa
+	this->listaVikingos = list<cVikingo*>(); //auspicia mati larrosa- N: jsjsj que
 }
 
-void cStoico::agregarVikingo(cVikingo& objV)
+void cStoico::agregarVikingo(cVikingo* objV)
 {
-	this->listaVikingos.push_back(&objV);
+	this->listaVikingos.push_back(objV);
 }
 
-void cStoico::eliminarVikingo(cVikingo* objV)
+void cStoico::eliminarVikingo(cVikingo* objV)//Este metodo tiene que ir en un catch porque tiene throw
 {
-	this->listaVikingos.pop_back(); //?
+    list<cVikingo*>::iterator it = this->listaVikingos.begin();
+    bool borrado = false;
+
+    while (it != this->listaVikingos.end()) {
+
+        if ((*it)->get_nombreV() == objV->get_nombreV()) {
+            this->listaVikingos.erase(it);
+            borrado = true;
+            break;
+        }
+        it++;
+    }
+
+    if (!borrado) {
+        throw new exception("Error: No se encontro el libro");
+    }
+}
+
+cVikingo* cStoico::get_vikingoxNom(string nombre)
+{
+    list<cVikingo*>::iterator it = this->listaVikingos.begin();
+
+    while (nombre != (*it)->get_nombreV()) { // < o <= ???
+        it++;
+        if (it == this->listaVikingos.end()) {
+            throw new exception("Error: No se encontro el libro");
+        }
+    }
+    return *it;
+}
+
+cVikingo* cStoico::get_vikingoxPos(string pos)//Tambien debe ir en un trycatch
+{
+    list<cVikingo*>::iterator it = this->listaVikingos.begin();
+
+    while (pos != (*it)->get_posicionV()) { // < o <= ???
+        it++;
+        if (it == this->listaVikingos.end()) {
+            throw new exception("Error: No se encontro el libro");
+        }
+    }
+    return *it;
 }
 
 int cStoico::getcantVikCreados()

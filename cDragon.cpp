@@ -66,6 +66,11 @@ void cDragon::set_domado(bool domado)
 	this->domadoD = domado;
 }
 
+void cDragon::adquirirAtaque(cFormaAtaque* ataque)
+{
+	this->listaformaataque.push_back(ataque);
+}
+
 cDragon::~cDragon()
 {
 }

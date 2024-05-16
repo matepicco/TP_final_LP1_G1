@@ -8,8 +8,11 @@ private:
 	list <cVikingo*> listaVikingos;
 public:
 	cStoico();
-	void agregarVikingo(cVikingo& objV);
+	void agregarVikingo(cVikingo* objV);
 	void eliminarVikingo(cVikingo* objV);
+	cVikingo* get_vikingoxNom(string nombre);
+	cVikingo* get_vikingoxPos(string pos);
+
 	static int getcantVikCreados();
 	~cStoico();
 

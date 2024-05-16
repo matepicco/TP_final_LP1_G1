@@ -1,6 +1,8 @@
 #include "cJinete.h"
 
-cJinete::cJinete(string nom, time_t fecha, string caracfisic)
+
+
+cJinete::cJinete(string nom, time_t fecha, string caracfisic):cVikingo()
 {
     this->nombreJ = nom;
     this->fechaNac = fecha;;
