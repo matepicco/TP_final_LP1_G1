@@ -26,7 +26,7 @@ void cDragon::entrenarDragon()
 	//entrenando
 }
 
-void cDragon::bajaDragon()//hace esto??
+void cDragon::bajaDragon()//hace esto??// seria como un set cuando lo matan?
 {
 	this->estadoD = false;
 }

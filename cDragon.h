@@ -6,7 +6,7 @@ class cDragon
 {
 private:
 	string nombreD;
-	string  caracteristicaD;
+	string caracteristicaD;
 	string tamanioD;
 	string colorD;
 	bool estadoD;
