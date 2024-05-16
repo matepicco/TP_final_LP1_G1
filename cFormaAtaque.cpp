@@ -1,12 +1,12 @@
 #include "cFormaAtaque.h"
 
-cFormaAtaque::cFormaAtaque(eTipo tipoataque, eDamage tipodanio)
+cFormaAtaque::cFormaAtaque(eTipoAtaque tipoataque, eDamage tipodanio)
 {
 	this->tipodeataque = tipoataque;
 	this->tipodedanio = tipodanio;
 }
 
-void cFormaAtaque::CambiarTipo(eTipo tipo)
+void cFormaAtaque::CambiarTipo(eTipoAtaque tipo)
 {
 	this->tipodeataque = tipo;
 }
@@ -16,7 +16,7 @@ eDamage cFormaAtaque::get_danio()
 	return this->tipodedanio;
 }
 
-eTipo cFormaAtaque::get_tipo()
+eTipoAtaque cFormaAtaque::get_tipoataque()
 {
 	return this->tipodeataque;
 }

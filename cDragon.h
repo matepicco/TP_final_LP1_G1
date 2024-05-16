@@ -6,22 +6,21 @@ class cDragon
 {
 private:
 	string nombreD;
-	string caracteristicaD;
+	eHabilidad caracteristicaD;
 	string tamanioD;
 	string colorD;
 	bool estadoD;
 	bool domadoD;
-	cFormaAtaque* formaataque;
 
-	list <cFormaAtaque*> listaformaataque;// para mi pincho lista, solo tiene una forma
+	list <cFormaAtaque*> listaformaataque;//porque puede haber defensa etc.
 
 public:
-	cDragon(string nombred, string caracteristicad, string tamaniod, string colord, bool estadod, bool domadod);
+	cDragon(string nombred, eHabilidad caracteristicad, string tamaniod, string colord);
 	~cDragon();
-	void altaNombre(string nom);
-	void entrenarDragon();
+	void altaNombre();//de acuerdo a las caracteristicas o ataque, se llama de tal manera
+	
 	void bajaDragon();
-	string get_caracteristica();
+	eHabilidad get_caracteristica();
 	string get_nombre();
 	string get_tamanio();
 	string get_color();
@@ -29,8 +28,10 @@ public:
 	void set_estado(bool estado);
 	bool get_domado();
 	void set_domado(bool domado);
-	void adquirirAtaque(cFormaAtaque* ataque);
+	friend 	void AtacarDragon(cDragon& objD);//Porque me pide una implementacion si justamente esta hecha en vikingo
 
+	void atacarDragon();
+	void entrenarDragon();
 	~cDragon();
 };
 

@@ -13,16 +13,16 @@ private:
 
 public:
 	cVikingo();
-	cVikingo(string nombrev, string apellidov, string posicionv, unsigned int dragoneliminado);
+	cVikingo(string nombrev, string apellidov, string posicionv);
 	string get_nombreV();
 	string get_apellido();
 	string get_posicionV();
 	unsigned int get_DragonesEliminados();
-	void set_posicionV(string pos);
-	void set_DragonesEliminados(unsigned int dragoneseliminados);
+	void set_posicionV(string pos);//no se haria esto en trabajar?
+	/////////////////////////////////
 	void trabajar();
-	void atacarDragones(cDragon* objD);
-	unsigned int TerminarDragon();
+	void AtacarDragon(cDragon& objD);
+	void TerminarDragon();
 
 	~cVikingo();
 };

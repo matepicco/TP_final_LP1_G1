@@ -1,19 +1,28 @@
 #include "cDragon.h"
 
-cDragon::cDragon(string nombred, string caracteristicad, string tamaniod, string colord, bool estadod, bool domadod)
+cDragon::cDragon(string nombred, eHabilidad caracteristicad, string tamaniod, string colord)
 {
 	this->nombreD = nombred;
 	this->caracteristicaD = caracteristicad;
 	this->tamanioD = tamaniod;
 	this->colorD = colord;
-	this->estadoD = estadod;
-	this->domadoD = domadod;
-	//this->listaforma = nullptr;//no permite en inicializar en null (agregacion)
+	this->estadoD = true;
+	this->domadoD = false;
 }
 
-void cDragon::altaNombre(string nom)
+void cDragon::altaNombre()
 {
-	this->nombreD = nom;
+//eeeeeee lo que dice la def, tonto esta ahi, para que venis a verlo aca, tonto
+}
+
+void cDragon::atacarDragon()
+{
+}
+
+void cDragon::entrenarDragon()
+{
+	//lista de ifs que ven su habilidad y de acuerdo a esta establecen la forma de ataque
+	//es lineal, digamos una habilidad va a una forma de ataque
 }
 
 bool cDragon::get_domado()
@@ -21,17 +30,12 @@ bool cDragon::get_domado()
 	return this->domadoD;
 }
 
-void cDragon::entrenarDragon()
-{
-	//entrenando
-}
-
 void cDragon::bajaDragon()//hace esto??// seria como un set cuando lo matan?
 {
 	this->estadoD = false;
 }
 
-string cDragon::get_caracteristica()
+eHabilidad cDragon::get_caracteristica()
 {
 	return this->caracteristicaD;
 }
@@ -64,11 +68,6 @@ void cDragon::set_estado(bool estado)
 void cDragon::set_domado(bool domado)
 {
 	this->domadoD = domado;
-}
-
-void cDragon::adquirirAtaque(cFormaAtaque* ataque)
-{
-	this->listaformaataque.push_back(ataque);
 }
 
 cDragon::~cDragon()

@@ -24,6 +24,8 @@ string cJinete::get_nombreJ()
 void cJinete::incorporarDragon(cDragon* ptrDragon)
 {
     this->dragon = ptrDragon;
+    domar();//le pone domado al drg
+    this->dragon->entrenarDragon();//llama al metodo de dragon y lo entrena
 }
 
 void cJinete::trabajarBerk()
@@ -31,13 +33,14 @@ void cJinete::trabajarBerk()
     //AGARRANDO PALA?
 }
 
-void cJinete::atacarDragones()
-{//atacandooooooooooooooooooooooooooooooooooooooo
+void cJinete::RelacionarseDragon()
+{
+
 }
 
 void cJinete::domar()
 {
-    //domado te tienen dragon puto
+    this->dragon->set_domado(true);
 }
 
 eResultado cJinete::get_trainresult()
@@ -58,4 +61,9 @@ string cJinete::get_caracteristicas()
 void cJinete::set_trainresult(eResultado resultado)
 {
     this->TrainResult = resultado;
+}
+
+void cJinete::manejarDragon()
+{
+ //aca llama al metodo de atacar en el dragon q esta montando
 }

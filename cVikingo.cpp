@@ -4,12 +4,11 @@ cVikingo::cVikingo()
 {
 }
 
-cVikingo::cVikingo(string nombrev, string apellidov, string posicionv, unsigned int dragoneliminado)
+cVikingo::cVikingo(string nombrev, string apellidov, string posicionv)
 {
     this->nombreV = nombrev;
     this->apellidoV = apellidov;
     this->posicionV = posicionv;
-    this->DragonesEliminados = dragoneliminado;
 }
 
 string cVikingo::get_nombreV()
@@ -37,24 +36,23 @@ void cVikingo::set_posicionV(string pos)
     this->posicionV = pos;
 }
 
-void cVikingo::set_DragonesEliminados(unsigned int dragoneseliminados)
+
+void cVikingo::trabajar()//asigna una posicion
 {
-    this->DragonesEliminados = dragoneseliminados;
+   //seria como elegir la posicion, granjero, stripper, entrenador, corredor de bolsa, etc.
+}  //entrenador, retirado, granjero, 
+
+void cVikingo::AtacarDragon(cDragon& objD)
+{
+    //random 0 o 1 que hacer q muera el dragon o muera l vikin
+    objD.get_estado() = false;
+    TerminarDragon();
+
+    //mas adelante iria mas desarrollado con el tema de comparar habilidades
+    //o que le baje la vida o simplemente vivan los dos
 }
 
-void cVikingo::trabajar()
-{
-    //trabajandoooooooooooooooooooooo
-}
-
-void cVikingo::atacarDragones(cDragon* objD)
-{
-    //chachacha..................
-
-    if()
-}
-
-unsigned int cVikingo::TerminarDragon()
+void cVikingo::TerminarDragon()
 {
     this->DragonesEliminados++;
 }
