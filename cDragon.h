@@ -1,9 +1,9 @@
 #pragma once
 #include "Headers.h"
 #include "cFormaAtaque.h"
-#include "cVikingo.h"
+#include "cGuerrero.h"
 
-class cVikingo; 
+class cGuerrero; 
 
 class cDragon
 {
@@ -32,7 +32,7 @@ public:
 	bool get_domado();
 	void set_domado(bool domado);
 
-	friend void cVikingo::TerminarDragon(cDragon* objD);
+	friend void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero *objG);
 
 	void atacarDragon();
 	void entrenarDragon();

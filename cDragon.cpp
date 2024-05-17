@@ -74,11 +74,14 @@ cDragon::~cDragon()
 {
 }
 
-void cVikingo::TerminarDragon(cDragon* objD)
-{//random 0 o 1 que hacer q muera el dragon o muera l vikin
-		objD->set_estado(false);
-		this->DragonesEliminados++;
+void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero *objG)
+{
+	//random 0 o 1 que hace q muera el dragon o muera el vikingo
+	objD->set_estado(false);
+	objG->set_DragonesEliminados(1);
 
-		//mas adelante iria mas desarrollado con el tema de comparar habilidades
-		//o que le baje la vida o simplemente vivan los dos
+	/*
+		* constará de un enfrentamiento entre dragon y el vikingo para contrastar las habilidades y deb
+		*más desarrollado aún: bajen la vida y acabe el enfrentamiento y vivan los dos
+		*/
 }

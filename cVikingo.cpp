@@ -25,9 +25,14 @@ string cVikingo::get_posicionV()
     return this->posicionV;
 }
 
-bool cVikingo::get_DragonesEliminados()
+unsigned int  cVikingo::get_DragonesEliminados()
 {
     return this->DragonesEliminados;
+}
+
+void cVikingo::set_DragonesEliminados(unsigned int cant)
+{
+    this->DragonesEliminados = this->DragonesEliminados + cant;
 }
 
 void cVikingo::set_posicionV(string pos)
