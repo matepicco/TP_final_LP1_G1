@@ -1,6 +1,9 @@
 #pragma once
 #include "Headers.h"
 #include "cFormaAtaque.h"
+#include "cVikingo.h"
+
+class cVikingo; 
 
 class cDragon
 {
@@ -28,7 +31,8 @@ public:
 	void set_estado(bool estado);
 	bool get_domado();
 	void set_domado(bool domado);
-	friend 	void AtacarDragon(cDragon& objD);//Porque me pide una implementacion si justamente esta hecha en vikingo
+
+	friend void cVikingo::TerminarDragon(cDragon* objD);
 
 	void atacarDragon();
 	void entrenarDragon();

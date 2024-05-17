@@ -2,35 +2,26 @@
 
 
 
-cJinete::cJinete(string nom, time_t fecha, string caracfisic):cVikingo()
+cJinete::cJinete(string nom, string ape, time_t fecha, string caracfisic):cVikingo(nom,ape,"")
 {
-    this->nombreJ = nom;
+
     this->fechaNac = fecha;;
     this->caractFisicasJ = caracfisic;
     this->apodoD = "";
     this->TrainResult = NoAsistio;
-    this->dragon = nullptr;
+
+    this->listaDragones = list<cDragon*>();
 }
 
 cJinete::~cJinete()
 {
 }
 
-string cJinete::get_nombreJ()
-{
-    return this->nombreJ;
-}
-
 void cJinete::incorporarDragon(cDragon* ptrDragon)
 {
-    this->dragon = ptrDragon;
+    this->listaDragones = ptrDragon;
     domar();//le pone domado al drg
-    this->dragon->entrenarDragon();//llama al metodo de dragon y lo entrena
-}
-
-void cJinete::trabajarBerk()
-{
-    //AGARRANDO PALA?
+    this->listaDragones->entrenarDragon();//llama al metodo de dragon y lo entrena
 }
 
 void cJinete::RelacionarseDragon()
@@ -40,7 +31,7 @@ void cJinete::RelacionarseDragon()
 
 void cJinete::domar()
 {
-    this->dragon->set_domado(true);
+    this->listaDragones->set_domado(true);
 }
 
 eResultado cJinete::get_trainresult()

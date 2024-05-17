@@ -73,3 +73,12 @@ void cDragon::set_domado(bool domado)
 cDragon::~cDragon()
 {
 }
+
+void cVikingo::TerminarDragon(cDragon* objD)
+{//random 0 o 1 que hacer q muera el dragon o muera l vikin
+		objD->set_estado(false);
+		this->DragonesEliminados++;
+
+		//mas adelante iria mas desarrollado con el tema de comparar habilidades
+		//o que le baje la vida o simplemente vivan los dos
+}

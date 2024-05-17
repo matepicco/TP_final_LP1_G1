@@ -4,7 +4,7 @@ int cStoico::cantVikCreados = 0;
 
 cStoico::cStoico()
 {
-	this->listaVikingos = list<cVikingo*>(); //auspicia mati larrosa- N: jsjsj que
+	this->listaVikingos = list<cVikingo*>(); 
 }
 
 void cStoico::agregarVikingo(cVikingo* objV)
@@ -31,6 +31,8 @@ void cStoico::eliminarVikingo(cVikingo* objV)//Este metodo tiene que ir en un ca
     if (!borrado) {
         throw new exception("Error: No se encontro el vikingo");
     }
+
+    this->cantVikCreados--;
 }
 
 cVikingo* cStoico::get_vikingoxNom(string nombre)
