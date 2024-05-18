@@ -8,15 +8,51 @@ cDragon::cDragon(string nombred, eHabilidad caracteristicad, string tamaniod, st
 	this->colorD = colord;
 	this->estadoD = true;
 	this->domadoD = false;
+
+	this->listaFA = list<cFormaAtaque*>();
 }
 
-void cDragon::altaNombre()
+void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero* objG)
 {
-//eeeeeee lo que dice la def, tonto esta ahi, para que venis a verlo aca, tonto
+	/*
+	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
+	* más desarrollado aún: bajen la vida,segun danio,acabe el enfrentamiento y vivan los dos...
+	*/
+	objD->set_estado(false);
+	objG->set_DragonesEliminados(1);
+
 }
 
-void cDragon::atacarDragon()
-{
+void cDragon::atacarDragon(cDragon *objD)
+{//esta funcion mimebro de el objeto X compara sus atributos con los de un dragon externo Y
+	
+	//creo dos iteradores, recorran ambas listas
+	list<cFormaAtaque*>::iterator itObjP = objD->listaFA.begin();
+	list<cFormaAtaque*>::iterator itObjL = this->listaFA.begin();
+	bool flag = false;
+
+	while (itObjP != this->listaFA.end()) 
+	{
+
+		if ((*itObjP)->get_danio() <= (*itObjL)->get_danio()) //el objeto mas debil, pierde. se elimina respectiv.
+		{	
+			//accedo al jinete y con un set cambio el atb del objeto dEliminados.
+			flag = true;
+			break;
+		}
+		itObjP++;
+		itObjL++;
+
+	}
+
+	/*
+	opciones - Tipos de exception.
+	dragon no tenga forma ataque, no entra.
+	una llega al final antes q la otra, se dejan FA sin comparar
+	*/
+	if (!flag) {
+		throw new exception("Error: Tie");
+	}
 }
 
 void cDragon::entrenarDragon()
@@ -25,12 +61,16 @@ void cDragon::entrenarDragon()
 	//es lineal, digamos una habilidad va a una forma de ataque
 }
 
+void cDragon::altaNombre()
+{//de acuerdo a las caracteristicas o ataque, al dragon se le asigna un nombre
+}
+
 bool cDragon::get_domado()
 {
 	return this->domadoD;
 }
 
-void cDragon::bajaDragon()//hace esto??// seria como un set cuando lo matan?
+void cDragon::bajaDragon()//(setter) llamado cuando dragon eliminado
 {
 	this->estadoD = false;
 }
@@ -72,16 +112,4 @@ void cDragon::set_domado(bool domado)
 
 cDragon::~cDragon()
 {
-}
-
-void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero *objG)
-{
-	//random 0 o 1 que hace q muera el dragon o muera el vikingo
-	objD->set_estado(false);
-	objG->set_DragonesEliminados(1);
-
-	/*
-		* constará de un enfrentamiento entre dragon y el vikingo para contrastar las habilidades y deb
-		*más desarrollado aún: bajen la vida y acabe el enfrentamiento y vivan los dos
-		*/
 }

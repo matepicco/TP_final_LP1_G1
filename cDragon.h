@@ -5,6 +5,7 @@
 
 class cGuerrero; 
 
+//posible herencia: dragones se comportan distinto
 class cDragon
 {
 private:
@@ -15,13 +16,13 @@ private:
 	bool estadoD;
 	bool domadoD;
 
-	list <cFormaAtaque*> listaformaataque;//porque puede haber defensa etc.
+	list <cFormaAtaque*> listaFA;//posible defensa, diferentes tipos.
 
 public:
 	cDragon(string nombred, eHabilidad caracteristicad, string tamaniod, string colord);
 	~cDragon();
-	void altaNombre();//de acuerdo a las caracteristicas o ataque, se llama de tal manera
-	
+
+	void altaNombre();
 	void bajaDragon();
 	eHabilidad get_caracteristica();
 	string get_nombre();
@@ -34,7 +35,7 @@ public:
 
 	friend void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero *objG);
 
-	void atacarDragon();
+	void atacarDragon(cDragon* objD);
 	void entrenarDragon();
 	~cDragon();
 };
