@@ -5,13 +5,13 @@ class cFormaAtaque
 {
 private:
 	eTipoAtaque tipodeataque;
-	eDamage tipodedanio;
-
+	eDanio tipodedanio;
 public:
-	cFormaAtaque(eTipoAtaque tipoataque, eDamage tipodanio);
+	cFormaAtaque(eTipoAtaque tipoataque, eDanio tipodanio);
 	void CambiarTipo(eTipoAtaque tipo);
-	eDamage get_danio();
+	eDanio get_danio();
 	eTipoAtaque get_tipoataque();
+	void cambiarDanio(eDanio danio);
 
 	~cFormaAtaque();
 };
