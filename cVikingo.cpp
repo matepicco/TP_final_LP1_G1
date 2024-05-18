@@ -41,13 +41,13 @@ void cVikingo::set_posicionV(string pos)
 }
 
 
-void cVikingo::trabajar()//asigna una posicion
-{
-   //seria como elegir la posicion, granjero, stripper, entrenador, corredor de bolsa, etc.
-}  //entrenador, retirado, granjero,
-
-void cVikingo::atacarDragones()
-{
+void cVikingo::trabajarEnBerk()
+{   /*
+    asigna una posicion
+    pasará determinarse por parametro en el constructor
+    seria como elegir la posicion, granjero, stripper, entrenador, corredor de bolsa, etc.
+    entrenador, retirado, granjero,
+    */
 }
 
 cVikingo::~cVikingo()
