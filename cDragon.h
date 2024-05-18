@@ -11,28 +11,28 @@ class cDragon
 private:
 	string nombreD;
 	eHabilidad caracteristicaD;
-	string tamanioD;
-	string colorD;
+	eTamanio tamanioD;
+	eColor colorD;
 	bool estadoD;
 	bool domadoD;
 
 	list <cFormaAtaque*> listaFA;//posible defensa, diferentes tipos.
 
 public:
-	cDragon(string nombred, eHabilidad caracteristicad, string tamaniod, string colord);
+	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
 
 	void altaNombre();
 	void bajaDragon();
 	eHabilidad get_caracteristica();
 	string get_nombre();
-	string get_tamanio();
-	string get_color();
+	eTamanio get_tamanio();
+	eColor get_color();
 	bool get_estado();
 	void set_estado(bool estado);
 	bool get_domado();
 	void set_domado(bool domado);
-
+	cFormaAtaque* get_FormaAtaque();
 	friend void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero *objG);
 
 	void atacarDragon(cDragon* objD);
