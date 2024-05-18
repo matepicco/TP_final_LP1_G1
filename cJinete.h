@@ -5,27 +5,25 @@
 class cJinete :public cVikingo
 {
 private:
-	string apodoD;
+	string apodoJ;
 	time_t fechaNac;
 	string caractFisicasJ;
 	eResultado TrainResult;
 	list <cDragon*> listaDragones;
 	
 public:
-	cJinete(string nom, string ape, time_t fecha, string caracfisic);//el apodo se lo asigna gracias al dragon que doma
+	cJinete(string nom, string ape, time_t fecha, string caracfisic);
 
-	string get_apodo();
-	string get_caracteristicas();
+	string get_apodoJ();
+	string get_caractFisicasJ();
 	eResultado get_trainresult();
 	void set_trainresult(eResultado resultado);
 
-	void incorporarDragon(cDragon* ptrDragon);//lo incorpora, setea el domado y lo entrena
-	void domar();//listo
-	void RelacionarseDragon();/*
-	* primer contacto con el dragon, evalua si es domable, si es, llama a incorporar
-	* compara caract del jinete con las del dragon, a ver si son compatibles
-	*/
-	void manejarDragon();//dispara el metodo de dragon que ataca a otro dragon
+	void trabajarEnBerk();
+	void incorporarDragon(cDragon* ptrDragon);
+	void domar(cDragon* ptrDragon);
+	void RelacionarseConDragon();
+	void manejarDragon();
 
 	~cJinete();
 };
