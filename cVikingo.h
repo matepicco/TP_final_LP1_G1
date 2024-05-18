@@ -20,10 +20,10 @@ public:
 	unsigned int  get_DragonesEliminados();
 	void set_DragonesEliminados(unsigned int cant);
 	string get_posicionV();
-	void set_posicionV(string pos);//no se haria esto en trabajar?
+	void set_posicionV(string pos);
 
-	void trabajar(); //pasará determinarse por parametro en el constructor
-	void atacarDragones(); //manda el mensaje. stoico ejecuta?
+	void trabajarEnBerk();
+	virtual void RelacionarseConDragon() = 0;
 
 	~cVikingo();
 };
