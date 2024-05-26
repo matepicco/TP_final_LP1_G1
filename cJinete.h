@@ -21,9 +21,11 @@ public:
 
 	void trabajarEnBerk();
 	void incorporarDragon(cDragon* ptrDragon);
-	void domar(cDragon* ptrDragon);
+	void domar();
 	void RelacionarseConDragon();
 	void manejarDragon();
+	void entrenarYrendir(cDragon* ptrDragon);
+	void entrenarDragon();
 
 	~cJinete();
 };
