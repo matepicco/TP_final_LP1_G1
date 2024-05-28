@@ -8,8 +8,8 @@ public:
 	cGuerrero();
 	cGuerrero(string nombrev, string apellidov, string posicionv);
 
-	void RelacionarseConDragon(cDragon* objD, cGuerrero* objG);
-	void TerminarDragon(cDragon* objD, cGuerrero *objG);
+	void RelacionarseConDragon(cDragon* objD);
+	void TerminarDragon(cDragon* objD);
 
 	~cGuerrero();
 };
