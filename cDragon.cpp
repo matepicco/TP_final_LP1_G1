@@ -12,14 +12,14 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord)
 	this->listaFA = list<cFormaAtaque*>();
 }
 
-void cGuerrero::TerminarDragon(cDragon* objD, cGuerrero* objG)
+void cGuerrero::TerminarDragon(cDragon* objD)
 {
 	/*
 	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
 	* más desarrollado aún: bajen la vida,segun danio,acabe el enfrentamiento y vivan los dos...
 	*/
 	objD->set_estado(false);
-	objG->set_DragonesEliminados(1);
+	this->set_DragonesEliminados(1);
 
 }
 
@@ -37,12 +37,10 @@ void cDragon::atacarDragon(cDragon *objD)
 		if ((*itObjP)->get_danio() < (*itObjL)->get_danio()) //el objeto mas debil, pierde. se elimina respectiv.
 		{	
 			objD->bajaDragon();//muere el dragon parametro, mas adelante vemos tema destructores
-			flag = true;
 			break;
 		}
 		else if ((*itObjP)->get_danio() > (*itObjL)->get_danio()) {
 			this->bajaDragon();//muere el dragon actual, mas adelante vemos tema destructores
-			flag = true;
 			break;
 		}
 		itObjP++;
@@ -54,54 +52,6 @@ void cDragon::atacarDragon(cDragon *objD)
 	dragon no tenga forma ataque, no entra.
 	una llega al final antes q la otra, se dejan FA sin comparar
 	*/
-	if (!flag) {
-		throw new exception("Error: Tie");
-	}
-}
-
-void cDragon::entrenarDragon()
-{
-	//lista de ifs que ven su habilidad y de acuerdo a esta establecen la forma de ataque
-	//es lineal, digamos una habilidad va a una forma de ataque
-	eHabilidad habilidad = this->caracteristicaD;
-	switch(habilidad){
-	case ResisteFuego:
-		this->get_FormaAtaque()->CambiarTipo(BolasFuego);
-		if (this->tamanioD = Grande)
-			this->get_FormaAtaque()->cambiarDanio(Mucho);
-		else if (this->tamanioD = Mediano)
-			this->get_FormaAtaque()->cambiarDanio(Moderado);
-		else
-			this->get_FormaAtaque()->cambiarDanio(Poco);
-		break;
-	case PatasLargas:
-		this->get_FormaAtaque()->CambiarTipo(Araniar);
-		if (this->tamanioD = Grande)
-			this->get_FormaAtaque()->cambiarDanio(Mucho);
-		else if (this->tamanioD = Mediano)
-			this->get_FormaAtaque()->cambiarDanio(Moderado);
-		else
-			this->get_FormaAtaque()->cambiarDanio(Poco);
-		break;
-	case Rapidez:
-		this->get_FormaAtaque()->CambiarTipo(Coletazo);
-		if (this->tamanioD = Grande)
-			this->get_FormaAtaque()->cambiarDanio(Mucho);
-		else if (this->tamanioD = Mediano)
-			this->get_FormaAtaque()->cambiarDanio(Moderado);
-		else
-			this->get_FormaAtaque()->cambiarDanio(Poco);
-		break;
-	case CuraFacil:
-		this->get_FormaAtaque()->CambiarTipo(Curar);
-		if (this->tamanioD = Grande)
-			this->get_FormaAtaque()->cambiarDanio(Mucho);
-		else if (this->tamanioD = Mediano)
-			this->get_FormaAtaque()->cambiarDanio(Moderado);
-		else
-			this->get_FormaAtaque()->cambiarDanio(Poco);
-		break;
-	}
 }
 
 void cDragon::altaNombre()
