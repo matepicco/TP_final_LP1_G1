@@ -1,45 +1,64 @@
 #include "cJinete.h"
 
-cJinete::cJinete(string nom, string ape, time_t fecha, string caracfisic):cVikingo(nom,ape,"")
+cJinete::cJinete(string nom, string ape, time_t fecha, eCaract caracfisic):cVikingo(nom,ape,"")
 {
     //debe declarar implementar el constructor del padre. to do
     this->fechaNac = fecha;;
     this->caractFisicasJ = caracfisic;
     this->TrainResult = NoAsistio;
     //el apodo se lo asignará gracias al dragon que dome. inicializado en cVikingo
-    this->listaDragones = list<cDragon*>();
+    this->listaDragonesVivos = list<cDragon*>();
 }
 
 void cJinete::trabajarEnBerk()
 {
-    string descrip;
-    //posicion asignada segun caracteristicas u otro factor determinante
-   if(descrip==get_caractFisicasJ())
-    set_posicionV("tal");
-}
-
-void cJinete::RelacionarseConDragon()// esta esta rara, eliminable
-{
-    /*
-    * metodo polimorfico. dispara el inicio de la interacción con dragon
-    * primer contacto con el dragon, evalua si es domable, si es, llama a incorporar
-    * compara caract del jinete con las del dragon, a ver si son compatibles
-    */
+    if(caractFisicasJ==Fortachon)
+        set_posicionV(Leniador);
+    if (caractFisicasJ == Matematico)
+        set_posicionV(Comerciante);
+    else
+        set_posicionV(Agricultor);
 }
 
 void cJinete::domar()
 {
-    this->listaDragones.back()->set_domado(true);
+    this->listaDragonesVivos.back()->set_domado(true);
 }
 
-void cJinete::manejarDragon()
+cDragon* cJinete::operator[](size_t index)
+{
+    if (listaDragonesVivos.size() < index)
+        throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
+    list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
+   /* while (int i = 0 != index) {
+        it++;
+        i++;
+    }
+    return *it;*/
+    auto it = listaDragonesVivos.begin();
+    advance(it, index);
+    return *it;
+}
+
+void cJinete::manejarDragon(int index, cDragon* ptrD)
 {
     /*
         llama al metodo de atacar en el dragon q esta montando
         dispara el metodo de dragon que ataca a otro
         recorre la lista para chequear que dragon maneja y fluye hacia cDragon
     */
+    if (listaDragonesVivos.size() < index)
+        throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
+    auto it = listaDragonesVivos.begin();
+    advance(it, index);
+    (*it)->atacarDragon(ptrD);
+    if ((*it)->get_estado() == false) {
+        this->listaDragonesMuertos.push_back(*it);
+        quitarDragon(listaDragonesVivos,(*it));
+    }
 }
+
+
 
 void cJinete::entrenarYrendir(cDragon* ptrDragon)
 {
@@ -63,16 +82,16 @@ void cJinete::entrenarYrendir(cDragon* ptrDragon)
 }
 void cJinete::incorporarDragon(cDragon* ptrDragon)
 {
-    this->listaDragones.push_back(ptrDragon);
+    this->listaDragonesVivos.push_back(ptrDragon);
     entrenarDragon();//llama al metodo de dragon y lo entrena. jinete fluye hacia dragon
     domar();//settea domado al drg
-    this->listaDragones.back()->altaNombre();// le da el nombre
+    this->listaDragonesVivos.back()->altaNombre();// le da el nombre
 }
 void cJinete::entrenarDragon()
 {
     //lista de ifs que ven su habilidad y de acuerdo a esta establecen la forma de ataque
     //es lineal, digamos una habilidad va a una forma de ataque
-    cDragon * ptrDragon = this->listaDragones.back();
+    cDragon * ptrDragon = this->listaDragonesVivos.back();
     switch (ptrDragon->caracteristicaD) {
     case ResisteFuego:
         ptrDragon->get_FormaAtaque()->CambiarTipo(BolasFuego);
@@ -135,4 +154,12 @@ void cJinete::set_trainresult(eResultado resultado)
 
 cJinete::~cJinete()
 {
+}
+
+void quitarDragon(list<cDragon*> listaux, cDragon* drg)
+{
+    auto it = std::find(listaux.begin(), listaux.end(), drg);
+    if (it != listaux.end()) {
+        listaux.erase(it);
+    }
 }
