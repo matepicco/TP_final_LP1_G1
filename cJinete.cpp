@@ -128,7 +128,6 @@ string cJinete::get_apodoJ()
     return this->apodoJ;
 }
 
-
 void cJinete::set_trainresult(eResultado resultado)
 {
     this->TrainResult = resultado;

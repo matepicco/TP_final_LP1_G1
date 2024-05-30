@@ -39,7 +39,6 @@ void cVikingo::set_posicionV(ePos pos)
     this->posicion = pos;
 }
 
-
 void cVikingo::trabajarEnBerk()
 {  
     if (caractFisicasV == Fortachon)

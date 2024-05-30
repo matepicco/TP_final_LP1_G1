@@ -48,7 +48,7 @@ cVikingo* cStoico::get_vikingoxNom(string nombre)
     return *it;
 }
 
-cVikingo* cStoico::get_vikingoxPos(string pos)//Tambien debe ir en un trycatch
+cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
 {
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
@@ -59,6 +59,10 @@ cVikingo* cStoico::get_vikingoxPos(string pos)//Tambien debe ir en un trycatch
         }
     }
     return *it;
+}
+
+void cStoico::mandarAentrenar()
+{
 }
 
 void cStoico::mandarAatacar()
