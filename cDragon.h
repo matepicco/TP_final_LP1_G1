@@ -41,4 +41,3 @@ public:
 	void atacarDragon(cDragon* objD);
 	~cDragon();
 };
-

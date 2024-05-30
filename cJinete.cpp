@@ -1,23 +1,12 @@
 #include "cJinete.h"
 
-cJinete::cJinete(string nom, string ape, time_t fecha, eCaract caracfisic):cVikingo(nom,ape,"")
+cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
     //debe declarar implementar el constructor del padre. to do
     this->fechaNac = fecha;;
-    this->caractFisicasJ = caracfisic;
     this->TrainResult = NoAsistio;
     //el apodo se lo asignará gracias al dragon que dome. inicializado en cVikingo
     this->listaDragonesVivos = list<cDragon*>();
-}
-
-void cJinete::trabajarEnBerk()
-{
-    if(caractFisicasJ==Fortachon)
-        set_posicionV(Leniador);
-    if (caractFisicasJ == Matematico)
-        set_posicionV(Comerciante);
-    else
-        set_posicionV(Agricultor);
 }
 
 void cJinete::domar()
@@ -44,21 +33,18 @@ void cJinete::manejarDragon(int index, cDragon* ptrD)
 {
     /*
         llama al metodo de atacar en el dragon q esta montando
-        dispara el metodo de dragon que ataca a otro
-        recorre la lista para chequear que dragon maneja y fluye hacia cDragon
+        
     */
     if (listaDragonesVivos.size() < index)
         throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
     auto it = listaDragonesVivos.begin();
-    advance(it, index);
-    (*it)->atacarDragon(ptrD);
+    advance(it, index);//para que avance en la lista hasta el indice pedido
+    (*it)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
     if ((*it)->get_estado() == false) {
         this->listaDragonesMuertos.push_back(*it);
         quitarDragon(listaDragonesVivos,(*it));
     }
 }
-
-
 
 void cJinete::entrenarYrendir(cDragon* ptrDragon)
 {
@@ -142,10 +128,6 @@ string cJinete::get_apodoJ()
     return this->apodoJ;
 }
 
-string cJinete::get_caractFisicasJ()
-{
-    return this->caractFisicasJ;
-}
 
 void cJinete::set_trainresult(eResultado resultado)
 {
