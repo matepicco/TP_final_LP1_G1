@@ -21,6 +21,11 @@ eTipoAtaque cFormaAtaque::get_tipoataque()
 	return this->tipodeataque;
 }
 
+unsigned int cFormaAtaque::getCantDanioD()
+{
+	return this->cantDanioD;
+}
+
 void cFormaAtaque::cambiarDanio(eDanio danio)
 {
 	this->cambiarDanio(danio);
