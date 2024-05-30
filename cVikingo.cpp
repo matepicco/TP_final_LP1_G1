@@ -35,7 +35,7 @@ void cVikingo::set_DragonesEliminados(unsigned int cant)
     this->DragonesEliminados = this->DragonesEliminados + cant;
 }
 
-void cVikingo::set_posicionV(string pos)
+void cVikingo::set_posicionV(ePos pos)
 {
     this->posicionV = pos;
 }

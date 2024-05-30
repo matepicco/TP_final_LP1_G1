@@ -20,7 +20,7 @@ public:
 	unsigned int  get_DragonesEliminados();
 	void set_DragonesEliminados(unsigned int cant);
 	string get_posicionV();
-	void set_posicionV(string pos);
+	void set_posicionV(ePos caract);
 
 	void trabajarEnBerk();
 	virtual void RelacionarseConDragon() = 0;
