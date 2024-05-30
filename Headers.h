@@ -16,3 +16,5 @@ enum eTipoAtaque { BolasFuego, Araniar, Coletazo, Curar};
 enum eHabilidad {ResisteFuego, PatasLargas, Rapidez, CuraFacil};
 enum eTamanio {Grande, Mediano, Chico};
 enum eColor {Rojo,Negro,Azul,Naranja,Verde,Blanco};
+enum eCaract {Fortachon, Matematico, Botanico};
+enum ePos {Leniador, Comerciante, Agricultor};
