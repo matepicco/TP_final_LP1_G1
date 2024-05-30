@@ -15,6 +15,8 @@ private:
 	bool estadoD;
 	bool domadoD;
 
+	unsigned int vidaD;
+
 	list <cFormaAtaque*> listaFA;//posible defensa, diferentes tipos.
 
 public:
@@ -28,8 +30,10 @@ public:
 	eTamanio get_tamanio();
 	eColor get_color();
 	bool get_estado();
-	void set_estado(bool estado);
 	bool get_domado();
+	unsigned int getVidaD();
+	void setVidaD(unsigned int vidaAct);
+	void set_estado(bool estado);
 	void set_domado(bool domado);
 	cFormaAtaque* get_FormaAtaque();
 	friend void cGuerrero::TerminarDragon(cDragon* objD);
