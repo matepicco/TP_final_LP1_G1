@@ -61,6 +61,11 @@ cVikingo* cStoico::get_vikingoxPos(string pos)//Tambien debe ir en un trycatch
     return *it;
 }
 
+void cStoico::mandarAatacar()
+{
+   
+}
+
 int cStoico::getcantVikCreados()
 {
 	return cantVikCreados;

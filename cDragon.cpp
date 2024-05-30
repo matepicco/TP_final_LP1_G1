@@ -19,10 +19,11 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
 	* más desarrollado aún: ambos 100 de daño, entonces empate, knock out doble, evaluo con if
 	*/
+
 	while (this->cantVidaG>0 && objD->vidaD>0) 
 	{
-		objD->setVidaD(getCantDanioG());
-		this->setCantVidaG(objD->get_FormaAtaque()->getCantDanioD());
+		objD->setVidaD(objD->getVidaD()-getCantDanioG());
+		this->cantVidaG = this->cantVidaG - objD->get_FormaAtaque()->getCantDanioD();
 	}
 
 	if (getCantVidaG() > 0)
@@ -92,7 +93,7 @@ unsigned int cDragon::getVidaD()
 
 void cDragon::setVidaD(unsigned int vidaAct)
 {
-	this->vidaD = vidaD - vidaAct;
+	this->vidaD = vidaAct;
 }
 
 void cDragon::bajaDragon()
@@ -137,7 +138,7 @@ void cDragon::set_domado(bool domado)
 
 cFormaAtaque* cDragon::get_FormaAtaque()
 {
-	return this->listaFA.front();//es el frente porque solo tiene uno por ahora entonces funca
+	return this->listaFA.back();
 }
 
 cDragon::~cDragon()

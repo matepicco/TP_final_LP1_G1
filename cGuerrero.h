@@ -8,7 +8,7 @@ class cGuerrero :public cVikingo
 	bool estadoG;
 	//hereda atb del padre: no se repiten acá
 public:
-	cGuerrero(string nombrev, string apellidov, string posicionv, unsigned int danioG);
+	cGuerrero(string nombrev, string apellidov, eCaract caracfisic, unsigned int danioG);
 
 	unsigned int getCantDanioG();
 	unsigned int getCantVidaG();
