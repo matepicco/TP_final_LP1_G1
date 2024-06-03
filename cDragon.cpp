@@ -1,7 +1,11 @@
 #include "cDragon.h"
 
-cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord)
+int cDragon::dragonesCreados = 0;
+
+cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): dragonID(dragonesCreados)
 {
+	//paso x parametro FA, igualo al parametro
+	//si con new no recibe x param
 	this->nombreD = "";
 	this->caracteristicaD = caracteristicad;
 	this->tamanioD = tamaniod;
@@ -11,6 +15,7 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord)
 	this->vidaD = 100;
 
 	this->listaFA = list<cFormaAtaque*>();
+	dragonesCreados++;
 }
 
 void cGuerrero::TerminarDragon(cDragon* objD)
@@ -19,6 +24,9 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
 	* más desarrollado aún: ambos 100 de daño, entonces empate, knock out doble, evaluo con if
 	*/
+
+	if (objD->get_estado())
+	{//repito comentario. prefiero chequear esta condicion, previo a entrar a este modulo
 
 	while (this->cantVidaG>0 && objD->vidaD>0) 
 	{
@@ -33,6 +41,7 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	}
 	else if (objD->getVidaD() > 0)
 		this->setEstadoG(false);
+	}
 }
 
 void cDragon::atacarDragon(cDragon *objD)
@@ -66,6 +75,12 @@ void cDragon::atacarDragon(cDragon *objD)
 	Dragon si tiene, FA
 	cambio de relacion entre D y FA -> COMPOSICION. Dragon nace con FA. Sino, alternativa para asignarla?
 	*/
+}
+
+void cDragon::agregarFA(cFormaAtaque *objFA)
+{
+	//objeto llego con todas las caracteristicas aplicadas, desde entrenardragon, en jinete
+	this->listaFA.push_back(objFA);
 }
 
 void cDragon::altaNombre()
@@ -104,6 +119,11 @@ void cDragon::bajaDragon()
 eHabilidad cDragon::get_caracteristica()
 {
 	return this->caracteristicaD;
+}
+
+const int cDragon::getDragonID()
+{
+	return this->dragonID;
 }
 
 string cDragon::get_nombre()

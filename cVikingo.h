@@ -23,7 +23,6 @@ public:
 	void set_posicionV(ePos pos);
 
 	void trabajarEnBerk();
-	virtual void RelacionarseConDragon() = 0;
-
+	virtual void RelacionarseConDragon(cVikingo* ptrV);
 	~cVikingo();
 };

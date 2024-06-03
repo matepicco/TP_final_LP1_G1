@@ -42,13 +42,14 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 	this->cantVidaG = vidaAct;
 }
 
-void cGuerrero::RelacionarseConDragon(cDragon* objD)
+void cGuerrero::RelacionarseConDragon(cVikingo* objV,cDragon* objD)
 {
-	/*
-	 metodo polimorfico. dispara el inicio de la interacción con dragon
-	*/
-	TerminarDragon(objD);
-
+	cGuerrero* ptrG = dynamic_cast <cGuerrero*>(objV);
+	if (ptrG != nullptr)
+	{	
+		//prefiero chequear estadoVital de D, antes de ingresar al metodo. como hago.
+		ptrG->TerminarDragon(objD);
+	}
 }
 
 void cGuerrero::TerminarDragon(cDragon* objD)

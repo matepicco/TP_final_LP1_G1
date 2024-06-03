@@ -11,7 +11,7 @@ public:
 	void agregarVikingo(cVikingo* objV);
 	void eliminarVikingo(cVikingo* objV);
 	cVikingo* get_vikingoxNom(string nombre);
-	cVikingo* get_vikingoxPos(string pos);
+	cVikingo* get_vikingoxPos(ePos pos);
 
 	//metodo mandar a atacar
 	void mandarAatacar();
