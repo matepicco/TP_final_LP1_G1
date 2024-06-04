@@ -14,14 +14,11 @@ cDragon* cJinete::operator[](size_t index)
     if (listaDragonesVivos.size() < index)
         throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
     list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
-    /* while (int i = 0 != index) {
+    while (int i = 0 != index) {
          it++;
          i++;
-     }
-     return *it;*/
-    auto it = listaDragonesVivos.begin();
-    advance(it, index);
-    return *it;
+    }
+     return *it;
 }
 
 void cJinete::entrenarDragon()
@@ -85,12 +82,20 @@ void cJinete::manejarDragon(cDragon* ptrD)//manejardragon(jinete1[3]))
     //como logro justificar,con la sobrecarga del [] que el ptr por parametro es una posicion entera (int)
     if (listaDragonesVivos.size() < index)
         throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
-    auto it = listaDragonesVivos.begin();
+    list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
     advance(it, index);//para que avance en la lista hasta el indice pedido
-    (*it)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
-    if ((*it)->get_estado() == false) {
+    
+    if ((*it)->get_estado()) {
+        (*it)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
+    }
+    else {//si con ese no ataca, ataca con el proximo vivo que encuentre en la lista y mete el otro en los muertos
         this->listaDragonesMuertos.push_back(*it);
         quitarDragon(listaDragonesVivos, (*it));
+        it = listaDragonesVivos.begin();
+        while (it != listaDragonesVivos.end() && (*it)->get_estado() == true) {
+            (*it)->atacarDragon(ptrD);
+        }
+
     }
 }
 
@@ -156,7 +161,7 @@ void cJinete::RelacionarseConDragon(cVikingo* ptrV)
         list<cDragon*>::iterator itObjD = ptrJ->listaDragonesVivos.begin();
 
         //try catch lo hace Stoico?
-        if (listaDragonesVivos.empty())
+        if (listaDragonesVivos.empty())//PERO ACA SERIA DEL QUE LE LLEGA
             throw exception("Lista vacía");
         
         while (itObjD != listaDragonesVivos.end())
@@ -190,8 +195,7 @@ cJinete::~cJinete()
 
 void quitarDragon(list<cDragon*> listaux, cDragon* drg)
 {
-    auto it = std::find(listaux.begin(), listaux.end(), drg);
-    if (it != listaux.end()) {
-        listaux.erase(it);
-    }
+    list<cDragon*>::iterator it = listaux.begin();
+    advance(it,drg);
+    listaux.erase(it);
 }
