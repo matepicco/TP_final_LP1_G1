@@ -1,16 +1,24 @@
 #include "cStoico.h"
 
 int cStoico::cantVikCreados = 0;
+int cStoico::cantDrgCreados = 0;
 
 cStoico::cStoico()
 {
 	this->listaVikingos = list<cVikingo*>(); 
+    this->listaDrgS = list<cDragon*>();
 }
 
 void cStoico::agregarVikingo(cVikingo* objV)
 {
 	this->listaVikingos.push_back(objV);
     cantVikCreados++;
+}
+
+void cStoico::agregarDragon(cDragon* objD)
+{
+    this->listaDrgS.push_back(objD);
+    cantDrgCreados++;
 }
 
 void cStoico::eliminarVikingo(cVikingo* objV)//Este metodo tiene que ir en un catch porque tiene throw
@@ -37,6 +45,8 @@ void cStoico::eliminarVikingo(cVikingo* objV)//Este metodo tiene que ir en un ca
 
 cVikingo* cStoico::get_vikingoxNom(string nombre)
 {
+    //Debe ir en un trycatch
+    //Sobrecargar
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
     while (nombre != (*it)->get_nombreV()) { // < o <= ???
@@ -48,8 +58,10 @@ cVikingo* cStoico::get_vikingoxNom(string nombre)
     return *it;
 }
 
-cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
+cVikingo* cStoico::get_vikingoxPos(ePos pos)
 {
+    //Debe ir en un trycatch
+    //Sobrecargar
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
     while (pos != (*it)->get_posicionV()) {
@@ -63,7 +75,35 @@ cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
 
 void cStoico::mandarAatacar()
 {
-   
+    //parametro objeto Dragon o stoico posee listaDragon. justificacion?
+    if (listaVikingos.empty())
+        throw exception("Lista vacia");
+    else
+    {
+        list<cVikingo*>::iterator itV = this->listaVikingos.begin();
+        while (itV != listaVikingos.end())
+        {
+            cJinete* ptrJ = dynamic_cast<cJinete*>(*(itV));
+            if (ptrJ != nullptr)
+            {
+                ptrJ->RelacionarseConDragon(*(itV));
+                // me hace mucho ruido. declarar el mismo vikingo (jinete) dos veces
+            }
+            else
+            {
+                list <cDragon*> ::iterator itObjD = listaDrgS.begin();
+                for (itObjD; itObjD != listaDrgS.end(); itObjD++)
+                {
+                    cGuerrero* ptrG = dynamic_cast<cGuerrero*>(*(itV));
+                    if (ptrG != nullptr)
+                    {
+                        //implementacion: guerrero pelea uno por uno con los dragones de la lista.
+                        ptrG->RelacionarseConDragon(*(itV),(*itObjD));
+                    }
+                }
+            }
+        }
+    }
 }
 
 int cStoico::getcantVikCreados()
