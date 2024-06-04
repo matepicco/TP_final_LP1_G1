@@ -1,7 +1,7 @@
 #include "cGuerrero.h"
 
-cGuerrero::cGuerrero(string nombreG, string apellidoG, string posicionG, unsigned int danioG):cVikingo()
-{
+cGuerrero::cGuerrero(string nombreG, string apellidoG, eCaract caracfisic, unsigned int danioG):cVikingo(nombreG,apellidoG,caracfisic)
+{//tira verde porque cantDanioG esta dentro del trycatch
 	this->cantVidaG = 100;
 	this->estadoG = true;
 	try {
@@ -39,20 +39,16 @@ void cGuerrero::setCantDanioG(unsigned int danioAct)
 
 void cGuerrero::setCantVidaG(unsigned int vidaAct)
 {
-	this->cantVidaG = cantVidaG - vidaAct;
+	this->cantVidaG = vidaAct;
 }
 
-void cGuerrero::RelacionarseConDragon(cDragon* objD)
+void cGuerrero::RelacionarseConDragon(cVikingo* objV,cDragon* objD)
 {
-	/*
-	 metodo polimorfico. dispara el inicio de la interacción con dragon
-	*/
-	TerminarDragon(objD);
-
+	//implementada en cDragon (friend)
 }
 
 void cGuerrero::TerminarDragon(cDragon* objD)
-{//vacia: implementada en cDragon (friend)
+{//implementada en cDragon (friend)
 }
 
 cGuerrero::~cGuerrero()

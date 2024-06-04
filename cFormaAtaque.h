@@ -8,7 +8,7 @@ private:
 	eDanio tipodedanio;
 	unsigned int cantDanioD;
 public:
-	cFormaAtaque(eTipoAtaque tipoataque, eDanio tipodanio);
+	cFormaAtaque(eTipoAtaque tipoataque, eDanio tipodanio, unsigned int danio);
 	void CambiarTipo(eTipoAtaque tipo);
 	eDanio get_danio();
 	eTipoAtaque get_tipoataque();

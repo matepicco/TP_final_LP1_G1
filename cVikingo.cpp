@@ -1,13 +1,12 @@
 #include "cVikingo.h"
 
-cVikingo::cVikingo()
-{}
-
-cVikingo::cVikingo(string nombrev, string apellidov, string posicionv)
+cVikingo::cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas)
 {
     this->nombreV = nombrev;
     this->apellidoV = apellidov;
-    this->posicionV = posicionv;
+    this->caractFisicasV = caracteristicasfisicas;
+    this->DragonesEliminados = 0;
+    trabajarEnBerk();
 }
 
 string cVikingo::get_nombreV()
@@ -20,9 +19,9 @@ string cVikingo::get_apellido()
     return this->apellidoV;
 }
 
-string cVikingo::get_posicionV()
+ePos cVikingo::get_posicionV()
 {
-    return this->posicionV;
+    return this->posicion;
 }
 
 unsigned int  cVikingo::get_DragonesEliminados()
@@ -37,17 +36,22 @@ void cVikingo::set_DragonesEliminados(unsigned int cant)
 
 void cVikingo::set_posicionV(ePos pos)
 {
-    this->posicionV = pos;
+    this->posicion = pos;
 }
 
 
 void cVikingo::trabajarEnBerk()
-{   /*
-    asigna una posicion
-    pasará determinarse por parametro en el constructor
-    seria como elegir la posicion, granjero, stripper, entrenador, corredor de bolsa, etc.
-    entrenador, retirado, granjero,
-    */
+{  
+    if (caractFisicasV == Fortachon)
+        set_posicionV(Leniador);
+    if (caractFisicasV == Matematico)
+        set_posicionV(Comerciante);
+    else
+        set_posicionV(Agricultor);
+}
+
+void cVikingo::RelacionarseConDragon(cVikingo *ptrV)
+{
 }
 
 cVikingo::~cVikingo()
