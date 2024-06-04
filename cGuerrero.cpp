@@ -44,16 +44,11 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 
 void cGuerrero::RelacionarseConDragon(cVikingo* objV,cDragon* objD)
 {
-	cGuerrero* ptrG = dynamic_cast <cGuerrero*>(objV);
-	if (ptrG != nullptr)
-	{	
-		//prefiero chequear estadoVital de D, antes de ingresar al metodo. como hago.
-		ptrG->TerminarDragon(objD);
-	}
+	//implementada en cDragon (friend)
 }
 
 void cGuerrero::TerminarDragon(cDragon* objD)
-{//vacia: implementada en cDragon (friend)
+{//implementada en cDragon (friend)
 }
 
 cGuerrero::~cGuerrero()

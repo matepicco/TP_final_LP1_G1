@@ -20,17 +20,18 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 
 void cGuerrero::TerminarDragon(cDragon* objD)
 {
+	if (objD->get_estado() == false)
+		throw exception("Dragon muerto");
+	else if (objD->get_domado() == true)
+		throw exception("Dragon bueno");
+
 	/*
 	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
 	* más desarrollado aún: ambos 100 de daño, entonces empate, knock out doble, evaluo con if
 	*/
-
-	if (objD->get_estado())
-	{//repito comentario. prefiero chequear esta condicion, previo a entrar a este modulo
-
-	while (this->cantVidaG>0 && objD->vidaD>0) 
+	while (this->cantVidaG > 0 && objD->vidaD > 0)
 	{
-		objD->setVidaD(objD->getVidaD()-getCantDanioG());
+		objD->setVidaD(objD->getVidaD() - getCantDanioG());
 		this->cantVidaG = this->cantVidaG - objD->get_FormaAtaque()->getCantDanioD();
 	}
 
@@ -41,6 +42,21 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	}
 	else if (objD->getVidaD() > 0)
 		this->setEstadoG(false);
+}
+
+void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD)
+{
+	if (objD->get_estado() == false)
+		throw exception("Dragon muerto");
+	else if (objD->get_domado() == true)
+		throw exception("Dragon bueno");
+	else
+	{	
+		cGuerrero* ptrG = dynamic_cast <cGuerrero*>(objV);
+		if (ptrG != nullptr)
+		{
+			ptrG->TerminarDragon(objD);
+		}
 	}
 }
 
@@ -50,6 +66,7 @@ void cDragon::atacarDragon(cDragon *objD)
 	//creo dos iteradores, recorran ambas listas
 	list<cFormaAtaque*>::iterator itObjP = objD->listaFA.begin();
 	list<cFormaAtaque*>::iterator itObjL = this->listaFA.begin();
+	//necesito crear metodo elegir forma ataque (elige de forma random). en getFA-> cambio
 	bool flag = false;
 
 	while (itObjP != this->listaFA.end()) 
@@ -67,12 +84,9 @@ void cDragon::atacarDragon(cDragon *objD)
 		itObjP++;
 		itObjL++;
 	}
-
 	/*
 	opciones - Tipos de exception.
 	dragon no tenga forma ataque, no entra. 
-	una llega al final antes q la otra, se dejan FA sin comparar. NO
-	Dragon si tiene, FA
 	cambio de relacion entre D y FA -> COMPOSICION. Dragon nace con FA. Sino, alternativa para asignarla?
 	*/
 }
