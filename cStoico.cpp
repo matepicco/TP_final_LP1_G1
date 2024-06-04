@@ -73,6 +73,10 @@ cVikingo* cStoico::get_vikingoxPos(ePos pos)
     return *it;
 }
 
+void cStoico::eliminarDragon(cVikingo* objD)
+{
+}
+
 void cStoico::mandarAatacar()
 {
     //parametro objeto Dragon o stoico posee listaDragon. justificacion?
@@ -109,6 +113,14 @@ void cStoico::mandarAatacar()
 int cStoico::getcantVikCreados()
 {
 	return cantVikCreados;
+}
+
+void cStoico::DragonesDomados()
+{
+}
+
+void cStoico::JinetesxDragon()
+{
 }
 
 cStoico::~cStoico()
