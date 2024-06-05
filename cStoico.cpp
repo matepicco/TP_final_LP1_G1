@@ -58,7 +58,7 @@ cVikingo* cStoico::get_vikingoxNom(string nombre)
     return *it;
 }
 
-cVikingo* cStoico::get_vikingoxPos(ePos pos)
+cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
 {
     //Debe ir en un trycatch
     //Sobrecargar
@@ -74,6 +74,8 @@ cVikingo* cStoico::get_vikingoxPos(ePos pos)
 }
 
 void cStoico::eliminarDragon(cVikingo* objD)
+
+void cStoico::mandarAentrenar()
 {
 }
 

@@ -5,7 +5,7 @@ cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikin
     //debe declarar implementar el constructor del padre. to do
     this->fechaNac = fecha;;
     this->TrainResult = NoAsistio;
-    //el apodo se lo asignará gracias al dragon que dome. inicializado en cVikingo
+    //el apodo se lo asignarÃ¡ gracias al dragon que dome. inicializado en cVikingo
     this->listaDragonesVivos = list<cDragon*>();
 }
 
@@ -26,9 +26,9 @@ cDragon* cJinete::operator[](size_t index)
 
 void cJinete::entrenarDragon()
 {
-    //indicación de Sol. En mi pov, no necesario ya que: previamente la lista es chequeada no nula
+    //indicaciÃ³n de Sol. En mi pov, no necesario ya que: previamente la lista es chequeada no nula
    if(listaDragonesVivos.empty())
-       throw exception("Lista vacía");
+       throw exception("Lista vacÃ­a");
 
     //lista de ifs que ven su habilidad y de acuerdo a esta establecen la forma de ataque
     //es lineal, digamos una habilidad va a una forma de ataque
@@ -108,7 +108,7 @@ void cJinete::domar()
 {//agregar si lista vacia, exception.tambien para entrenar dragon
    //list.empty(): Returns whether the list container is empty(i.e.whether its size is 0).
     if (listaDragonesVivos.empty())
-        throw exception("Lista vacía");
+        throw exception("Lista vacÃ­a");
     else
         this->listaDragonesVivos.back()->set_domado(true);
 }
@@ -145,7 +145,7 @@ void cJinete::entrenarYrendir(cDragon* ptrDragon)
 void cJinete::RelacionarseConDragon(cVikingo* ptrV)
 {
     //caso stoico manda a vikingo a relacionarse. Si sos jinete:
-    // caso#1: manejas los de tu lista entonces de por sí, están domados por vos.
+    // caso#1: manejas los de tu lista entonces de por sÃ­, estÃ¡n domados por vos.
     // caso#2: viene listaDragones por parametro (dragones no necessarily domados por vos): recorres, hasta encontrar uno domado por vos. 
 
     //caso#1
@@ -157,13 +157,13 @@ void cJinete::RelacionarseConDragon(cVikingo* ptrV)
 
         //try catch lo hace Stoico?
         if (listaDragonesVivos.empty())
-            throw exception("Lista vacía");
+            throw exception("Lista vacÃ­a");
         
         while (itObjD != listaDragonesVivos.end())
         {
             ptrJ->entrenarYrendir(*(itObjD));
         }
-        /* MODULO APARTE: función extra. relaciono con dragon por parametro
+        /* MODULO APARTE: funciÃ³n extra. relaciono con dragon por parametro
           //caso#2
           //simulo crear una lista tal que en realidad viene por parametro
             list <cDragon*> listaDragon;
@@ -177,7 +177,6 @@ void cJinete::RelacionarseConDragon(cVikingo* ptrV)
          */
     }
 }
-
 
 void cJinete::set_trainresult(eResultado resultado)
 {

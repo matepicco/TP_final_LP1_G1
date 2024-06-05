@@ -22,10 +22,12 @@ public:
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
 
+	void mandarAentrenar();
+
 	void mandarAatacar();
 	static int getcantVikCreados();
 
-	//métodos objetivo de Stoico. función: listar
+	//mï¿½todos objetivo de Stoico. funciï¿½n: listar
 	void DragonesDomados();
 	void JinetesxDragon();
 	~cStoico();
