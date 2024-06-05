@@ -42,17 +42,13 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 	this->cantVidaG = vidaAct;
 }
 
-void cGuerrero::RelacionarseConDragon(cDragon* objD)
+void cGuerrero::RelacionarseConDragon(cVikingo* objV,cDragon* objD)
 {
-	/*
-	 metodo polimorfico. dispara el inicio de la interacción con dragon
-	*/
-	TerminarDragon(objD);
-
+	//implementada en cDragon (friend)
 }
 
 void cGuerrero::TerminarDragon(cDragon* objD)
-{//vacia: implementada en cDragon (friend)
+{//implementada en cDragon (friend)
 }
 
 cGuerrero::~cGuerrero()

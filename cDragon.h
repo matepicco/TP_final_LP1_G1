@@ -4,10 +4,12 @@
 #include "cGuerrero.h"
 
 class cGuerrero; 
-//posible herencia: dragones se comportan distinto
+
 class cDragon
 {
 private:
+	static int dragonesCreados;
+	const int dragonID;
 	string nombreD;
 	eHabilidad caracteristicaD;
 	eTamanio tamanioD;
@@ -25,8 +27,10 @@ public:
 	~cDragon();
 	void altaNombre();
 	void bajaDragon();
-	eHabilidad get_caracteristica();
+
+	const int getDragonID();
 	string get_nombre();
+	eHabilidad get_caracteristica();
 	eTamanio get_tamanio();
 	eColor get_color();
 	bool get_estado();
@@ -36,8 +40,10 @@ public:
 	void set_estado(bool estado);
 	void set_domado(bool domado);
 	cFormaAtaque* get_FormaAtaque();
-	friend void cGuerrero::TerminarDragon(cDragon* objD);
 
+	friend void cGuerrero::TerminarDragon(cDragon* objD);
+	friend void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void atacarDragon(cDragon* objD);
+	void agregarFA(cFormaAtaque*objD);
 	~cDragon();
 };

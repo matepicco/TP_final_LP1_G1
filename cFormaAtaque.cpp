@@ -1,9 +1,10 @@
 #include "cFormaAtaque.h"
 
-cFormaAtaque::cFormaAtaque(eTipoAtaque tipoataque, eDanio tipodanio)
+cFormaAtaque::cFormaAtaque(eTipoAtaque tipoataque, eDanio tipodanio, unsigned int danio)
 {
 	this->tipodeataque = tipoataque;
 	this->tipodedanio = tipodanio;
+	this->cantDanioD = danio;
 }
 
 void cFormaAtaque::CambiarTipo(eTipoAtaque tipo)

@@ -1,6 +1,8 @@
 #pragma once
 #include "cVikingo.h"
 
+class cDragon;
+
 class cGuerrero :public cVikingo
 {
 	unsigned int cantDanioG;
@@ -15,7 +17,8 @@ public:
 	void setEstadoG(bool VM);
 	void setCantDanioG(unsigned int danioAct);
 	void setCantVidaG(unsigned int vidaAct);
-	void RelacionarseConDragon(cDragon* objD);
+
+	void RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void TerminarDragon(cDragon* objD);
 
 	~cGuerrero();

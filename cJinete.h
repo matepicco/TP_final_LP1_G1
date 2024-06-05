@@ -16,13 +16,15 @@ public:
 	string get_apodoJ();
 	eResultado get_trainresult();
 	void set_trainresult(eResultado resultado);
-	friend void quitarDragon(list<cDragon*> listaux,cDragon* drg);
-	void incorporarDragon(cDragon* ptrDragon);
+
+	void RelacionarseConDragon(cVikingo* ptrV);
 	void domar();
-	void manejarDragon(int index, cDragon* ptrD);
-	cDragon* operator[](size_t index);
+	void incorporarDragon(cDragon* ptrDragon);
 	void entrenarYrendir(cDragon* ptrDragon);
 	void entrenarDragon();
+	void manejarDragon(cDragon* ptrD);
+	friend void quitarDragon(list<cDragon*> listaux, cDragon* drg);
+	cDragon* operator[](size_t index);
 
 	~cJinete();
 };
