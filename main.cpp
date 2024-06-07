@@ -14,6 +14,9 @@ int main()
 
     Stoico + jinete1;
 
+    cout << jinete1;
+    cout << dragon1;
+
 //aca luego de instanciar a los jinetes y vikingos,
 //se llama a ingresar dragon, se pasa el puntero y ahi empieza el programa llamando a entrenar
 //luego se llamaria a atacar dragon y eso haria que dos peleen

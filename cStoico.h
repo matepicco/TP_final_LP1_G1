@@ -22,7 +22,8 @@ public:
 	void operator+(cDragon* objD);
 	void operator-(cVikingo* objV);
 	void operator-(cDragon* objD);
-	
+	friend ostream& operator <<(ostream& out, cVikingo* objV);
+	//not necesario friend xq main posee a stoico y <<metodo public
 
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);

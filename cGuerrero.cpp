@@ -51,6 +51,18 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 {//implementada en cDragon (friend)
 }
 
+string cGuerrero::to_string()
+{
+	stringstream ss;
+
+	ss << this->cantDanioG <<
+	"" << this->cantVidaG <<
+	"" << this->estadoG <<
+	"" << endl;
+
+	return ss.str();
+}
+
 cGuerrero::~cGuerrero()
 {
 }

@@ -14,6 +14,8 @@ private:
 
 public:
 	cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas);
+	~cVikingo();
+
 	string get_nombreV();
 	string get_apellido();
 
@@ -24,5 +26,4 @@ public:
 
 	void trabajarEnBerk();
 	virtual void RelacionarseConDragon(cVikingo* ptrV);
-	~cVikingo();
 };

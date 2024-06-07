@@ -21,6 +21,18 @@ cDragon* cJinete::operator[](size_t index)
      return *it;
 }
 
+string cJinete::to_string()
+{
+    stringstream ss;
+
+    ss << this->apodoJ<<
+        "" << this->fechaNac <<
+        "" << this->TrainResult<<
+        "" << endl;
+
+    return ss.str();
+}
+
 void cJinete::entrenarDragon()
 {
     //indicación de Sol. En mi pov, no necesario ya que: previamente la lista es chequeada no nula

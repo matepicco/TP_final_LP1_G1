@@ -11,6 +11,7 @@ class cGuerrero :public cVikingo
 	//hereda atb del padre: no se repiten acá
 public:
 	cGuerrero(string nombrev, string apellidov, eCaract caracfisic, unsigned int danioG);
+	~cGuerrero();
 
 	unsigned int getCantDanioG();
 	unsigned int getCantVidaG();
@@ -21,6 +22,6 @@ public:
 	void RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void TerminarDragon(cDragon* objD);
 
-	~cGuerrero();
+	string to_string();
 };
 
