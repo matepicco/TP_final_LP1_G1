@@ -11,6 +11,7 @@ protected:
 	list <cDragon*> listaDragonesVivos;
 	list <cDragon*> listaDragonesMuertos;
 public:
+	friend class cDragon;
 	cJinete(string nom, string ape, time_t fecha,eCaract caract);
 	~cJinete();
 
@@ -18,12 +19,13 @@ public:
 	eResultado get_trainresult();
 	void set_trainresult(eResultado resultado);
 
-	void RelacionarseConDragon(cVikingo* ptrV);
+	void RelacionarseConDragon(cDragon* drgNuevo);
 	void domar();
+	void altaNombre(cDragon* drg);
 	void incorporarDragon(cDragon* ptrDragon);
 	void entrenarYrendir(cDragon* ptrDragon);
 	void entrenarDragon();//tiene que ir dentro de try/catch
-	void manejarDragon(cDragon* ptrD);
+	void manejarDragon(cDragon* ptrD, int index);
 	friend void quitarDragon(list<cDragon*> listaux, cDragon* drg);
 
 	cDragon* operator[](size_t index);
