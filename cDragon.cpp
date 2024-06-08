@@ -21,9 +21,9 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 void cGuerrero::TerminarDragon(cDragon* objD)
 {
 	if (objD->get_estado() == false)
-		throw exception("Dragon muerto");
+		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
-		throw exception("Dragon bueno");
+		throw exception("Este Dragon es bueno");
 
 	/*
 	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
@@ -44,19 +44,15 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 		this->setEstadoG(false);
 }
 
-void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD)
+void cGuerrero::RelacionarseConDragon(cDragon* objD)
 {
 	if (objD->get_estado() == false)
-		throw exception("Dragon muerto");
+		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
-		throw exception("Dragon bueno");
+		throw exception("Este Dragon es bueno");
 	else
-	{	
-		cGuerrero* ptrG = dynamic_cast <cGuerrero*>(objV);
-		if (ptrG != nullptr)
-		{
-			ptrG->TerminarDragon(objD);
-		}
+	{
+		this->TerminarDragon(objD);
 	}
 }
 
@@ -97,19 +93,6 @@ void cDragon::agregarFA(cFormaAtaque *objFA)
 	this->listaFA.push_back(objFA);
 }
 
-void cDragon::altaNombre()
-{
-	//de acuerdo a las caracteristicas, al dragon se le asigna un nombre
-	if (this->caracteristicaD = ResisteFuego)
-		this->nombreD = "Fueguin";
-	else if (this->caracteristicaD =PatasLargas)
-		this->nombreD = "El Patas";
-	else if (this->caracteristicaD = Rapidez)
-		this->nombreD = "Rapidrag";
-	else
-		this->nombreD = "Curita";
-}
-
 bool cDragon::get_domado()
 {
 	return this->domadoD;
@@ -128,6 +111,11 @@ void cDragon::setVidaD(unsigned int vidaAct)
 void cDragon::bajaDragon()
 {
 	this->estadoD = false;
+}
+
+void cDragon::set_nombre(string nombre)
+{
+	this->nombreD = nombre;
 }
 
 eHabilidad cDragon::get_caracteristica()

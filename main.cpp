@@ -9,11 +9,12 @@ int main()
     cDragon* dragon3 = new cDragon(CuraFacil,Chico,Verde);
     cDragon* dragon4 = new cDragon(PatasLargas,Grande,Blanco);
 
-    cJinete* jinete1 = new cJinete();
-    cJinete* jinete2 = new cJinete();
+    cJinete* jinete1 = new cJinete("Malau","Raro",04/10/2002,Fortachon);
+    cJinete* jinete2 = new cJinete("Elsa","Pato",10/10/2010,Matematico);
 
     Stoico + jinete1;
-
+    Stoico + jinete2;
+    Stoico.imprimir();
     cout << jinete1;
     cout << dragon1; //comprueba q << mal hecho
 

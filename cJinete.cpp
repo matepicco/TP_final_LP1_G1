@@ -100,32 +100,30 @@ void cJinete::entrenarDragon()
     }
 }
 
-void cJinete::manejarDragon(cDragon* ptrD)//manejardragon(jinete1[3])) 
-{ //jinete[3]
-    /*
-        llama al metodo de atacar en el dragon q esta montando
-
-    */
-
-    int index; 
-    // ARREGLAR FX MANEJAR EN FX DE la sobrecarga.
-    //como logro justificar,con la sobrecarga del [] que el ptr por parametro es una posicion entera (int)
-    if (listaDragonesVivos.size() < index)
-        throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
-    list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
-    advance(it, index);//para que avance en la lista hasta el indice pedido
+void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])) 
+{      
+    cDragon* midragon;//Creo el objeto de dragon que voy a usar 
+    if (this->listaDragonesVivos.size() == 0)
+        throw exception("El jinete no tiene ningun dragon guardado");
+    else if (listaDragonesVivos.size() < index)
+      throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
+    else
+        midragon = this->operator[](index);// se trae el dragon de cierta posicion de la lista para que luche
     
-    if ((*it)->get_estado()) {
-        (*it)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
+    list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
+    
+    if ((midragon)->get_estado()) {
+        (midragon)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
     }
-    else {//si con ese no ataca, ataca con el proximo vivo que encuentre en la lista y mete el otro en los muertos
-        this->listaDragonesMuertos.push_back(*it);
-        quitarDragon(listaDragonesVivos, (*it));
-        it = listaDragonesVivos.begin();
-        while (it != listaDragonesVivos.end() && (*it)->get_estado() == true) {
+    else {//si con midragon no ataca, ataca con el proximo vivo que encuentre en la lista y mete el otro en los muertos
+        this->listaDragonesMuertos.push_back(midragon);
+        quitarDragon(listaDragonesVivos, (midragon));
+     
+        while (it != listaDragonesVivos.end() && !((*it)->get_estado())) it++;
             (*it)->atacarDragon(ptrD);
-        }
 
+            if (it == listaDragonesVivos.end())
+                throw exception("El jinete no posee dragones vivos para luchar");
     }
 }
 
@@ -148,12 +146,33 @@ void cJinete::domar()
         this->listaDragonesVivos.back()->set_domado(true);
 }
 
+void cJinete::altaNombre(cDragon* drg)
+{
+    string s;
+    if (drg->get_caracteristica() == ResisteFuego) {
+            s = nombreV + "'s Fueguin";
+        drg->set_nombre(s);
+    }
+    else if (drg->get_caracteristica() == PatasLargas) {
+        s=nombreV+"'s Patudo";
+        drg->set_nombre(s);
+    }
+    else if (drg->get_caracteristica() == Rapidez) {
+        s = nombreV + "'s Rapidragui";
+        drg->set_nombre(s);
+    }
+    else {
+        s=nombreV+"'s Curita";
+        drg->set_nombre(s);
+    }
+}
+
 void cJinete::incorporarDragon(cDragon* ptrDragon)
 {
+    this->altaNombre(ptrDragon);
+    this->domar();//settea domado al drg
     this->listaDragonesVivos.push_back(ptrDragon);
     this->entrenarDragon();
-    this->domar();//settea domado al drg
-    this->listaDragonesVivos.back()->altaNombre();// le da el nombre
 }
 
 void cJinete::entrenarYrendir(cDragon* ptrDragon)
@@ -177,41 +196,29 @@ void cJinete::entrenarYrendir(cDragon* ptrDragon)
     }
 }
 
-void cJinete::RelacionarseConDragon(cVikingo* ptrV)
-{
+void cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
+
     //caso stoico manda a vikingo a relacionarse. Si sos jinete:
     // caso#1: manejas los de tu lista entonces de por sí, están domados por vos.
     // caso#2: viene listaDragones por parametro (dragones no necessarily domados por vos): recorres, hasta encontrar uno domado por vos. 
-
     //caso#1
+    
 
-    cJinete* ptrJ = dynamic_cast<cJinete*>(ptrV);
-    if (ptrJ != nullptr)
-    {
-        list<cDragon*>::iterator itObjD = ptrJ->listaDragonesVivos.begin();
+    this->entrenarYrendir(drgNuevo);
 
-        //try catch lo hace Stoico?
 
-        if (listaDragonesVivos.empty())//PERO ACA SERIA DEL QUE LE LLEGA
-            throw exception("Lista vac�a");
-        
-        while (itObjD != listaDragonesVivos.end())
-        {
+    /* MODULO APARTE: función extra. relaciono con dragon por parametro
+      //caso#2
+      //simulo crear una lista tal que en realidad viene por parametro
+        list <cDragon*> listaDragon;
+        itObjD = listaDragon.begin();
+       //primero chequeo jinete tenga domado al dragon xParametro. necesito
+        while (itObjD != listaDragon.end())
+        {//condicion posible: igualo iterador listaParametro con iterador listaObjetoJinete hasta que coincidan
             ptrJ->entrenarYrendir(*(itObjD));
         }
-        /* MODULO APARTE: función extra. relaciono con dragon por parametro
-          //caso#2
-          //simulo crear una lista tal que en realidad viene por parametro
-            list <cDragon*> listaDragon;
-            itObjD = listaDragon.begin();
-           //primero chequeo jinete tenga domado al dragon xParametro. necesito
-            while (itObjD != listaDragon.end())
-            {//condicion posible: igualo iterador listaParametro con iterador listaObjetoJinete hasta que coincidan
-                ptrJ->entrenarYrendir(*(itObjD));
-            }
-        }
-         */
     }
+     */
 }
 
 void cJinete::set_trainresult(eResultado resultado)

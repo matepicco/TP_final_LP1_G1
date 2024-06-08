@@ -42,11 +42,6 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 	this->cantVidaG = vidaAct;
 }
 
-void cGuerrero::RelacionarseConDragon(cVikingo* objV,cDragon* objD)
-{
-	//implementada en cDragon (friend)
-}
-
 void cGuerrero::TerminarDragon(cDragon* objD)
 {//implementada en cDragon (friend)
 }
