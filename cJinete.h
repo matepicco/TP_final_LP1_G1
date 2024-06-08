@@ -4,14 +4,15 @@
 
 class cJinete :public cVikingo
 {
-private:
+protected:
 	string apodoJ;
-	time_t fechaNac;
+	struct tm fechaNac;
 	eResultado TrainResult;
 	list <cDragon*> listaDragonesVivos;
 	list <cDragon*> listaDragonesMuertos;
 public:
 	cJinete(string nom, string ape, time_t fecha,eCaract caract);
+	~cJinete();
 
 	string get_apodoJ();
 	eResultado get_trainresult();
@@ -24,7 +25,7 @@ public:
 	void entrenarDragon();//tiene que ir dentro de try/catch
 	void manejarDragon(cDragon* ptrD);
 	friend void quitarDragon(list<cDragon*> listaux, cDragon* drg);
-	cDragon* operator[](size_t index);
 
-	~cJinete();
+	cDragon* operator[](size_t index);
+	string toString();	
 };

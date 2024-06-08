@@ -22,7 +22,7 @@ private:
 	list <cFormaAtaque*> listaFA;//posible defensa, diferentes tipos.
 
 public:
-	friend class cJinete;
+	friend class cJinete; //????
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
 	void altaNombre();
@@ -45,5 +45,4 @@ public:
 	friend void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void atacarDragon(cDragon* objD);
 	void agregarFA(cFormaAtaque*objD);
-	~cDragon();
 };
