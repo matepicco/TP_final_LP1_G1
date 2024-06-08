@@ -129,6 +129,9 @@ void cStoico::operator-(cDragon* objD)
 
 ostream& operator<<(ostream& out, cVikingo* objV)
 {
+    //ocurro llamo a toString de guerrero y jinete
+    //chequeo listas no vacias. exception (o desde donde uso los <<
+    //chequear metodo listar de matilarro
     cGuerrero* objG = dynamic_cast<cGuerrero*>(objV);
     if (objG != nullptr)
     {
@@ -142,33 +145,6 @@ ostream& operator<<(ostream& out, cVikingo* objV)
             out << objJ->to_string() << endl;
         }
     }
-
-    /*
-    //quiero << para imprimir desde el main todos elementos de listas
-    //ocurro llamo a toString de guerrero y jinete
-    //chequeo listas no vacias. exception (o desde donde uso los <<)
-    list <cVikingo*> ::iterator itr;
-    itr = listaVikingos.begin();
-
-    for (itr; itr != listaVikingos.end(); itr++)
-    {
-        cGuerrero* objG = dynamic_cast<cGuerrero*>(*itr);
-        if (objG !=nullptr)
-        {
-            out << objG->to_string() << endl;
-        }
-        else
-        {
-            cJinete* objJ = dynamic_cast<cJinete*>(*(itr));
-            if (objJ != nullptr)
-            {
-                out << objJ->to_string() << endl;
-            }
-        }
-    }
-    
-    return out;
-    */
     return out;
 }
 

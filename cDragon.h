@@ -45,5 +45,4 @@ public:
 	friend void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void atacarDragon(cDragon* objD);
 	void agregarFA(cFormaAtaque*objD);
-	~cDragon();
 };

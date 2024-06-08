@@ -2,10 +2,28 @@
 
 cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
-    //debe declarar implementar el constructor del padre. to do
-    this->fechaNac = fecha;;
+	stringstream fechaIngresada(fecha);
+	string aux = "";
+	sFecha auxF = { 0,0,0 };
+
+	// Escaneamos el string de la fecha, hasta cada '/'
+	// Guardando en auxiliar los datos de dia, mes y anio
+	getline(fechaIngresada, aux, '/');
+	auxF.dia = stoi(aux);
+
+	getline(fechaIngresada, aux, '/');
+	auxF.mes = stoi(aux);
+
+	getline(fechaIngresada, aux);
+	auxF.anio = stoi(aux);
+
+	// Pasamos lo guardado a un struct tm
+	// el -1900 en anio es porque tm tiene en cuenta los anios pasados desde el 1900
+	// el -1 en mes es porque el rango va de 0 a 11
+	this->fechaNac = { 0, 0, 0, auxF.dia, auxF.mes - 1, auxF.anio - 1900 };
+   
     this->TrainResult = NoAsistio;
-    //el apodo se lo asignará gracias al dragon que dome. inicializado en cVikingo
+    //el apodo se asignará gracias al dragon que dome. inicializado en cVikingo
     this->listaDragonesVivos = list<cDragon*>();
 }
 
@@ -21,21 +39,21 @@ cDragon* cJinete::operator[](size_t index)
      return *it;
 }
 
-string cJinete::to_string()
+string cJinete::toString()
 {
+    //imprimo lo del hijo,padre
     stringstream ss;
 
-    ss << this->apodoJ<<
-        "" << this->fechaNac <<
-        "" << this->TrainResult<<
-        "" << endl;
+    ss << this->nombreV << "" << this->apellidoV<< "" << this->posicion << "" << this->caractFisicasV << ""
+       << this->apodoJ << "" << to_string(this->fechaNac.tm_mday) << "" << to_string(this->fechaNac.tm_mon + 1) << ""
+       << to_string(this->fechaNac.tm_year + 1900) << "" << this->TrainResult << "" << this->DragonesEliminados << endl;
 
     return ss.str();
 }
 
 void cJinete::entrenarDragon()
 {
-    //indicación de Sol. En mi pov, no necesario ya que: previamente la lista es chequeada no nula
+    //indicación de Sol.Necesario? previamente lista es chequeada no nula
    if(listaDragonesVivos.empty())
        throw exception("Lista vacía");
 

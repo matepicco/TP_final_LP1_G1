@@ -4,9 +4,9 @@
 
 class cJinete :public cVikingo
 {
-private:
+protected:
 	string apodoJ;
-	time_t fechaNac;
+	struct tm fechaNac;
 	eResultado TrainResult;
 	list <cDragon*> listaDragonesVivos;
 	list <cDragon*> listaDragonesMuertos;
@@ -27,5 +27,5 @@ public:
 	friend void quitarDragon(list<cDragon*> listaux, cDragon* drg);
 
 	cDragon* operator[](size_t index);
-	string to_string();	
+	string toString();	
 };

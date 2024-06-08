@@ -5,7 +5,7 @@ class cDragon;
 
 class cVikingo
 {
-private:
+protected:
 	string nombreV;
 	string apellidoV;
 	ePos posicion;

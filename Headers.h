@@ -6,6 +6,7 @@
 #include <ctime>
 #include <sstream>
 #include <random>
+#include <cstdlib>
 
 
 using namespace std;
@@ -18,3 +19,8 @@ enum eTamanio {Grande, Mediano, Chico};
 enum eColor {Rojo,Negro,Azul,Naranja,Verde,Blanco};
 enum eCaract {Fortachon, Matematico, Botanico};
 enum ePos {Leniador, Comerciante, Agricultor};
+
+
+typedef struct Fecha {
+	int dia, mes, anio;
+}sFecha;

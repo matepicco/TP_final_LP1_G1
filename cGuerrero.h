@@ -5,6 +5,7 @@ class cDragon;
 
 class cGuerrero :public cVikingo
 {
+protected:
 	unsigned int cantDanioG;
 	unsigned int cantVidaG;
 	bool estadoG;
@@ -22,6 +23,6 @@ public:
 	void RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void TerminarDragon(cDragon* objD);
 
-	string to_string();
+	string toString();
 };
 
