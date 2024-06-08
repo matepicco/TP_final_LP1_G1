@@ -49,10 +49,6 @@ void cVikingo::trabajarEnBerk()
         set_posicionV(Agricultor);
 }
 
-void cVikingo::RelacionarseConDragon(cVikingo *ptrV)
-{
-}
-
 cVikingo::~cVikingo()
 {
 }

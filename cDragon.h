@@ -4,7 +4,7 @@
 #include "cGuerrero.h"
 
 class cGuerrero; 
-
+class cJinete;
 class cDragon
 {
 private:
@@ -25,9 +25,8 @@ public:
 	friend class cJinete;
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
-	void altaNombre();
 	void bajaDragon();
-
+	void set_nombre(string nombre);
 	const int getDragonID();
 	string get_nombre();
 	eHabilidad get_caracteristica();
@@ -40,10 +39,10 @@ public:
 	void set_estado(bool estado);
 	void set_domado(bool domado);
 	cFormaAtaque* get_FormaAtaque();
+	void agregarFA(cFormaAtaque* objD);
 
 	friend void cGuerrero::TerminarDragon(cDragon* objD);
 	friend void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void atacarDragon(cDragon* objD);
-	void agregarFA(cFormaAtaque*objD);
-	~cDragon();
+
 };

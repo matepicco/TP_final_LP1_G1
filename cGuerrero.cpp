@@ -42,13 +42,19 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 	this->cantVidaG = vidaAct;
 }
 
-void cGuerrero::RelacionarseConDragon(cVikingo* objV,cDragon* objD)
-{
-	//implementada en cDragon (friend)
-}
-
 void cGuerrero::TerminarDragon(cDragon* objD)
 {//implementada en cDragon (friend)
+}
+
+string cGuerrero::toString()
+{
+	//imprimo lo del hijo,padre
+	stringstream ss;
+
+	ss << this->nombreV << "" << this->apellidoV << "" << this->posicion << "" << this->caractFisicasV << ""
+		<< this->posicion << "" << this->caractFisicasV << "" << this->DragonesEliminados << endl;
+
+	return ss.str();
 }
 
 cGuerrero::~cGuerrero()

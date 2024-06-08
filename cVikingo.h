@@ -5,7 +5,7 @@ class cDragon;
 
 class cVikingo
 {
-private:
+protected:
 	string nombreV;
 	string apellidoV;
 	ePos posicion;
@@ -14,6 +14,8 @@ private:
 
 public:
 	cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas);
+	~cVikingo();
+
 	string get_nombreV();
 	string get_apellido();
 
@@ -23,6 +25,5 @@ public:
 	void set_posicionV(ePos pos);
 
 	void trabajarEnBerk();
-	virtual void RelacionarseConDragon(cVikingo* ptrV);
-	~cVikingo();
+	virtual void RelacionarseConDragon(cDragon* drg) = 0;
 };

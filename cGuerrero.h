@@ -5,12 +5,14 @@ class cDragon;
 
 class cGuerrero :public cVikingo
 {
+protected:
 	unsigned int cantDanioG;
 	unsigned int cantVidaG;
 	bool estadoG;
 	//hereda atb del padre: no se repiten acá
 public:
 	cGuerrero(string nombrev, string apellidov, eCaract caracfisic, unsigned int danioG);
+	~cGuerrero();
 
 	unsigned int getCantDanioG();
 	unsigned int getCantVidaG();
@@ -18,9 +20,9 @@ public:
 	void setCantDanioG(unsigned int danioAct);
 	void setCantVidaG(unsigned int vidaAct);
 
-	void RelacionarseConDragon(cVikingo* objV, cDragon* objD);
+	void RelacionarseConDragon(cDragon* objD);
 	void TerminarDragon(cDragon* objD);
 
-	~cGuerrero();
+	string toString();
 };
 
