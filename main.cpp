@@ -15,8 +15,10 @@ int main()
     Stoico + jinete1;
     Stoico + jinete2;
     Stoico.imprimir();
-    cout << jinete1;
-    cout << dragon1; //comprueba q << mal hecho
+    cout << jinete1 << endl;
+    cout << dragon1 << endl;
+
+    //cout << Stoico << endl; //porqué no?
 
 //aca luego de instanciar a los jinetes y vikingos,
 //se llama a ingresar dragon, se pasa el puntero y ahi empieza el programa llamando a entrenar

@@ -41,7 +41,7 @@ cDragon* cJinete::operator[](size_t index)
 
 string cJinete::toString()
 {
-    //imprimo lo del hijo,padre
+    //imprimo hijo y padre
     stringstream ss;
 
     ss << this->nombreV << "" << this->apellidoV<< "" << this->posicion << "" << this->caractFisicasV << ""
@@ -59,42 +59,48 @@ void cJinete::entrenarDragon()
 
     //lista de ifs que ven su habilidad y de acuerdo a esta establecen la forma de ataque
     //es lineal, digamos una habilidad va a una forma de ataque
+
     cDragon * ptrDragon = this->listaDragonesVivos.back();
-    switch (ptrDragon->caracteristicaD) {
+    switch (ptrDragon->get_caracteristica()) {
     case ResisteFuego:
         ptrDragon->get_FormaAtaque()->CambiarTipo(BolasFuego);
-        if (ptrDragon->tamanioD == Grande && this->TrainResult == Primero)//si el dragon es grande y el jinete salio primero tiene el maximo danio
+        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
+            //si el dragon es grande y el jinete salio primero tiene el maximo danio
             ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if(ptrDragon->tamanioD == Chico && this->TrainResult == Ultimo)
+        else if(ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->tamanioD == Mediano || ptrDragon->tamanioD == Grande|| ptrDragon->tamanioD == Chico)
+        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande|| ptrDragon->get_tamanio() == Chico)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
         break;
     case PatasLargas:
         ptrDragon->get_FormaAtaque()->CambiarTipo(Araniar);
-        if (ptrDragon->tamanioD == Grande && this->TrainResult == Primero)//si el dragon es grande y el jinete salio primero tiene el maximo danio
+        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
+            //si el dragon es grande y el jinete salio primero tiene el maximo danio
             ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if (ptrDragon->tamanioD == Chico && this->TrainResult == Ultimo)
+        else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->tamanioD == Mediano || ptrDragon->tamanioD == Grande || ptrDragon->tamanioD == Chico)
+        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
         break;
     case Rapidez:
         ptrDragon->get_FormaAtaque()->CambiarTipo(Coletazo);
-        if (ptrDragon->tamanioD == Grande && this->TrainResult == Primero)//si el dragon es grande y el jinete salio primero tiene el maximo danio
+        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
+            //si el dragon es grande y el jinete salio primero tiene el maximo danio
             ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if (ptrDragon->tamanioD == Chico && this->TrainResult == Ultimo)
+        else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->tamanioD == Mediano || ptrDragon->tamanioD == Grande || ptrDragon->tamanioD == Chico)
+        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
         break;
     case CuraFacil:
         ptrDragon->get_FormaAtaque()->CambiarTipo(Curar);
-        if (ptrDragon->tamanioD == Grande && this->TrainResult == Primero)//si el dragon es grande y el jinete salio primero tiene el maximo danio
+        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
+            //si el dragon es grande y el jinete salio primero tiene el maximo danio
             ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if (ptrDragon->tamanioD == Chico && this->TrainResult == Ultimo)//si el dragon es chico y el jinete salio ultimo hace poco danio
+        else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+            //si el dragon es chico y el jinete salio ultimo hace poco danio
             ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->tamanioD == Mediano || ptrDragon->tamanioD == Grande || ptrDragon->tamanioD == Chico)
+        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
             ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
         break;
     }
@@ -125,6 +131,7 @@ void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])
             if (it == listaDragonesVivos.end())
                 throw exception("El jinete no posee dragones vivos para luchar");
     }
+    return;
 }
 
 eResultado cJinete::get_trainresult()
@@ -139,7 +146,6 @@ string cJinete::get_apodoJ()
 
 void cJinete::domar()
 {//agregar si lista vacia, exception.tambien para entrenar dragon
-   //list.empty(): Returns whether the list container is empty(i.e.whether its size is 0).
     if (listaDragonesVivos.empty())
         throw exception("Lista vacía");
     else
@@ -175,18 +181,20 @@ void cJinete::incorporarDragon(cDragon* ptrDragon)
     this->entrenarDragon();
 }
 
-void cJinete::entrenarYrendir(cDragon* ptrDragon)
+bool cJinete::entrenarYrendir(cDragon* ptrDragon)
 {
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> dis(1, 4);
     int numero_aleatorio = dis(gen);
+    bool flag = true;
     switch (numero_aleatorio) {
     case 1:
         set_trainresult(Aprobado);
         incorporarDragon(ptrDragon);
     case 2:
         set_trainresult(Desaprobado);
+        flag = false;
     case 3:
         set_trainresult(Primero);
         incorporarDragon(ptrDragon);
@@ -194,19 +202,15 @@ void cJinete::entrenarYrendir(cDragon* ptrDragon)
         set_trainresult(Ultimo);//no es que no aprobo, sino que aprobo justo
         incorporarDragon(ptrDragon);
     }
+    return flag;
 }
 
-void cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
+bool cJinete::RelacionarseConDragon(cDragon* drgNuevo) 
+{
+    bool flag = false;
+    flag= this->entrenarYrendir(drgNuevo);
 
-    //caso stoico manda a vikingo a relacionarse. Si sos jinete:
-    // caso#1: manejas los de tu lista entonces de por sí, están domados por vos.
-    // caso#2: viene listaDragones por parametro (dragones no necessarily domados por vos): recorres, hasta encontrar uno domado por vos. 
-    //caso#1
-    
-
-    this->entrenarYrendir(drgNuevo);
-
-
+    return flag;
     /* MODULO APARTE: función extra. relaciono con dragon por parametro
       //caso#2
       //simulo crear una lista tal que en realidad viene por parametro

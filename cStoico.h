@@ -13,33 +13,34 @@ private:
 	list<cDragon*> listaDrgMatcheados;
 public:
 	cStoico();
+	~cStoico();
 
 	void agregarVikingo(cVikingo* objV);
 	void agregarDragon(cDragon* objD);
 	void agregarDrgXlista(list<cDragon*> lista, cDragon* drg);
 	void eliminarDrgXlista(list<cDragon*> lista, cDragon* drg);
-
 	void eliminarVikingo(cVikingo* objV);
 	void eliminarDragon(cDragon* objD);
+	
 	void operator-(cDragon* objD);
 	void operator+(cVikingo* objV);
 	void operator+(cDragon* objD);
 	void operator-(cVikingo* objV);
-	void imprimir();
-
 	friend ostream& operator<<(ostream& out, cStoico* objS);
-	//not necesario para friend xq main posee a stoico y << metodo public
+
+	void imprimir();
 	string to_string();
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
-
-	void mandarAentrenar();// este nose si quedo obsoleto>??????????????
-
-	void crearInteraccion();// le cambie el nombre porque en jinete no ataca directamente, primero entrena
 	static int getcantVikCreados();
 
-	//m�todos objetivo de Stoico. funci�n: listar
+	void mandarAentrenar();//obsoleto. funcionaría como met aislado
+	void crearInteraccion();//jinete no ataca directo, primero entrena
+	//metodos objetivo de Stoico. funcion: listar
+	//metodo que modula el add a listaMatch. parametros lista y objeto
 	void DragonesDomados();
 	void JinetesxDragon();
-	~cStoico();
-};
+}; 
+
+//acceso desde main. op << no miembro
+ostream& operator<<(ostream& out, cStoico* objS);

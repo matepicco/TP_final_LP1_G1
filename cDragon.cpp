@@ -18,8 +18,10 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 	dragonesCreados++;
 }
 
-void cGuerrero::TerminarDragon(cDragon* objD)
+bool cGuerrero::TerminarDragon(cDragon* objD)
 {
+	bool terminado = false;
+	//double check: innecesario? Solo necesario si ejecuto directo este metodo
 	if (objD->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
@@ -39,21 +41,28 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	{
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
+		terminado = true;
+		//puedo !terminado; (?) queda facha
+		!terminado;
 	}
 	else if (objD->getVidaD() > 0)
 		this->setEstadoG(false);
+
+	return terminado;
 }
 
-void cGuerrero::RelacionarseConDragon(cDragon* objD)
+bool cGuerrero::RelacionarseConDragon(cDragon* objD)
 {
+	bool terminado = false;
 	if (objD->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
 		throw exception("Este Dragon es bueno");
 	else
 	{
-		this->TerminarDragon(objD);
+		terminado = this->TerminarDragon(objD);
 	}
+	return terminado;
 }
 
 void cDragon::atacarDragon(cDragon *objD)

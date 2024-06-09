@@ -9,7 +9,7 @@ protected:
 	unsigned int cantDanioG;
 	unsigned int cantVidaG;
 	bool estadoG;
-	//hereda atb del padre: no se repiten acá
+
 public:
 	cGuerrero(string nombrev, string apellidov, eCaract caracfisic, unsigned int danioG);
 	~cGuerrero();
@@ -20,8 +20,8 @@ public:
 	void setCantDanioG(unsigned int danioAct);
 	void setCantVidaG(unsigned int vidaAct);
 
-	void RelacionarseConDragon(cDragon* objD);
-	void TerminarDragon(cDragon* objD);
+	bool RelacionarseConDragon(cDragon* objD);
+	bool TerminarDragon(cDragon* objD);
 
 	string toString();
 };
