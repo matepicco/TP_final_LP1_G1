@@ -20,7 +20,7 @@ private:
 
 	unsigned int vidaD;
 
-	list <cFormaAtaque*> listaFA;//posible defensa, diferentes tipos.
+	list <cFormaAtaque*> listaFA;//diferentes tipos.
 
 public:
 	//friend class cJinete;

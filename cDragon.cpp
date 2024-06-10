@@ -76,7 +76,7 @@ void cDragon::atacarDragon(cDragon *objD)
 
 	while (itObjP != this->listaFA.end()) 
 	{
-
+		//corregir error
 		if ((*itObjP)->get_danio() < (*itObjL)->get_danio()) //el objeto mas debil, pierde. se elimina respectiv.
 		{	
 			objD->bajaDragon();
