@@ -17,3 +17,7 @@ void cDefensa::cambiarDefensa(eTipoDefensa tipo)
 {
 	this->tipoDefensa = tipo;
 }
+
+void cDefensa::combatir()
+{
+}

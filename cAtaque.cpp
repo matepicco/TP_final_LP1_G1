@@ -17,3 +17,7 @@ void cAtaque::CambiarTipo(eTipoAtaque tipo)
 {
 	this->tipoAtaque = tipo;
 }
+
+void cAtaque::combatir()
+{
+}

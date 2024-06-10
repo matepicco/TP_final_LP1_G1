@@ -13,5 +13,6 @@ public:
 	eTipoDefensa getTipoDefensa();
 	void cambiarDefensa(eTipoDefensa tipo);
 
+	void combatir();
 };
 
