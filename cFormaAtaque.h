@@ -3,17 +3,18 @@
 
 class cFormaAtaque
 {
-private:
-	eTipoAtaque tipodeataque;
-	eDanio tipodedanio;
+protected:
 	unsigned int cantDanioD;
+	eDanio tipoDanio;
+
 public:
-	cFormaAtaque(eTipoAtaque tipoataque, eDanio tipodanio, unsigned int danio);
-	void CambiarTipo(eTipoAtaque tipo);
-	eDanio get_danio();
-	eTipoAtaque get_tipoataque();
+	cFormaAtaque(unsigned int danio, eDanio tipodanio);
+	virtual ~cFormaAtaque();
+
 	unsigned int getCantDanioD();
+	eDanio getTipoDanio();
+	void setCantDanio(unsigned int danio);
 	void cambiarDanio(eDanio danio);
 
-	~cFormaAtaque();
+	virtual void combatir() = 0; //cuando llamado a FA: chequeo si Ata/Def : polimorfismo
 };

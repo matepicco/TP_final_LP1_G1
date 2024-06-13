@@ -18,16 +18,18 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 	dragonesCreados++;
 }
 
-void cGuerrero::TerminarDragon(cDragon* objD)
+bool cGuerrero::TerminarDragon(cDragon* objD)
 {
+	bool terminado = false;
+	//double check: innecesario? Solo necesario si ejecuto directo este metodo
 	if (objD->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
 		throw exception("Este Dragon es bueno");
 
 	/*
-	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
-	* más desarrollado aún: ambos 100 de daño, entonces empate, knock out doble, evaluo con if
+	* constarÃ¡ de un enfrentamiento entre dragon y vikingo: contrastarÃ¡ las habilidades y deb
+	* mÃ¡s desarrollado aÃºn: ambos 100 de daÃ±o, entonces empate, knock out doble, evaluo con if
 	*/
 	while (this->cantVidaG > 0 && objD->getVidaD() > 0)
 	{
@@ -39,21 +41,27 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	{
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
+		terminado = true;
+		//puedo !terminado; (?) queda facha
+		!terminado;
 	}
 	else if (objD->getVidaD() > 0)
 		this->setEstadoG(false);
+
+	return terminado;
 }
 
-void cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
+
+bool cGuerrero::RelacionarseConDragon(cDragon* objD)
 {
-	if (drgNuevo->get_estado() == false)
+	bool terminado = false;
+	if (objD->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
 	else if (drgNuevo->get_domado() == true)
 		throw exception("Este Dragon es bueno");
 	else
-	{
-		this->TerminarDragon(drgNuevo);
-	}
+		terminado = this->TerminarDragon(objD);
+	return terminado;
 }
 
 void cDragon::atacarDragon(cDragon *objD)
@@ -67,7 +75,7 @@ void cDragon::atacarDragon(cDragon *objD)
 
 	while (itObjP != this->listaFA.end()) 
 	{
-
+		//corregir error
 		if ((*itObjP)->get_danio() < (*itObjL)->get_danio()) //el objeto mas debil, pierde. se elimina respectiv.
 		{	
 			objD->bajaDragon();
