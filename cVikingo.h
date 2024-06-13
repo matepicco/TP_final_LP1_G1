@@ -25,5 +25,6 @@ public:
 	void set_posicionV(ePos pos);
 
 	void trabajarEnBerk();
+
 	virtual bool RelacionarseConDragon(cDragon* drg) = 0;
 };

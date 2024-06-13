@@ -106,6 +106,17 @@ void cJinete::entrenarDragon()
     }
 }
 
+void quitarDragon(list<cDragon*> listaux, cDragon* drg)
+{
+    list<cDragon*>::iterator it = listaux.begin();
+    while (it != listaux.end() && (*it) != drg) it++;
+
+    listaux.erase(it);
+
+    if(it == listaux.end())
+        throw exception("El elemento a quitar no esta en la lista proporcionada");
+}
+
 void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])) 
 {      
     cDragon* midragon;//Creo el objeto de dragon que voy a usar 
@@ -123,7 +134,7 @@ void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])
     }
     else {//si con midragon no ataca, ataca con el proximo vivo que encuentre en la lista y mete el otro en los muertos
         this->listaDragonesMuertos.push_back(midragon);
-        quitarDragon(listaDragonesVivos, (midragon));
+        quitarDragon(listaDragonesVivos, midragon);
      
         while (it != listaDragonesVivos.end() && !((*it)->get_estado())) it++;
             (*it)->atacarDragon(ptrD);
@@ -183,6 +194,9 @@ void cJinete::incorporarDragon(cDragon* ptrDragon)
 
 bool cJinete::entrenarYrendir(cDragon* ptrDragon)
 {
+
+void cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
+
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> dis(1, 4);
@@ -191,19 +205,20 @@ bool cJinete::entrenarYrendir(cDragon* ptrDragon)
     switch (numero_aleatorio) {
     case 1:
         set_trainresult(Aprobado);
-        incorporarDragon(ptrDragon);
+        incorporarDragon(drgNuevo);
     case 2:
         set_trainresult(Desaprobado);
         flag = false;
     case 3:
         set_trainresult(Primero);
-        incorporarDragon(ptrDragon);
+        incorporarDragon(drgNuevo);
     case 4:
         set_trainresult(Ultimo);//no es que no aprobo, sino que aprobo justo
-        incorporarDragon(ptrDragon);
+        incorporarDragon(drgNuevo);
     }
     return flag;
 }
+
 
 bool cJinete::RelacionarseConDragon(cDragon* drgNuevo) 
 {
@@ -232,11 +247,4 @@ void cJinete::set_trainresult(eResultado resultado)
 
 cJinete::~cJinete()
 {
-}
-
-void quitarDragon(list<cDragon*> listaux, cDragon* drg)
-{
-    list<cDragon*>::iterator it = listaux.begin();
-    advance(it,drg);
-    listaux.erase(it);
 }

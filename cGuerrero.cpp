@@ -50,6 +50,7 @@ bool cGuerrero::TerminarDragon(cDragon* objD)
 {//implementada en cDragon (friend)
 }
 
+
 string cGuerrero::toString()
 {
 	//imprimo lo del hijo,padre

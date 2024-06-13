@@ -26,13 +26,15 @@ public:
 	void operator+(cVikingo* objV);
 	void operator+(cDragon* objD);
 	void operator-(cVikingo* objV);
-	friend ostream& operator<<(ostream& out, cStoico* objS);
 
 	void imprimir();
+	//not necesario para friend xq main posee a stoico y << metodo public
 	string to_string();
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
 	static int getcantVikCreados();
+
+	void crearInteraccion();// le cambie el nombre porque en jinete no ataca directamente, primero entrena
 
 	void mandarAentrenar();//obsoleto. funcionaría como met aislado
 	void crearInteraccion();//jinete no ataca directo, primero entrena
