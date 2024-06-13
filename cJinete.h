@@ -23,7 +23,6 @@ public:
 	void domar();
 	void altaNombre(cDragon* drg);
 	void incorporarDragon(cDragon* ptrDragon);
-	void entrenarYrendir(cDragon* ptrDragon);
 	void entrenarDragon();//tiene que ir dentro de try/catch
 	void manejarDragon(cDragon* ptrD, int index);
 	friend void quitarDragon(list<cDragon*> listaux, cDragon* drg);

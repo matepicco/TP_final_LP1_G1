@@ -41,8 +41,8 @@ public:
 	cFormaAtaque* get_FormaAtaque();
 	void agregarFA(cFormaAtaque* objD);
 
-	friend void cGuerrero::TerminarDragon(cDragon* objD);
-	friend void cGuerrero::RelacionarseConDragon(cVikingo* objV, cDragon* objD);
+	friend void TerminarDragon(cDragon* objD);
+	friend void RelacionarseConDragon(cVikingo* objV, cDragon* objD);
 	void atacarDragon(cDragon* objD);
 
 };

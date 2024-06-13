@@ -20,7 +20,7 @@ public:
 	void setCantDanioG(unsigned int danioAct);
 	void setCantVidaG(unsigned int vidaAct);
 
-	void RelacionarseConDragon(cDragon* objD);
+	void RelacionarseConDragon(cDragon* drgNuevo);
 	void TerminarDragon(cDragon* objD);
 
 	string toString();
