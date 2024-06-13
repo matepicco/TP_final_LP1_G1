@@ -29,13 +29,13 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 	* constará de un enfrentamiento entre dragon y vikingo: contrastará las habilidades y deb
 	* más desarrollado aún: ambos 100 de daño, entonces empate, knock out doble, evaluo con if
 	*/
-	while (this->cantVidaG > 0 && objD->vidaD > 0)
+	while (this->cantVidaG > 0 && objD->getVidaD() > 0)
 	{
-		objD->setVidaD(objD->getVidaD() - getCantDanioG());
+		objD->setVidaD(objD->getVidaD() - this->getCantDanioG());
 		this->cantVidaG = this->cantVidaG - objD->get_FormaAtaque()->getCantDanioD();
 	}
 
-	if (getCantVidaG() > 0)
+	if (this->getCantVidaG() > 0)
 	{
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
@@ -44,15 +44,15 @@ void cGuerrero::TerminarDragon(cDragon* objD)
 		this->setEstadoG(false);
 }
 
-void cGuerrero::RelacionarseConDragon(cDragon* objD)
+void cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
 {
-	if (objD->get_estado() == false)
+	if (drgNuevo->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
-	else if (objD->get_domado() == true)
+	else if (drgNuevo->get_domado() == true)
 		throw exception("Este Dragon es bueno");
 	else
 	{
-		this->TerminarDragon(objD);
+		this->TerminarDragon(drgNuevo);
 	}
 }
 

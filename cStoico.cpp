@@ -1,3 +1,4 @@
+
 #include "cStoico.h"
 
 int cStoico::cantVikCreados = 0;
@@ -30,12 +31,14 @@ void cStoico::eliminarDrgXlista(list<cDragon*> lista, cDragon* drg)
     list<cDragon*>::iterator it = lista.begin();
     bool borrado = false;
 
-    while (it !=lista.end()) {
+    while (it != lista.end()) {
 
         if ((*it) == drg) //compara atb 1x1 
         {
-            lista.remove((*it)); //erase se usa para borrar la lista integra
-            lista.remove(drg); //erase se usa para borrar la lista integra
+            lista.remove(*it);
+            lista.erase(it);
+            //erase se usa para borrar la lista integra
+           // lista.remove(drg); //erase se usa para borrar la lista integra
             //decidir con cual de los dos quedarse. yo elijo  objD
             borrado = true;
         }
@@ -47,54 +50,57 @@ void cStoico::eliminarDrgXlista(list<cDragon*> lista, cDragon* drg)
         throw new exception("Error: No se encontro el vikingo");
 }
 
-void cStoico::eliminarVikingo(cVikingo* objV)
-//Este metodo tiene que ir en un catch porque tiene throw
-//este metodo puede impleemtnar sobrecarga ==
-{
-    list<cVikingo*>::iterator it = this->listaVikingos.begin();
-    bool borrado = false;
-
-    while (it != this->listaVikingos.end())
-    {
-        //opcion dynamic cast
-        cGuerrero* ptrG = dynamic_cast<cGuerrero*>(objV);
-        if (ptrG != nullptr)
-        {
-            if ((*it) == ptrG)
-            {//no esperaba lo acepte pero... (comparo vikingo con guerrero)
-                this->listaVikingos.remove((*it));
-                borrado = true;
-            }
-        }
-        else //if (ptrG == nullptr)//es jinete
-        {
-            if ((*it) == objV)//imposible == lista de Jinete, entonces NECESITO identificador
-            {
-                this->listaVikingos.remove(objV);
-                borrado = true;
-            }
-        }
-
-        //otra forma, poco precisa
-        if ((*it)->get_nombreV() == objV->get_nombreV()) 
-        {//tendría que ASEGURAR q no se repiten nombres
-         // imposible: usuario ingresa lo que quiere
-            this->listaVikingos.remove((*it)); //erase se usa para borrar la lista integra
-            this->listaVikingos.remove(objV); //erase se usa para borrar la lista integra
-            //decidir con cual de los dos quedarse.
-            borrado = true;
-        }
-
-        it++;
-    }
-
-    if (!borrado)
-        throw new exception("Error: No se encontro el vikingo");
-    else
-        this->cantVikCreados--;
-
-    return;
-}
+//void cStoico::eliminarVikingo(cVikingo* objV)
+////Este metodo tiene que ir en un catch porque tiene throw
+////este metodo puede impleemtnar sobrecarga ==
+//{
+//    list<cVikingo*>::iterator it = this->listaVikingos.begin();
+//    bool borrado = false;
+//
+//    while (it != this->listaVikingos.end())
+//    {
+//        //opcion dynamic cast
+//        cGuerrero* ptrG = dynamic_cast<cGuerrero*>(objV);
+//        if (ptrG != nullptr)
+//        {
+//            if ((*it) == ptrG)
+//            {//no esperaba lo acepte pero... (comparo vikingo con guerrero)
+//                this->listaVikingos.remove(*it);
+//                this->listaVikingos.erase(it);
+//                borrado = true;
+//            }
+//        }
+//        else //if (ptrG == nullptr)//es jinete
+//        {
+//            if ((*it) == objV)//imposible == lista de Jinete, entonces NECESITO identificador
+//            {
+//                this->listaVikingos.remove(*it);
+//                this->listaVikingos.erase(it);
+//                borrado = true;
+//            }
+//        }
+//
+//        //otra forma, poco precisa
+//        if ((*it)->get_nombreV() == objV->get_nombreV()) 
+//        {//tendría que ASEGURAR q no se repiten nombres
+//         // imposible: usuario ingresa lo que quiere
+//           
+//            this->listaVikingos.erase(it); //erase se usa para borrar la lista integra
+//          //  this->listaVikingos.remove(objV); //erase se usa para borrar la lista integra
+//            //decidir con cual de los dos quedarse.
+//            borrado = true;
+//        }
+//
+//        it++;
+//    }
+//
+//    if (!borrado)
+//        throw new exception("Error: No se encontro el vikingo");
+//    else
+//        this->cantVikCreados--;
+//
+//    return;
+//}
 
 void cStoico::eliminarDragon(cDragon* objD)
 {
@@ -105,8 +111,9 @@ void cStoico::eliminarDragon(cDragon* objD)
 
         if ((*it)==objD) //compara atb 1x1 
         {
-            this->listaDrgS.remove((*it)); //erase se usa para borrar la lista integra
-            this->listaDrgS.remove(objD); //erase se usa para borrar la lista integra
+            this->listaDrgS.remove(*it);
+            this->listaDrgS.erase(it); //erase se usa para borrar la lista integra
+         //   this->listaDrgS.remove(objD); //erase se usa para borrar la lista integra
             //decidir con cual de los dos quedarse. yo elijo  objD
             borrado = true;
         }
@@ -148,42 +155,16 @@ void cStoico::imprimir()
     cout << this->to_string();
 }
 
-void cStoico::operator-(cDragon* objD)
-{///operator [], ==. si lo encuentra, lo elimina. sino exception
-    if (objD != nullptr)
-        eliminarDragon(objD);
-    else
-        throw exception("Vacío");
-
-    return;
-}
-
-//ostream& operator<<(ostream& out, cVikingo* objV)         // Es una forma de hacerlo pero se me ocurrio que podia ser como esta abajo
-//{
-//    //ocurro llamo a toString de guerrero y jinete
-//    //chequeo listas no vacias. exception (o desde donde uso los <<
-//    //chequear metodo listar de matilarro
-//    cGuerrero* objG = dynamic_cast<cGuerrero*>(objV);
-//    if (objG != nullptr)
-//    { 
-//        out << objG->to_string() << endl;
-//    }
+//void cStoico::operator-(cDragon* objD)
+//{///operator [], ==. si lo encuentra, lo elimina. sino exception
+//    if (objD != nullptr)
+//        eliminarDragon(objD);
 //    else
-//    {
-//        cJinete* objJ = dynamic_cast<cJinete*>(objV);
-//        if (objJ != nullptr)
-//        {
-//            out << objJ->to_string() << endl;
-//        }
-//    }
-//    return out;
+//        throw exception("Vacío");
+//
+//    return;
 //}
 
-ostream& operator<<(ostream& out, cStoico* objS) {
-
-    out << objS->to_string();
-    return out;
-}
 string cStoico::to_string()
 {
     stringstream ss;
@@ -230,10 +211,6 @@ cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
     return *it;
 }
 
-void cStoico::mandarAentrenar()
-{
-}
-
 void cStoico::crearInteraccion()
 {
     //parametro objeto Dragon o stoico posee listaDragon. justificacion?
@@ -251,10 +228,13 @@ void cStoico::crearInteraccion()
                 cJinete* ptrJ = dynamic_cast<cJinete*>(*(itV));
                 if (ptrJ != nullptr)
                 {
-                    ptrJ->RelacionarseConDragon((*itD));
-                    agregarDrgXlista(listaDrgMatcheados,(*itD));//agrego el match a la de dragones matcheados
-                    eliminarDrgXlista(listaDrgS, (*itD));//elimino el que use de la lista comun, que siempre es el primero que 
+                    list<cDragon*>::iterator itDaux = this->listaDrgS.begin();
+                    itDaux = itD;// para no eliminar ese elemento de la lista y despues darle a it++ uso un aux
                     itD++;
+                    ptrJ->RelacionarseConDragon((*itDaux));
+                    agregarDrgXlista(listaDrgMatcheados,(*itDaux));//agrego el match a la de dragones matcheados
+                    eliminarDrgXlista(listaDrgS, (*itDaux));//elimino el que use de la lista comun, que siempre es el primero que 
+                    
                     break;
                 }
                 else {
@@ -262,10 +242,13 @@ void cStoico::crearInteraccion()
                     if (ptrG != nullptr)
                     {
                         //implementacion: guerrero pelea uno por uno con los dragones de la lista.
-                        ptrG->RelacionarseConDragon((*itD));
-                        agregarDrgXlista(listaDrgMatcheados,(*itD));
-                        eliminarDrgXlista(listaDrgS,(*itD));
+                        list<cDragon*>::iterator itDaux2 = this->listaDrgS.begin();
+                        itDaux2 = itD;
                         itD++;
+                        ptrG->RelacionarseConDragon((*itDaux2));
+                        agregarDrgXlista(listaDrgMatcheados,(*itDaux2));
+                        eliminarDrgXlista(listaDrgS,(*itDaux2));
+                        
                         break;
                     }
                 }
@@ -291,9 +274,4 @@ void cStoico::JinetesxDragon()
 
 cStoico::~cStoico()
 {
-}
-
-ostream& operator<<(cVikingo* objV, cSt)
-{
-    // TODO: insert return statement here
 }

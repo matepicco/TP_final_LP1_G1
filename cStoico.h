@@ -26,17 +26,14 @@ public:
 	void operator+(cDragon* objD);
 	void operator-(cVikingo* objV);
 	void imprimir();
-
-	friend ostream& operator<<(ostream& out, cStoico* objS);
 	//not necesario para friend xq main posee a stoico y << metodo public
 	string to_string();
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
-
-	void mandarAentrenar();// este nose si quedo obsoleto>??????????????
+	static int getcantVikCreados();
 
 	void crearInteraccion();// le cambie el nombre porque en jinete no ataca directamente, primero entrena
-	static int getcantVikCreados();
+	
 
 	//m�todos objetivo de Stoico. funci�n: listar
 	void DragonesDomados();
