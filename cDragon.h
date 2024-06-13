@@ -5,6 +5,7 @@
 
 class cGuerrero; 
 class cJinete;
+
 class cDragon
 {
 private:
@@ -19,14 +20,13 @@ private:
 
 	unsigned int vidaD;
 
-	list <cFormaAtaque*> listaFA;//posible defensa, diferentes tipos.
+	list <cFormaAtaque*> listaFA;//diferentes tipos.
 
 public:
-	friend class cJinete;
+	//friend class cJinete;
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
-	void bajaDragon();
-	void set_nombre(string nombre);
+
 	const int getDragonID();
 	string get_nombre();
 	eHabilidad get_caracteristica();
@@ -35,14 +35,16 @@ public:
 	bool get_estado();
 	bool get_domado();
 	unsigned int getVidaD();
+	void set_nombre(string nombre);
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
 	cFormaAtaque* get_FormaAtaque();
+
+	void bajaDragon();
 	void agregarFA(cFormaAtaque* objD);
 
-	friend void TerminarDragon(cDragon* objD);
-	friend void RelacionarseConDragon(cVikingo* objV, cDragon* objD);
+	friend bool cGuerrero::TerminarDragon(cDragon* objD);
+	friend bool cGuerrero::RelacionarseConDragon(cDragon* objD);
 	void atacarDragon(cDragon* objD);
-
 };
