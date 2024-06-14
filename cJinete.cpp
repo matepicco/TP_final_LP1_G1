@@ -1,5 +1,6 @@
 #include "cJinete.h"
-
+vector<string> cJinete::PosicionNombres = {"uno", "dos", "tres", "cuatro", "cinco", "seis"};
+int cJinete::iterador = 0;
 cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
 	stringstream fechaIngresada(fecha);
@@ -51,58 +52,142 @@ string cJinete::toString()
     return ss.str();
 }
 
-void cJinete::entrenarDragon()
+void cJinete::entrenarDragon()///////// Poner danio de acuerdo a cada INTENSIDAD
 {
-    //indicación de Sol.Necesario? previamente lista es chequeada no nula
-   if(listaDragonesVivos.empty())
-       throw exception("Lista vacía");
-
-    //lista de ifs que ven su habilidad y de acuerdo a esta establecen la forma de ataque
-    //es lineal, digamos una habilidad va a una forma de ataque
-
     cDragon * ptrDragon = this->listaDragonesVivos.back();
+    cAtaque* ataaux = dynamic_cast<cAtaque*>(ptrDragon->get_FormaAtaque());//Aca toma como que el dragon siempre tiene una forma de ataque
+    cDefensa* defaux = dynamic_cast<cDefensa*>(ptrDragon->get_FormaAtaque());
     switch (ptrDragon->get_caracteristica()) {
-    case ResisteFuego:
-        ptrDragon->get_FormaAtaque()->CambiarTipo(BolasFuego);
-        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
-            //si el dragon es grande y el jinete salio primero tiene el maximo danio
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if(ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande|| ptrDragon->get_tamanio() == Chico)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
-        break;
-    case PatasLargas:
-        ptrDragon->get_FormaAtaque()->CambiarTipo(Araniar);
-        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
-            //si el dragon es grande y el jinete salio primero tiene el maximo danio
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
-        break;
-    case Rapidez:
-        ptrDragon->get_FormaAtaque()->CambiarTipo(Coletazo);
-        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
-            //si el dragon es grande y el jinete salio primero tiene el maximo danio
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
-        break;
-    case CuraFacil:
-        ptrDragon->get_FormaAtaque()->CambiarTipo(Curar);
-        if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero)
-            //si el dragon es grande y el jinete salio primero tiene el maximo danio
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Mucho);
-        else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
-            //si el dragon es chico y el jinete salio ultimo hace poco danio
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Poco);
-        else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
-            ptrDragon->get_FormaAtaque()->cambiarDanio(Moderado);
-        break;
+    case Fogoso:
+        if (ataaux != nullptr) {
+            ataaux->CambiarTipo(BolasFuego);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                //si el dragon es grande y el jinete salio primero tiene el maximo danio
+                ataaux->cambiarIntensidad(Mucho);
+                ataaux->setCantDanio(80);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo) {
+                ataaux->cambiarIntensidad(Poco);
+                ataaux->setCantDanio(20);
+            }
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+            {
+                ataaux->cambiarIntensidad(Moderado);
+                ataaux->setCantDanio(50);
+            } 
+            break;
+        }
+        else if (defaux != nullptr) {
+            defaux->cambiarDefensa(ResisteFuego);//En el caso de la defensa no hay un numero que la represente, pero si sirve para hacer la cuenta del danio en ataque
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                defaux->cambiarIntensidad(Mucho);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+                defaux->cambiarIntensidad(Poco);
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+                defaux->cambiarIntensidad(Moderado);
+            break;
+        }
+    case Garras:
+        if (ataaux != nullptr) {
+            ataaux->CambiarTipo(Araniar);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                //si el dragon es grande y el jinete salio primero tiene el maximo danio
+                ataaux->cambiarIntensidad(Mucho);
+                ataaux->setCantDanio(80);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo) { 
+                ataaux->cambiarIntensidad(Poco);
+                ataaux->setCantDanio(20);
+            }
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+            {
+             ataaux->cambiarIntensidad(Moderado);
+             ataaux->setCantDanio(50);
+            }
+            break;
+        }
+        else if (defaux != nullptr) {
+            defaux->cambiarDefensa(EscamasResistentes);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                defaux->cambiarIntensidad(Mucho);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+            {
+                defaux->cambiarIntensidad(Poco);
+            }
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+            {
+            defaux->cambiarIntensidad(Moderado);
+            } 
+            break;
+        }
+    case Colilargo:
+        if (ataaux != nullptr) {
+            ataaux->CambiarTipo(Coletazo);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                ataaux->cambiarIntensidad(Mucho);
+                ataaux->setCantDanio(80);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+            {
+                ataaux->cambiarIntensidad(Poco);
+                ataaux->setCantDanio(20);
+            }
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+            {
+                ataaux->cambiarIntensidad(Moderado);
+                ataaux->setCantDanio(50);
+            }
+            break;
+        }
+        else if (defaux != nullptr) {
+            defaux->cambiarDefensa(Rapidez);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                defaux->cambiarIntensidad(Mucho);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+            {
+                defaux->cambiarIntensidad(Poco);
+            }
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+            {
+                defaux->cambiarIntensidad(Moderado);
+            }
+            break;
+        }
+    case Dientes:
+        if (ataaux != nullptr) {
+            ataaux->CambiarTipo(Mordidita);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                ataaux->cambiarIntensidad(Mucho);
+                ataaux->setCantDanio(80);
+
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+            {
+                ataaux->cambiarIntensidad(Poco);
+                ataaux->setCantDanio(20);
+
+            }
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+            {
+                ataaux->cambiarIntensidad(Moderado);
+                ataaux->setCantDanio(50);
+            }
+            break;
+        }
+        else if (defaux != nullptr) {
+            defaux->cambiarDefensa(ArmaduraDrg);
+            if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
+                defaux->cambiarIntensidad(Mucho);
+            }
+            else if (ptrDragon->get_tamanio() == Chico && this->TrainResult == Ultimo)
+                defaux->cambiarIntensidad(Poco);
+            else if (ptrDragon->get_tamanio() == Mediano || ptrDragon->get_tamanio() == Grande || ptrDragon->get_tamanio() == Chico)
+                defaux->cambiarIntensidad(Moderado);
+            break;
+        }
     }
 }
 
@@ -165,21 +250,26 @@ void cJinete::domar()
 
 void cJinete::altaNombre(cDragon* drg)
 {
+    if (iterador == 7)
+        throw exception("No hay mas nombres para Dragones");// Y si, lo fije en 7 porque dale que va a tener mas de 7 dragones bobo no da
+    string aux = cJinete::PosicionNombres[iterador];//vector static para nombres
+    cJinete::iterador++;// avanzo el iterador static, como una variable global
+    int i = 0;
     string s;
     if (drg->get_caracteristica() == ResisteFuego) {
-            s = nombreV + "'s Fueguin";
+        s = nombreV + "'s Fueguin" + aux;
         drg->set_nombre(s);
     }
-    else if (drg->get_caracteristica() == PatasLargas) {
-        s=nombreV+"'s Patudo";
+    else if (drg->get_caracteristica() == Garras) {
+        s=nombreV+"'s Garritas" + aux;
         drg->set_nombre(s);
     }
-    else if (drg->get_caracteristica() == Rapidez) {
-        s = nombreV + "'s Rapidragui";
+    else if (drg->get_caracteristica() == Colilargo){
+        s = nombreV + "'s Colilargo" + aux;
         drg->set_nombre(s);
     }
     else {
-        s=nombreV+"'s Curita";
+        s=nombreV+"'s Dientudo" + aux;
         drg->set_nombre(s);
     }
 }
@@ -192,10 +282,7 @@ void cJinete::incorporarDragon(cDragon* ptrDragon)
     this->entrenarDragon();
 }
 
-bool cJinete::entrenarYrendir(cDragon* ptrDragon)
-{
-
-void cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
+bool cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
 
     random_device rd;
     mt19937 gen(rd());
@@ -217,27 +304,6 @@ void cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
         incorporarDragon(drgNuevo);
     }
     return flag;
-}
-
-
-bool cJinete::RelacionarseConDragon(cDragon* drgNuevo) 
-{
-    bool flag = false;
-    flag= this->entrenarYrendir(drgNuevo);
-
-    return flag;
-    /* MODULO APARTE: función extra. relaciono con dragon por parametro
-      //caso#2
-      //simulo crear una lista tal que en realidad viene por parametro
-        list <cDragon*> listaDragon;
-        itObjD = listaDragon.begin();
-       //primero chequeo jinete tenga domado al dragon xParametro. necesito
-        while (itObjD != listaDragon.end())
-        {//condicion posible: igualo iterador listaParametro con iterador listaObjetoJinete hasta que coincidan
-            ptrJ->entrenarYrendir(*(itObjD));
-        }
-    }
-     */
 }
 
 void cJinete::set_trainresult(eResultado resultado)

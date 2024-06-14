@@ -1,6 +1,6 @@
 #include "cAtaque.h"
 
-cAtaque::cAtaque(eTipoAtaque tipoataque, eDanio tipodanio, unsigned int danio): cFormaAtaque(danio,tipodanio)
+cAtaque::cAtaque(eTipoAtaque tipoataque, eIntensidad tipodanio, unsigned int danio): cFormaAtaque(danio,tipodanio)
 {
 	this->tipoAtaque = tipoataque;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Headers.h"
-#include "cFormaAtaque.h"
+#include "cAtaque.h"
+#include "cDefensa.h"
 #include "cGuerrero.h"
 
 class cGuerrero; 
