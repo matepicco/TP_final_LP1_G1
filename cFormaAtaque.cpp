@@ -2,7 +2,13 @@
 
 cFormaAtaque::cFormaAtaque(unsigned int danio, eDanio tipodanio)
 {
-	this->cantDanioD = danio;
+	if (danio <= 0)
+		this->cantDanioD = 20;
+	if(danio >=100)
+		this->cantDanioD = 80;
+	else if(danio>=0 || danio<100)
+		this->cantDanioD = danio;
+
 	this->tipoDanio = tipodanio;
 }
 

@@ -1,20 +1,23 @@
 #include "cVikingo.h"
 
-cVikingo::cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas)
+cVikingo::cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas): nombreV(nombrev), apellidoV(apellidov)
 {
-    this->nombreV = nombrev;
-    this->apellidoV = apellidov;
     this->caractFisicasV = caracteristicasfisicas;
     this->DragonesEliminados = 0;
     trabajarEnBerk();
 }
 
-string cVikingo::get_nombreV()
+const string cVikingo::getVikiID()
+{
+    return this->vikiID;
+}
+
+const string cVikingo::get_nombreV()
 {
     return this->nombreV;
 }
 
-string cVikingo::get_apellido()
+const string cVikingo::get_apellido()
 {
     return this->apellidoV;
 }

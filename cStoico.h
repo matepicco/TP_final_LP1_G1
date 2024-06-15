@@ -34,10 +34,11 @@ public:
 	cVikingo* get_vikingoxPos(ePos pos);
 	static int getcantVikCreados();
 
-	void crearInteraccion();// le cambie el nombre porque en jinete no ataca directamente, primero entrena
+	void crearInteraccion();
 
-	void mandarAentrenar();//obsoleto. funcionaría como met aislado
-	void crearInteraccion();//jinete no ataca directo, primero entrena
+	void mandarAtacar(); //todo
+	void crearInteraccion();
+
 	//metodos objetivo de Stoico. funcion: listar
 	//metodo que modula el add a listaMatch. parametros lista y objeto
 	void DragonesDomados();

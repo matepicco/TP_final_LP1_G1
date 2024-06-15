@@ -6,8 +6,9 @@ class cDragon;
 class cVikingo
 {
 protected:
-	string nombreV;
-	string apellidoV;
+	const string vikiID;
+	const string nombreV;
+	const string apellidoV;
 	ePos posicion;
 	eCaract caractFisicasV;
 	unsigned int DragonesEliminados;
@@ -16,8 +17,9 @@ public:
 	cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas);
 	~cVikingo();
 
-	string get_nombreV();
-	string get_apellido();
+	const string getVikiID();
+	const string get_nombreV();
+	const string get_apellido();
 
 	unsigned int  get_DragonesEliminados();
 	void set_DragonesEliminados(unsigned int cant);
