@@ -12,7 +12,6 @@ public:
 
 	eTipoAtaque getTipoAtaque();
 	void CambiarTipo(eTipoAtaque tipo);
-
 	void combatir();
 };
 
