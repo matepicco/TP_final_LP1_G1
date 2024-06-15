@@ -1,6 +1,7 @@
 #pragma once
 #include "Headers.h"
-#include "cFormaAtaque.h"
+#include "cAtaque.h"
+#include "cDefensa.h"
 #include "cGuerrero.h"
 
 class cGuerrero; 
@@ -20,8 +21,7 @@ private:
 
 	unsigned int vidaD;
 
-	list <cFormaAtaque*> listaFA;//diferentes tipos.
-
+	list <cFormaAtaque*> listaFA;
 public:
 	//friend class cJinete;
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
@@ -39,12 +39,17 @@ public:
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
-	cFormaAtaque* get_FormaAtaque();
+	
+	void getFAfuerte();
 
+	list<cFormaAtaque*> getListFA();
+	void ordenarFAsalvajes(cFormaAtaque* objFA);
 	void bajaDragon();
 	void agregarFA(cFormaAtaque* objD);
 
 	friend bool cGuerrero::TerminarDragon(cDragon* objD);
-	friend bool cGuerrero::RelacionarseConDragon(cDragon* objD);
+	friend bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo);
 	void atacarDragon(cDragon* objD);
+
+	bool operator==(cDragon &drg);
 };
