@@ -7,7 +7,7 @@ protected:
 	eTipoAtaque tipoAtaque;
 
 public:
-	cAtaque(eTipoAtaque tipoataque, eDanio tipodanio, unsigned int danio);
+	cAtaque(eTipoAtaque tipoataque, eIntensidad tipodanio, unsigned int danio);
 	~cAtaque();
 
 	eTipoAtaque getTipoAtaque();

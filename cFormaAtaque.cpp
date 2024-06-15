@@ -1,6 +1,6 @@
 #include "cFormaAtaque.h"
 
-cFormaAtaque::cFormaAtaque(unsigned int danio, eDanio tipodanio)
+cFormaAtaque::cFormaAtaque(unsigned int danio, eIntensidad tipodanio)
 {
 	if (danio <= 0)
 		this->cantDanioD = 20;
@@ -20,7 +20,7 @@ unsigned int cFormaAtaque::getCantDanioD()
 	return this->cantDanioD;
 }
 
-eDanio cFormaAtaque::getTipoDanio()
+eIntensidad cFormaAtaque::getTipoDanio()
 {
 	return this->tipoDanio;
 }
@@ -30,7 +30,7 @@ void cFormaAtaque::setCantDanio(unsigned int danio)
 	this->cantDanioD = danio;
 }
 
-void cFormaAtaque::cambiarDanio(eDanio danio)
+void cFormaAtaque::cambiarIntensidad(eIntensidad danio)
 {
 	this->tipoDanio = danio;
 }
