@@ -10,6 +10,8 @@ protected:
 	eResultado TrainResult;
 	list <cDragon*> listaDragonesVivos;
 	list <cDragon*> listaDragonesMuertos;
+	static vector<string> PosicionNombres;
+	static int iterador;
 public:
 	//friend class cDragon;
 	cJinete(string nom, string ape, time_t fecha,eCaract caract);
@@ -23,7 +25,6 @@ public:
 	void domar();
 	void altaNombre(cDragon* drg);
 	void incorporarDragon(cDragon* ptrDragon);
-	bool entrenarYrendir(cDragon* ptrDragon);
 
 	void entrenarDragon();//tiene que ir dentro de try/catch
 	void manejarDragon(cDragon* ptrD, int index);

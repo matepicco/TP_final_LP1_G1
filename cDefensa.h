@@ -7,7 +7,7 @@ protected:
 	eTipoDefensa tipoDefensa;
 
 public:
-	cDefensa(eTipoDefensa tipodefensa, eDanio tipodanio, unsigned int danio);
+	cDefensa(eTipoDefensa tipodefensa, eIntensidad tipodanio, unsigned int danio);
 	~cDefensa();
 
 	eTipoDefensa getTipoDefensa();
