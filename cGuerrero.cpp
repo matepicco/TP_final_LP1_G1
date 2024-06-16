@@ -4,17 +4,14 @@ cGuerrero::cGuerrero(string nombreG, string apellidoG, eCaract caracfisic, unsig
 {//tira verde porque cantDanioG esta dentro del trycatch
 	this->cantVidaG = 100;
 	this->estadoG = true;
-	try {
-		if (danioG < 100)
-			this->cantDanioG = danioG;
-		else
-			throw invalid_argument("Cantidad Danio Invalido");
-	}
-	catch (const invalid_argument &e)
-	{
-		cout << e.what() << endl;
-		cout << "Vuelva a ingresar una cantidad de danio menor a 100" << endl;
-	}
+
+	if (danioG <= 0)
+		this->cantDanioG = 20;
+	if (danioG >= 100)
+		this->cantDanioG = 80;
+	else if (danioG >= 0 || danioG < 100)
+		this->cantDanioG = danioG;
+
 }
 
 unsigned int cGuerrero::getCantDanioG()
@@ -44,10 +41,10 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 
 string cGuerrero::toString()
 {
-	//imprimo lo del hijo,padre
 	stringstream ss;
 
-	ss << this->nombreV << "" << this->apellidoV << "" << this->posicion << "" << this->caractFisicasV << "" << this->DragonesEliminados << endl;
+	ss << this->nombreV << "" << this->apellidoV << "" << this->posicion << "" << this->caractFisicasV << "" <<
+		this->DragonesEliminados << endl;
 
 	return ss.str();
 }

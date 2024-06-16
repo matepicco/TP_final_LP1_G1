@@ -161,14 +161,15 @@ string cStoico::to_string()
     stringstream ss;
 
     ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " << cStoico::cantDrgCreados << endl;
-    list<cVikingo*>::iterator itV = this->listaVikingos.begin();
-    ss << "El jinete es: ";
+    list<cVikingo*>::iterator itV = this->listaVikingos.begin(); 
     while (itV != listaVikingos.end()) {
         cJinete* jin = dynamic_cast<cJinete*>((*itV));
+        ss << "El jinete es: ";
         ss << jin->toString()<<endl;
         ss << "El guerrero es: ";
         cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
         ss << guer->toString() << endl;
+        itV++;
     }
         return ss.str();
 }
