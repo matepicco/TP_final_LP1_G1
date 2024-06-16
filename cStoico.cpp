@@ -2,6 +2,7 @@
 
 int cStoico::cantVikCreados = 0;
 int cStoico::cantDrgCreados = 0;
+int cStoico::b = 0;
 
 cStoico::cStoico()
 {
@@ -201,13 +202,6 @@ cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
     return *it;
 }
 
-
-void cStoico::mandarAtacar()
-{
-    //simulacion flujo de ataques
-    return;
-}
-
 void cStoico::crearInteraccion()
 {
     if (!listaVikingos.empty())
@@ -223,29 +217,23 @@ void cStoico::crearInteraccion()
                 cJinete* ptrJ = dynamic_cast<cJinete*>(*(itV));
                 if (ptrJ != nullptr)
                 {
-
                     flagRD = ptrJ->RelacionarseConDragon((*itD));
+                    list<cDragon*>::iterator itDaux = itD;
+                    itDaux++;
+                    ptrJ->manejarDragon(*itDaux,b);//esta b es porque hay que pasarle un indice para elegir un dragon
+                    b++;
                     if (flagRD)//logró domarlo
                     {
                         agregarDrgXlista(listaDrgMatcheados, (*itD));
                         eliminarDrgXlista(listaDrgS, (*itD));
                     }
-                    itD++;
-
-                    list<cDragon*>::iterator itDaux = this->listaDrgS.begin();
-                    itDaux = itD;// para no eliminar ese elemento de la lista y despues darle a it++ uso un aux
-                    itD++;
-                    ptrJ->RelacionarseConDragon((*itDaux));
-                    agregarDrgXlista(listaDrgMatcheados,(*itDaux));
-                    eliminarDrgXlista(listaDrgS, (*itDaux));
-                    
+                    itD++;                    
                     break;
-
                 }
-                else {
+                else
+                {
                     cGuerrero* ptrG = dynamic_cast<cGuerrero*>(*(itV));
-                    if (ptrG != nullptr)
-                    {
+                    //No chequeo si es nullptr porque si no es jinete si o si es Guerrero
                         //implementacion: guerrero pelea uno por uno con los dragones de la lista.
                         flagRD = ptrG->RelacionarseConDragon((*itD));
                         if (flagRD)
@@ -263,8 +251,6 @@ void cStoico::crearInteraccion()
                         eliminarDrgXlista(listaDrgS,(*itDaux2));
                         
                         break;
-
-                    }
                 }
 
             }
@@ -273,14 +259,18 @@ void cStoico::crearInteraccion()
     }
     else 
         throw exception("Lista vacia");
+}
 
-    return;
+void cStoico::MandarAAtacar()
+{
+
 }
 
 int cStoico::getcantVikCreados()
 {
 	return cantVikCreados;
 }
+
 
 void cStoico::DragonesDomados()
 {

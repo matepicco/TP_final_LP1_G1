@@ -1,7 +1,7 @@
 #pragma once
-#include "cFormaAtaque.h"
+#include "cFormaCombate.h"
 
-class cAtaque: public cFormaAtaque
+class cAtaque: public cFormaCombate
 {
 protected:
 	eTipoAtaque tipoAtaque;

@@ -1,6 +1,7 @@
 #include "cJinete.h"
-vector<string> cJinete::PosicionNombres = {"uno", "dos", "tres", "cuatro", "cinco", "seis"};
+vector<string> cJinete::PosicionNombres = {"Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto"};
 int cJinete::iterador = 0;
+int cJinete::i = 0;// un i para ir avanzando las formas de ataque en entrenar
 cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
 	stringstream fechaIngresada(fecha);
@@ -9,19 +10,19 @@ cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikin
 
 	// Escaneamos el string de la fecha, hasta cada '/'
 	// Guardando en auxiliar los datos de dia, mes y anio
-	getline(fechaIngresada, aux, '/');
-	auxF.dia = stoi(aux);
+	//getline(fechaIngresada, aux, '/');
+ //   auxF.dia = stoi(aux);
 
-	getline(fechaIngresada, aux, '/');
-	auxF.mes = stoi(aux);
+	//getline(fechaIngresada, aux, '/');
+	//auxF.mes = stoi(aux);
 
-	getline(fechaIngresada, aux);
-	auxF.anio = stoi(aux);
+	//getline(fechaIngresada, aux);
+	//auxF.anio = stoi(aux);
 
 	// Pasamos lo guardado a un struct tm
 	// el -1900 en anio es porque tm tiene en cuenta los anios pasados desde el 1900
 	// el -1 en mes es porque el rango va de 0 a 11
-	this->fechaNac = { 0, 0, 0, auxF.dia, auxF.mes - 1, auxF.anio - 1900 };
+	//this->fechaNac = { 0, 0, 0, auxF.dia, auxF.mes - 1, auxF.anio - 1900 };
    
     this->TrainResult = NoAsistio;
     //el apodo se asignará gracias al dragon que dome. inicializado en cVikingo
@@ -52,11 +53,12 @@ string cJinete::toString()
     return ss.str();
 }
 
-void cJinete::entrenarDragon()///////// Poner danio de acuerdo a cada INTENSIDAD
+void cJinete::entrenarDragon()
 {
     cDragon * ptrDragon = this->listaDragonesVivos.back();
-    cAtaque* ataaux = dynamic_cast<cAtaque*>(ptrDragon->get_FormaAtaque());//Aca toma como que el dragon siempre tiene una forma de ataque
-    cDefensa* defaux = dynamic_cast<cDefensa*>(ptrDragon->get_FormaAtaque());
+    cAtaque* ataaux = dynamic_cast<cAtaque*>(ptrDragon->get_FormaCombateXIndice(i));//va con ese i porque cada vez que llamo a esta funcion paso a modificar la siguiente forma de combate
+    cDefensa* defaux = dynamic_cast<cDefensa*>(ptrDragon->get_FormaCombateXIndice(i));
+    cJinete::i++;
     switch (ptrDragon->get_caracteristica()) {
     case Fogoso:
         if (ataaux != nullptr) {

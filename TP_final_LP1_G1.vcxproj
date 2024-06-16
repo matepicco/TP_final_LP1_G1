@@ -130,8 +130,8 @@
     <ClCompile Include="cAtaque.cpp" />
     <ClCompile Include="cDefensa.cpp" />
     <ClCompile Include="cDragon.cpp" />
-    <ClCompile Include="cFormaAtaque.cpp" />
-    <ClCompile Include="cFormaAtaque.h" />
+    <ClCompile Include="cFormaCombate.cpp" />
+    <ClCompile Include="cFormaCombate.h" />
     <ClCompile Include="cGuerrero.cpp" />
     <ClCompile Include="cJinete.cpp" />
     <ClCompile Include="cStoico.cpp" />

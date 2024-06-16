@@ -21,7 +21,7 @@ public:
 	void setCantVidaG(unsigned int vidaAct);
 
 	bool RelacionarseConDragon(cDragon* drgNuevo);
-	bool TerminarDragon(cDragon* objD);
+	bool PelearDragon(cDragon* objD);
 
 	string toString();
 };

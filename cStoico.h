@@ -11,6 +11,7 @@ private:
 	list <cVikingo*> listaVikingos;
 	list <cDragon*> listaDrgS;
 	list<cDragon*> listaDrgMatcheados;
+	static int b;
 public:
 	cStoico();
 	~cStoico();
@@ -22,6 +23,7 @@ public:
 	void eliminarVikingo(cVikingo* objV);
 	void eliminarDragon(cDragon* objD);
 	
+	friend ostream& operator<<(ostream& out, cStoico* objS);
 	void operator-(cDragon* objD);
 	void operator+(cVikingo* objV);
 	void operator+(cDragon* objD);
@@ -33,17 +35,12 @@ public:
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
 	static int getcantVikCreados();
-
-	void crearInteraccion();
-
-	void mandarAtacar(); //todo
+	
+	void MandarAAtacar();
 	void crearInteraccion();
 
 	//metodos objetivo de Stoico. funcion: listar
 	//metodo que modula el add a listaMatch. parametros lista y objeto
 	void DragonesDomados();
 	void JinetesxDragon();
-}; 
-
-//acceso desde main. op << no miembro
-ostream& operator<<(ostream& out, cStoico* objS);
+};
