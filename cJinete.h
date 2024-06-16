@@ -14,8 +14,8 @@ protected:
 	static int iterador;
 	static int i;
 public:
-	//friend class cDragon;
-	cJinete(string nom, string ape, time_t fecha,eCaract caract);
+
+	cJinete(string nom, string ape, string fecha,eCaract caract);
 	~cJinete();
 
 	string get_apodoJ();

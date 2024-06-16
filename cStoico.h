@@ -2,7 +2,6 @@
 #include "cGuerrero.h"
 #include "cJinete.h"
 
-class cVikingo;
 class cStoico
 {
 private:

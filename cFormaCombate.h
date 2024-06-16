@@ -16,5 +16,5 @@ public:
 	void setCantDanio(unsigned int danio);
 	void cambiarIntensidad(eIntensidad danio);
 
-	virtual void combatir() = 0; //cuando llamado a FA: chequeo si Ata/Def : polimorfismo
+	virtual void combatir() = 0; 
 };

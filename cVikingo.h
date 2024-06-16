@@ -15,7 +15,7 @@ protected:
 
 public:
 	cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas);
-	~cVikingo();
+	virtual ~cVikingo();
 
 	const string getVikiID();
 	const string get_nombreV();

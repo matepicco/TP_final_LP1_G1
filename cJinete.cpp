@@ -2,27 +2,25 @@
 vector<string> cJinete::PosicionNombres = {"Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto"};
 int cJinete::iterador = 0;
 int cJinete::i = 0;// un i para ir avanzando las formas de ataque en entrenar
-cJinete::cJinete(string nom, string ape, time_t fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
+cJinete::cJinete(string nom, string ape, string fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
 	stringstream fechaIngresada(fecha);
 	string aux = "";
 	sFecha auxF = { 0,0,0 };
 
-	// Escaneamos el string de la fecha, hasta cada '/'
+	//Escaneamos el string de la fecha, hasta cada '/'
 	// Guardando en auxiliar los datos de dia, mes y anio
-	//getline(fechaIngresada, aux, '/');
- //   auxF.dia = stoi(aux);
-
-	//getline(fechaIngresada, aux, '/');
-	//auxF.mes = stoi(aux);
-
-	//getline(fechaIngresada, aux);
-	//auxF.anio = stoi(aux);
+	getline(fechaIngresada, aux, '/');
+    auxF.dia = stoi(aux);
+	getline(fechaIngresada, aux, '/');
+	auxF.mes = stoi(aux);
+	getline(fechaIngresada, aux);
+	auxF.anio = stoi(aux);
 
 	// Pasamos lo guardado a un struct tm
 	// el -1900 en anio es porque tm tiene en cuenta los anios pasados desde el 1900
 	// el -1 en mes es porque el rango va de 0 a 11
-	//this->fechaNac = { 0, 0, 0, auxF.dia, auxF.mes - 1, auxF.anio - 1900 };
+	this->fechaNac = { 0, 0, 0, auxF.dia, auxF.mes - 1, auxF.anio - 1900 };
    
     this->TrainResult = NoAsistio;
     //el apodo se asignará gracias al dragon que dome. inicializado en cVikingo
