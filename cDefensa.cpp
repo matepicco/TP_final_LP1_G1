@@ -1,6 +1,6 @@
 #include "cDefensa.h"
 
-cDefensa:: cDefensa(eTipoDefensa tipodefensa, eIntensidad tipodanio, unsigned int danio) : cFormaAtaque(danio, tipodanio)
+cDefensa:: cDefensa(eTipoDefensa tipodefensa, eIntensidad tipodanio, unsigned int danio) : cFormaCombate(danio, tipodanio)
 {
 	this->tipoDefensa = tipodefensa;
 }

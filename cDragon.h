@@ -21,12 +21,13 @@ private:
 
 	unsigned int vidaD;
 
-	list <cFormaAtaque*> listaFA;
+	list <cFormaCombate*> listaFA;
 public:
 	//friend class cJinete;
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
 
+	cFormaCombate* get_FormaCombateXIndice(int i);
 	const int getDragonID();
 	string get_nombre();
 	eHabilidad get_caracteristica();
@@ -39,15 +40,14 @@ public:
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
-	
-	void getFAfuerte();
+	void FAfuerteAdelante();
 
-	list<cFormaAtaque*> getListFA();
-	void ordenarFAsalvajes(cFormaAtaque* objFA);
+	list<cFormaCombate*> getListFA();
+	void ordenarFAsalvajes(cFormaCombate* objFA);
 	void bajaDragon();
-	void agregarFA(cFormaAtaque* objD);
+	void agregarFA(cFormaCombate* objD);
 
-	friend bool cGuerrero::TerminarDragon(cDragon* objD);
+	friend bool cGuerrero::PelearDragon(cDragon* objD);
 	friend bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo);
 	void atacarDragon(cDragon* objD);
 

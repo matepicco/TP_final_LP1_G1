@@ -4,23 +4,27 @@
 int main()
 {
     cStoico Stoico = cStoico();
-    cDragon* dragon1 = new cDragon(ResisteFuego,Grande,Rojo);
-    cDragon* dragon2 = new cDragon(Rapidez,Mediano,Negro);
-    cDragon* dragon3 = new cDragon(CuraFacil,Chico,Verde);
-    cDragon* dragon4 = new cDragon(PatasLargas,Grande,Blanco);
+    cDragon* dragon1 = new cDragon(Fogoso,Grande,Rojo);
+    cDragon* dragon2 = new cDragon(Garras,Mediano,Negro);
+    cDragon* dragon3 = new cDragon(Colilargo,Chico,Verde);
+    cDragon* dragon4 = new cDragon(Dientes,Grande,Blanco);
 
     cJinete* jinete1 = new cJinete("Malau","Raro",04/10/2002,Fortachon);
     cJinete* jinete2 = new cJinete("Elsa","Pato",10/10/2010,Matematico);
-
+    try
+    {
+        Stoico + jinete1;
+        Stoico + jinete2;
+        Stoico.imprimir();
+    }
+    catch(const exception& e)
+    {
+        cout << e.what() << endl;
+    }
     Stoico + jinete1;
     Stoico + jinete2;
     Stoico.imprimir();
-    cout << jinete1 << endl;
-    cout << dragon1 << endl;
-
-    //cout << Stoico << endl; //porqué no?
-
-//aca luego de instanciar a los jinetes y vikingos,
-//se llama a ingresar dragon, se pasa el puntero y ahi empieza el programa llamando a entrenar
-//luego se llamaria a atacar dragon y eso haria que dos peleen
+   // cout << Stoico;  // no se porque tira error, como si no hubiese sobrecarga
+ /*   cout << jinete1 << endl;
+    cout << dragon1 << endl;*/
 }

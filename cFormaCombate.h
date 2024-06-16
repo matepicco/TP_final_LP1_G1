@@ -1,15 +1,15 @@
 #pragma once
 #include "Headers.h"
 
-class cFormaAtaque
+class cFormaCombate
 {
 protected:
 	unsigned int cantDanioD;
 	eIntensidad tipoDanio;
 
 public:
-	cFormaAtaque(unsigned int danio, eIntensidad tipodanio);
-	virtual ~cFormaAtaque();
+	cFormaCombate(unsigned int danio, eIntensidad tipodanio);
+	virtual ~cFormaCombate();
 
 	unsigned int getCantDanioD();
 	eIntensidad getTipoDanio();
