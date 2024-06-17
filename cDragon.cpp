@@ -12,14 +12,8 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 	this->estadoD = true;
 	this->domadoD = false;
 	this->vidaD = 100;
-
-	//plantear dos opciones
-	/*
-	cFormaCombate* at1= objA(Resistente);
-	this->listaFA = listaFA.push_back(at1)
 	
 	this->listaFA = list<cFormaCombate*>();
-	*/
 	dragonesCreados++;
 }
 
@@ -32,8 +26,13 @@ bool cDragon::operator==(cDragon& drg)
 				if (this->estadoD == drg.estadoD && this->domadoD == drg.domadoD)
 					flag = true;
 			}
-		return flag;
 	}
+	return flag;
+}
+
+void cDragon::operator+(cFormaCombate* FC)
+{
+	agregarFA(FC);
 }
 
 void cDragon::FAfuerteAdelante()
@@ -44,7 +43,7 @@ void cDragon::FAfuerteAdelante()
 
 	list<cFormaCombate*>::iterator itFA = this->listaFA.begin();
 	bool flag = true;
-	int maxDanio = 0;
+	unsigned int maxDanio = 0;
 
 	while (itFA != listaFA.end())
 	{
@@ -66,16 +65,30 @@ list<cFormaCombate*> cDragon::getListFA()
 	return this->listaFA;
 }
 
-void cDragon::ordenarFAsalvajes(cFormaCombate* objFA)
+void cDragon::ordenarFAsalvajes(cDragon* objD)
 {
+	//metodo ordena todas las defensas atras, ataques adelante
+	//La función splice de std::list mueve el elemento apuntado por el iterador fromIt a la posición antes del iterador toIt.
 	//dragon salvaje
-	if (this->domadoD != true)
-	{
-		if (dynamic_cast<cAtaque*>(objFA) != nullptr)
+	if (objD->domadoD == false)
+	{	
+		list <cFormaCombate*> ::iterator itFC = objD->listaFA.begin();
+		list <cFormaCombate*> ::iterator itFC1 = objD->listaFA.end();
+
+		while (itFC != objD->listaFA.end())
 		{
-			listaFA.push_front(objFA);
-			//defensa queda en back: segundo
+			if (dynamic_cast<cAtaque*>(*itFC) != nullptr)
+			{
+				objD->listaFA.push_front(*itFC);
+				//si 2 FC: defensa queda en back: segundo
+			}
+			else if (dynamic_cast<cDefensa*>(*itFC) != nullptr)
+			{
+				//objD->listaFA.splice(itFC, listaFA, itFC1);
+			}
+			itFC++;
 		}
+
 	}
 	return;
 }
@@ -111,7 +124,8 @@ bool cGuerrero::PelearDragon(cDragon* objD)
 	{
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
-		!terminado;
+		terminado =!terminado;
+		terminado = false;
 		//pendiente: metodo que llame, dependiendo el return 
 		//settea dragon muerto en listaDraognes muertos
 	}
@@ -136,11 +150,11 @@ bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
 void cDragon::atacarDragon(cDragon* objD)
 {
 	this->FAfuerteAdelante();// mueve el ataque de mas intensidad al principio
-	ordenarFAsalvajes(objD->getListFA().front());//Envia a la forma de ataque adelante
+	//ordenarFAsalvajes(objD);//Envia a la forma de ataque adelante
 	//dragones salvajes tienen Ataque primero, defensa segundo por el metodo de arriba
 
 	list <cFormaCombate*> ::iterator itFA = listaFA.begin();
-	while (objD->getVidaD() > 0 || this->getVidaD() > 0)
+	while (objD->getVidaD() > 0 && this->getVidaD() > 0)
 	{
 		random_device rd;
 		mt19937 gen(rd());
@@ -189,16 +203,28 @@ void cDragon::atacarDragon(cDragon* objD)
 			}
 			case 1://ataca solo salvaje
 			{
+				//ambos bucles meten mano en que NECESITAMOS un ataque y una defensa. buscar otra manera
+				bool flagDef = true;
 				list <cFormaCombate*> ::iterator itFAD = listaFA.begin();
-				while (itFAD != listaFA.end()) {
+				while (itFAD != listaFA.end() && flagDef) {
 					cDefensa* def = dynamic_cast<cDefensa*>(*itFAD);
 					if (def != nullptr)
-						break;
-					itFAD++;
+						flagDef=false;
+					else
+						itFAD++;
 				}
 
-				cDefensa* defAux = dynamic_cast<cDefensa*>((*itFAD));
-				cAtaque* ataObj = dynamic_cast<cAtaque*>(objD->getListFA().front());
+				bool flagAta = true;
+				list <cFormaCombate*> ::iterator itFA = objD->listaFA.begin();
+				while (itFA != objD->listaFA.end() && flagAta) {
+					cAtaque* ata = dynamic_cast<cAtaque*>(*itFA);
+					if (ata != nullptr)
+						flagAta = false;
+					else
+						itFA++;
+				}
+				cDefensa* defAux = dynamic_cast<cDefensa*>(*itFAD);
+				cAtaque* ataObj = dynamic_cast<cAtaque*>(*itFA);
 
 				if (defAux != nullptr)
 				{
@@ -233,16 +259,14 @@ void cDragon::atacarDragon(cDragon* objD)
 				}
 			}
 		}
-
-		if (this->vidaD <= 0) {
-			this->estadoD = false;
-		}
-		else if (objD->getVidaD() <= 0)
-			objD->set_estado(false);
 	}
+
+	if (this->vidaD <= 0) {
+		this->estadoD = false;
+	}
+	else if (objD->getVidaD() <= 0)
+		objD->set_estado(false);
 }
-
-
 
 void cDragon::agregarFA(cFormaCombate *objFA)
 {
@@ -286,6 +310,7 @@ cFormaCombate* cDragon::get_FormaCombateXIndice(int i)
 	int a = 0;
 	while (it != listaFA.end()&& a<i) {
 		it++;
+		a++;
 	}
 	return (*it);
 }

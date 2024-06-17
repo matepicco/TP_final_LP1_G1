@@ -161,6 +161,24 @@ string cStoico::to_string()
     stringstream ss;
 
     ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " << cStoico::cantDrgCreados << endl;
+    list<cVikingo*>::iterator itV = this->listaVikingos.begin();
+    while (itV != listaVikingos.end()) {
+        cJinete* jin = dynamic_cast<cJinete*>((*itV));
+        ss << "El jinete es: ";
+        ss << jin->toString()<<endl;
+        ss << "El guerrero es: ";
+        cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
+        ss << guer->toString() << endl;
+        itV++;
+    }
+        return ss.str();
+}
+
+string cStoico::to_string()
+{
+    stringstream ss;
+
+    ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " << cStoico::cantDrgCreados << endl;
     list<cVikingo*>::iterator itV = this->listaVikingos.begin(); 
     while (itV != listaVikingos.end()) {
         cJinete* jin = dynamic_cast<cJinete*>((*itV));
@@ -219,12 +237,12 @@ void cStoico::crearInteraccion()
                 if (ptrJ != nullptr)
                 {
                     flagRD = ptrJ->RelacionarseConDragon((*itD));
-                    list<cDragon*>::iterator itDaux = itD;
-                    itDaux++;
-                    ptrJ->manejarDragon(*itDaux,b);//esta b es porque hay que pasarle un indice para elegir un dragon
-                    b++;
                     if (flagRD)//logró domarlo
                     {
+                        list<cDragon*>::iterator itDaux = itD;
+                        itDaux++;
+                        ptrJ->manejarDragon(*itDaux, b);//esta b es porque hay que pasarle un indice para elegir un dragon
+                        b++;
                         agregarDrgXlista(listaDrgMatcheados, (*itD));
                         eliminarDrgXlista(listaDrgS, (*itD));
                     }

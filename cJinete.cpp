@@ -54,7 +54,8 @@ string cJinete::toString()
 void cJinete::entrenarDragon()
 {
     cDragon * ptrDragon = this->listaDragonesVivos.back();
-    cAtaque* ataaux = dynamic_cast<cAtaque*>(ptrDragon->get_FormaCombateXIndice(i));//va con ese i porque cada vez que llamo a esta funcion paso a modificar la siguiente forma de combate
+    cAtaque* ataaux = dynamic_cast<cAtaque*>(ptrDragon->get_FormaCombateXIndice(i));
+    //va con ese i porque cada vez que llamo a esta funcion paso a modificar la siguiente forma de combate
     cDefensa* defaux = dynamic_cast<cDefensa*>(ptrDragon->get_FormaCombateXIndice(i));
     cJinete::i++;
     switch (ptrDragon->get_caracteristica()) {
@@ -256,7 +257,7 @@ void cJinete::altaNombre(cDragon* drg)
     cJinete::iterador++;// avanzo el iterador static, como una variable global
     int i = 0;
     string s;
-    if (drg->get_caracteristica() == ResisteFuego) {
+    if (drg->get_caracteristica() == Fogoso) {
         s = nombreV + "'s Fueguin" + aux;
         drg->set_nombre(s);
     }
@@ -277,8 +278,8 @@ void cJinete::altaNombre(cDragon* drg)
 void cJinete::incorporarDragon(cDragon* ptrDragon)
 {
     this->altaNombre(ptrDragon);
-    this->domar();//settea domado al drg
     this->listaDragonesVivos.push_back(ptrDragon);
+    this->domar();//settea domado al drg
     this->entrenarDragon();
 }
 
@@ -293,15 +294,19 @@ bool cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
     case 1:
         set_trainresult(Aprobado);
         incorporarDragon(drgNuevo);
+        break;
     case 2:
         set_trainresult(Desaprobado);
         flag = false;
+        break;
     case 3:
         set_trainresult(Primero);
         incorporarDragon(drgNuevo);
+        break;
     case 4:
         set_trainresult(Ultimo);//no es que no aprobo, sino que aprobo justo
         incorporarDragon(drgNuevo);
+        break;
     }
     return flag;
 }

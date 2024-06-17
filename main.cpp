@@ -20,6 +20,13 @@ int main()
     cDragon* dragon3 = new cDragon(Colilargo,Chico,Verde);
     cDragon* dragon4 = new cDragon(Dientes,Grande,Blanco);
 
+    //dragon1 + ata1;
+    //no me permite con operator+ de dragon entonces
+    dragon1->agregarFA(def1);
+    dragon1->agregarFA(ata1);
+    dragon2->agregarFA(ata1);
+    dragon2->agregarFA(def1);
+
     cJinete* jinete1 = new cJinete("Malau","Raro","04/10/2002",Fortachon);
     cJinete* jinete2 = new cJinete("Elsa","Pato","10/10/2010",Matematico);
 
@@ -30,7 +37,10 @@ int main()
     {
         Stoico + jinete1;
         Stoico + jinete2;
-        Stoico.imprimir();
+        Stoico + dragon1;
+        Stoico + dragon2;
+        Stoico.crearInteraccion();
+        //Stoico.imprimir();
     }
     catch(const exception& e)
     {
@@ -38,7 +48,7 @@ int main()
     }
     Stoico + jinete1;
     Stoico + jinete2;
-    Stoico.imprimir();
+    //Stoico.imprimir();
 
  /* 
  cout << jinete1 << endl;
