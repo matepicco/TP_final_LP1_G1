@@ -2,6 +2,7 @@
 vector<string> cJinete::PosicionNombres = {"Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto"};
 int cJinete::iterador = 0;
 int cJinete::i = 0;// un i para ir avanzando las formas de ataque en entrenar
+
 cJinete::cJinete(string nom, string ape, string fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
 	stringstream fechaIngresada(fecha);
@@ -44,11 +45,31 @@ string cJinete::toString()
     //imprimo hijo y padre
     stringstream ss;
 
-    ss << this->nombreV << "" << this->apellidoV<< "" << this->posicion << "" << this->caractFisicasV << ""
-       << this->apodoJ << "" << to_string(this->fechaNac.tm_mday) << "" << to_string(this->fechaNac.tm_mon + 1) << ""
-       << to_string(this->fechaNac.tm_year + 1900) << "" << this->TrainResult << "" << this->DragonesEliminados << endl;
-
+    ss << this->nombreV << " " << this->apellidoV<< ", trabaja de: " << enumPtostring() << ", su caracteristica es:  " << enumCtostring() << ". Su fecha de nacimiento es: "
+       << this->apodoJ << " " << to_string(this->fechaNac.tm_mday) << "/" << to_string(this->fechaNac.tm_mon + 1) << "/"
+       << to_string(this->fechaNac.tm_year + 1900) << ". Resultado de entrenamiento: " << enumRtostring() << ". Cantidad de dragones eliminados: " << this->DragonesEliminados << "Sus dragones de combate son: "<<endl;
+   
+    list<cDragon*>::iterator itD = listaDragonesVivos.begin();
+    while (itD != listaDragonesVivos.end()) {
+        ss << (*itD)->to_string()<< "\n";
+    }
     return ss.str();
+}
+
+string cJinete::enumRtostring()
+{
+    switch (this->TrainResult) {
+    case NoAsistio:
+        return "No asistio";
+    case Aprobado:
+        return "Aprobado";
+    case Desaprobado:
+        return "Desaprobado";
+    case Primero:
+        return "Primero";
+    case Ultimo:
+        return "Ultimo";
+    }
 }
 
 void cJinete::entrenarDragon()

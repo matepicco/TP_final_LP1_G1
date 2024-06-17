@@ -23,6 +23,11 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 	dragonesCreados++;
 }
 
+string cDragon::enumColorTostring()
+{
+	return string();
+}
+
 bool cDragon::operator==(cDragon& drg)
 {
 	bool flag = false;
@@ -242,6 +247,52 @@ void cDragon::atacarDragon(cDragon* objD)
 	}
 }
 
+string cDragon::to_string()
+{
+	stringstream ss;
+	ss << "Nombre: " << this->nombreD << ", color: " << this->colorD<<", tipo de ataque: "<<enumAtostring()<<", tipo de defensa: "<<enumDtostring();
+	return ss.str();
+}
+
+string cDragon::enumAtostring()
+{
+	cAtaque* ata = dynamic_cast<cAtaque*>(this->getListFA().front());
+	if (ata != nullptr)
+	{
+		switch (ata->getTipoAtaque()) {
+		case BolasFuego:
+			return "Bolas de Fuego";
+		case Araniar:
+			return "Araniar";
+		case Coletazo:
+			return "Coletazo";
+		case Mordidita:
+			return "Mordidita";
+		}
+	}
+	else if (ata == nullptr)
+		return " - ";
+}
+
+string cDragon::enumDtostring()
+{
+	cDefensa* def = dynamic_cast<cDefensa*>(this->getListFA().back());
+	if (def != nullptr)
+	{
+		switch (def->getTipoDefensa()) {
+		case ResisteFuego:
+			return "Resiste Fuego";
+		case EscamasResistentes:
+			return "Escamas Resistentes";
+		case Rapidez:
+			return "Rapidez";
+		case ArmaduraDrg:
+			return "Armadura de Dragon";
+		}
+	}
+	else if (def == nullptr)
+		return" - ";
+}
 
 
 void cDragon::agregarFA(cFormaCombate *objFA)

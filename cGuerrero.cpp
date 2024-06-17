@@ -43,8 +43,8 @@ string cGuerrero::toString()
 {
 	stringstream ss;
 
-	ss << this->nombreV << "" << this->apellidoV << "" << this->posicion << "" << this->caractFisicasV << "" <<
-		this->DragonesEliminados << endl;
+	ss << this->nombreV << " " << this->apellidoV << ". Trabaja de: " << this->posicion << " y su caracteristica fisica es: " << this->caractFisicasV << ". Tiene " <<
+	this->DragonesEliminados <<"dragones eliminados" << endl;
 
 	return ss.str();
 }

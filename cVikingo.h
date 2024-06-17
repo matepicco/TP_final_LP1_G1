@@ -26,6 +26,9 @@ public:
 	ePos get_posicionV();
 	void set_posicionV(ePos pos);
 
+	 string enumPtostring();
+	 string enumCtostring();
+
 	void trabajarEnBerk();
 
 	virtual bool RelacionarseConDragon(cDragon* drg) = 0;

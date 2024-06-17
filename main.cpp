@@ -28,8 +28,11 @@ int main()
 
     try
     {
+        Stoico + dragon1;
         Stoico + jinete1;
+        Stoico + guerrero1;
         Stoico + jinete2;
+        Stoico.crearInteraccion();
         Stoico.imprimir();
     }
     catch(const exception& e)

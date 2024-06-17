@@ -31,6 +31,7 @@ public:
 	void manejarDragon(cDragon* ptrD, int index);
 	friend void quitarDragon(list<cDragon*> listaux, cDragon* drg);
 
+	string enumRtostring();
 	cDragon* operator[](size_t index);
 	string toString();	
 };
