@@ -32,7 +32,8 @@ cDragon* cJinete::operator[](size_t index)
     if (listaDragonesVivos.size() < index)
         throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
     list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
-    while (int i = 0 != index) {
+    int i = 0;
+    while (i != index) {
          it++;
          i++;
     }
@@ -215,7 +216,8 @@ void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])
     
     list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
     
-    if ((midragon)->get_estado()) {
+    if ((midragon)->get_estado()&& ptrD->get_domado() == false)
+    {  
         (midragon)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
     }
     else {//si con midragon no ataca, ataca con el proximo vivo que encuentre en la lista y mete el otro en los muertos

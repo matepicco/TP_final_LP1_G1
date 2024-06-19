@@ -154,7 +154,7 @@ void cDragon::atacarDragon(cDragon* objD)
 	//dragones salvajes tienen Ataque primero, defensa segundo por el metodo de arriba
 
 	list <cFormaCombate*> ::iterator itFA = listaFA.begin();
-	while (objD->getVidaD() > 0 && this->getVidaD() > 0)
+	while ((objD->getVidaD() > 0) && ((this->getVidaD()) >= 0))
 	{
 		random_device rd;
 		mt19937 gen(rd());
@@ -279,7 +279,7 @@ bool cDragon::get_domado()
 	return this->domadoD;
 }
 
-unsigned int cDragon::getVidaD()
+int cDragon::getVidaD()
 {
 	return this->vidaD;
 }

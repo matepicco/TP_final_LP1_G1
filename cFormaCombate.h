@@ -17,4 +17,5 @@ public:
 	void cambiarIntensidad(eIntensidad danio);
 
 	virtual void combatir() = 0; 
+
 };

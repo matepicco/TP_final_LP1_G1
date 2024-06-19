@@ -32,11 +32,14 @@ void cStoico::agregarDrgXlista(list<cDragon*> lista, cDragon* drg)
 void cStoico::eliminarDrgXlista(list<cDragon*> lista, cDragon* drg)
 {
     list<cDragon*>::iterator it = lista.begin();
-    bool borrado = false;
-    while (it != lista.end())
+    bool borrado = true;
+    while (it != lista.end() && borrado)
     {
         if ((*it) == drg)
-            lista.remove(*it);
+        {
+            lista.remove(drg);
+            borrado = false;
+        }
         else
             it++;
     }
@@ -174,24 +177,6 @@ string cStoico::to_string()
         return ss.str();
 }
 
-string cStoico::to_string()
-{
-    stringstream ss;
-
-    ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " << cStoico::cantDrgCreados << endl;
-    list<cVikingo*>::iterator itV = this->listaVikingos.begin(); 
-    while (itV != listaVikingos.end()) {
-        cJinete* jin = dynamic_cast<cJinete*>((*itV));
-        ss << "El jinete es: ";
-        ss << jin->toString()<<endl;
-        ss << "El guerrero es: ";
-        cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
-        ss << guer->toString() << endl;
-        itV++;
-    }
-        return ss.str();
-}
-
 cVikingo* cStoico::get_vikingoxNom(string nombre)
 {
     //Debe ir en un trycatch
@@ -239,12 +224,12 @@ void cStoico::crearInteraccion()
                     flagRD = ptrJ->RelacionarseConDragon((*itD));
                     if (flagRD)//logró domarlo
                     {
+                        agregarDrgXlista(listaDrgMatcheados, (*itD));
+                        //eliminarDrgXlista(listaDrgS, (*itD));
                         list<cDragon*>::iterator itDaux = itD;
                         itDaux++;
                         ptrJ->manejarDragon(*itDaux, b);//esta b es porque hay que pasarle un indice para elegir un dragon
                         b++;
-                        agregarDrgXlista(listaDrgMatcheados, (*itD));
-                        eliminarDrgXlista(listaDrgS, (*itD));
                     }
                     itD++;                    
                     break;
@@ -258,7 +243,7 @@ void cStoico::crearInteraccion()
                         if (flagRD)
                         {
                             agregarDrgXlista(listaDrgMatcheados, (*itD));
-                            eliminarDrgXlista(listaDrgS, (*itD));
+                          //  eliminarDrgXlista(listaDrgS, (*itD));
                         }
                         itD++;
 
@@ -282,7 +267,7 @@ void cStoico::crearInteraccion()
 
 void cStoico::MandarAAtacar()
 {
-
+    //particularizar
 }
 
 int cStoico::getcantVikCreados()

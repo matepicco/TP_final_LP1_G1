@@ -34,7 +34,7 @@ public:
 	eColor get_color();
 	bool get_estado();
 	bool get_domado();
-	unsigned int getVidaD();
+	int getVidaD();
 	void set_nombre(string nombre);
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
