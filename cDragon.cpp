@@ -125,7 +125,6 @@ bool cGuerrero::PelearDragon(cDragon* objD)
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
 		terminado =!terminado;
-		terminado = false;
 		//pendiente: metodo que llame, dependiendo el return 
 		//settea dragon muerto en listaDraognes muertos
 	}
@@ -138,7 +137,7 @@ bool cGuerrero::PelearDragon(cDragon* objD)
 bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
 {
 	bool terminado = false;
-	if (drgNuevo->get_estado() == false || drgNuevo->get_domado() == false)
+	if (drgNuevo->get_estado() == false || drgNuevo->get_domado() == true)
 		return terminado;
 	else
 		terminado = this->PelearDragon(drgNuevo);

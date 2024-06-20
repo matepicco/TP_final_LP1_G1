@@ -19,7 +19,7 @@ unsigned int cGuerrero::getCantDanioG()
 	return this->cantDanioG;
 }
 
-unsigned int cGuerrero::getCantVidaG()
+int cGuerrero::getCantVidaG()
 {
 	return this->cantVidaG;
 }

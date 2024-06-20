@@ -38,10 +38,10 @@ int main()
 
     try
     {
-        Stoico + jinete1;
-        Stoico + jinete2;
         Stoico + guerrero1;
         Stoico + guerrero2;
+        Stoico + jinete1;
+        Stoico + jinete2;
         Stoico + dragon1;
         Stoico + dragon2;
         Stoico + dragon3;
