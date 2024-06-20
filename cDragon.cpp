@@ -138,10 +138,8 @@ bool cGuerrero::PelearDragon(cDragon* objD)
 bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
 {
 	bool terminado = false;
-	if (drgNuevo->get_estado() == false)
-		throw exception("Este Dragon esta muerto");
-	else if (drgNuevo->get_domado() == true)
-		throw exception("Este Dragon es bueno");
+	if (drgNuevo->get_estado() == false || drgNuevo->get_domado() == false)
+		return terminado;
 	else
 		terminado = this->PelearDragon(drgNuevo);
 	return terminado;

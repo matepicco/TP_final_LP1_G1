@@ -25,33 +25,45 @@ void cStoico::agregarDragon(cDragon* objD)
 }
 void cStoico::agregarDrgXlista(list<cDragon*> lista, cDragon* drg)
 {
-    lista.push_back(drg);
-    return;
+    list <cDragon*> ::iterator itD = lista.begin();
+    bool agregado = true;
+    while (itD != lista.end() && agregado)
+    {
+        if (*itD == drg)
+            agregado = false;
+        itD++;
+    }
+
+    if (!agregado)
+        throw new exception("Error: dragon repetido");
+    else
+    {
+        lista.push_back(drg);
+        return;
+    }
 }
 
 void cStoico::eliminarDrgXlista(list<cDragon*> lista, cDragon* drg)
 {
-    list<cDragon*>::iterator it = lista.begin();
+    list<cDragon*>::iterator it = listaDrgS.begin();
     bool borrado = true;
-    while (it != lista.end() && borrado)
+    while (borrado && it != listaDrgS.end())
     {
         if ((*it) == drg)
-        {
-            lista.remove(drg);
             borrado = false;
-        }
-        else
-            it++;
+        it++;
     }
 
-    if (!borrado)
-        throw new exception("Error: No se encontro el vikingo");
+    if (borrado)
+        throw new exception("Error: No se encontro el dragon");
     else
+    {
+        lista.remove(*it);
         return;
+    }
 }
 
 void cStoico::eliminarVikingo(cVikingo* objV)
-//Este metodo tiene que ir en un catch porque tiene throw
 {
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
     bool borrado = false;
@@ -215,8 +227,9 @@ void cStoico::crearInteraccion()
 
         while (itV != listaVikingos.end())
         {
-            while (itD != listaDrgS.end()) {
-
+            this->b = 0;
+            while (itD != listaDrgS.end()) 
+            {
                 bool flagRD = false;
                 cJinete* ptrJ = dynamic_cast<cJinete*>(*(itV));
                 if (ptrJ != nullptr)
@@ -224,37 +237,57 @@ void cStoico::crearInteraccion()
                     flagRD = ptrJ->RelacionarseConDragon((*itD));
                     if (flagRD)//logró domarlo
                     {
-                        agregarDrgXlista(listaDrgMatcheados, (*itD));
-                        //eliminarDrgXlista(listaDrgS, (*itD));
-                        list<cDragon*>::iterator itDaux = itD;
-                        itDaux++;
-                        ptrJ->manejarDragon(*itDaux, b);//esta b es porque hay que pasarle un indice para elegir un dragon
-                        b++;
+                        /*
+                        try
+                        {
+                            agregarDrgXlista(listaDrgMatcheados, (*itD));
+                            eliminarDrgXlista(listaDrgS, (*itD));
+                        }
+                        catch (exception *e)
+                        {
+                            cout << e->what() << endl;
+                        }
+                        */
+                        listaDrgMatcheados.push_back(*itD);
+                        itD = listaDrgS.erase(itD);
+                        if(itD!= listaDrgS.end())
+                        {
+                            try
+                            {
+                                ptrJ->manejarDragon(*itD, b);
+                                //esta b es porque hay que pasarle un indice para elegir un dragon
+                                b++;
+                            }
+                            catch (exception& e)
+                            {
+                                cout << e.what() << endl;
+                            }
+                        }
                     }
                     itD++;                    
-                    break;
                 }
                 else
                 {
                     cGuerrero* ptrG = dynamic_cast<cGuerrero*>(*(itV));
                     //No chequeo si es nullptr porque si no es jinete si o si es Guerrero
+                    //ojo q el null puede ser por no haber objetos en lista
                         //implementacion: guerrero pelea uno por uno con los dragones de la lista.
                         flagRD = ptrG->RelacionarseConDragon((*itD));
                         if (flagRD)
                         {
-                            agregarDrgXlista(listaDrgMatcheados, (*itD));
-                          //  eliminarDrgXlista(listaDrgS, (*itD));
+                            itD = listaDrgS.erase(itD);
+                            /*
+                            try
+                            {
+                                eliminarDrgXlista(listaDrgS, (*itD));
+                            }
+                            catch (exception* e)
+                            {
+                                cout << e->what() << endl;
+                            }
+                            */
                         }
                         itD++;
-
-                        list<cDragon*>::iterator itDaux2 = this->listaDrgS.begin();
-                        itDaux2 = itD;
-                        itD++;
-                        ptrG->RelacionarseConDragon((*itDaux2));
-                        agregarDrgXlista(listaDrgMatcheados,(*itDaux2));
-                        eliminarDrgXlista(listaDrgS,(*itDaux2));
-                        
-                        break;
                 }
 
             }
