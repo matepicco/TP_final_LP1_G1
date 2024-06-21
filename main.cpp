@@ -41,11 +41,14 @@ int main()
         Stoico + guerrero1;
         Stoico + guerrero2;
         Stoico + jinete1;
+        Stoico + guerrero1;
         Stoico + jinete2;
+
         Stoico + dragon1;
         Stoico + dragon2;
         Stoico + dragon3;
         Stoico + dragon4;
+
         Stoico.crearInteraccion();
         Stoico.imprimir();
     }

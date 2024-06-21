@@ -177,20 +177,21 @@ string cStoico::to_string()
 
     ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " << cStoico::cantDrgCreados << endl;
     list<cVikingo*>::iterator itV = this->listaVikingos.begin();
-    while (itV != listaVikingos.end()) {
-        cJinete* jin = dynamic_cast<cJinete*>((*itV));
-        
-        if (jin != nullptr){
-                ss << "El jinete es: ";
+    while (itV != listaVikingos.end()) {        
+        cJinete* jin = dynamic_cast<cJinete*>((*itV));   
+        cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
+        if(jin!=nullptr)
+        {
+            ss << "El jinete es: ";
             ss << jin->toString() << endl;
+            itV++;
         }
-        else
+        else if(guer!=nullptr)
         {
             ss << "El guerrero es: ";
-            cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
             ss << guer->toString() << endl;
+            itV++;
         }
-        itV++;
     }
         return ss.str();
 }
