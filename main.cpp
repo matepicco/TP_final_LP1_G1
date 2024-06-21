@@ -47,7 +47,7 @@ int main()
         Stoico + dragon3;
         Stoico + dragon4;
         Stoico.crearInteraccion();
-        //Stoico.imprimir();
+        Stoico.imprimir();
     }
     catch(const exception& e)
     {

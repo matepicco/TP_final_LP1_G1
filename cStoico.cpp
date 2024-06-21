@@ -179,11 +179,17 @@ string cStoico::to_string()
     list<cVikingo*>::iterator itV = this->listaVikingos.begin();
     while (itV != listaVikingos.end()) {
         cJinete* jin = dynamic_cast<cJinete*>((*itV));
-        ss << "El jinete es: ";
-        ss << jin->toString()<<endl;
-        ss << "El guerrero es: ";
-        cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
-        ss << guer->toString() << endl;
+        
+        if (jin != nullptr){
+                ss << "El jinete es: ";
+            ss << jin->toString() << endl;
+        }
+        else
+        {
+            ss << "El guerrero es: ";
+            cGuerrero* guer = dynamic_cast<cGuerrero*>((*itV));
+            ss << guer->toString() << endl;
+        }
         itV++;
     }
         return ss.str();
@@ -195,7 +201,7 @@ cVikingo* cStoico::get_vikingoxNom(string nombre)
     //Sobrecargar
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
-    while (nombre != (*it)->get_nombreV()) it++;
+    while (nombre != (*it)->get_nombreV()&&it!=listaVikingos.end()) it++;
 
     if (it == this->listaVikingos.end()) {
         throw new exception("Error: No se encontro el vikingo");
@@ -209,7 +215,7 @@ cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
     //Sobrecargar
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
-    while (pos != (*it)->get_posicionV()) it++;
+    while (pos != (*it)->get_posicionV()&& it!= listaVikingos.end()) it++;
 
     if (it == this->listaVikingos.end()) {
         throw new exception("Error: No se encontro el vikingo");
@@ -289,7 +295,7 @@ void cStoico::crearInteraccion()
                         }
                         itD++;
                 }
-
+                break;
             }
             itV++;
         }

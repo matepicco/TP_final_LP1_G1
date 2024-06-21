@@ -33,7 +33,7 @@ cDragon* cJinete::operator[](size_t index)
         throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
     list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
     int i = 0;
-    while (i < index) {
+    while (i < index&& it!= listaDragonesVivos.end()) {
          it++;
          //error producido acá se debe a que no agrega en la lista de DrgVivos
          //entonces cuando it intenta sumar, no puedo, obvio, no hay qué, ni a dondes avanzar
@@ -48,7 +48,7 @@ string cJinete::toString()
     stringstream ss;
 
     ss << this->nombreV << "" << this->apellidoV<< "" << this->posicion << "" << this->caractFisicasV << ""
-       << this->apodoJ << "" << to_string(this->fechaNac.tm_mday) << "" << to_string(this->fechaNac.tm_mon + 1) << ""
+       << to_string(this->fechaNac.tm_mday) << "" << to_string(this->fechaNac.tm_mon + 1) << ""
        << to_string(this->fechaNac.tm_year + 1900) << "" << this->TrainResult << "" << this->DragonesEliminados << endl;
 
     return ss.str();
