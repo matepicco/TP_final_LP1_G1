@@ -1,6 +1,5 @@
 #include "Headers.h"
 
-#include "cFormaCombate.h"
 #include "cAtaque.h"
 #include "cDefensa.h"
 
@@ -20,6 +19,17 @@ int main()
     cDragon* dragon3 = new cDragon(Colilargo,Chico,Verde);
     cDragon* dragon4 = new cDragon(Dientes,Grande,Blanco);
 
+    //dragon1 + ata1;
+    //no me permite con operator+ de dragon entonces
+    dragon1->agregarFA(def1);
+    dragon1->agregarFA(ata1);
+    dragon2->agregarFA(ata1);
+    dragon2->agregarFA(def1);
+    dragon3->agregarFA(ata1);
+    dragon3->agregarFA(def1);
+    dragon4->agregarFA(ata1);
+    dragon4->agregarFA(def1);
+
     cJinete* jinete1 = new cJinete("Malau","Raro","04/10/2002",Fortachon);
     cJinete* jinete2 = new cJinete("Elsa","Pato","10/10/2010",Matematico);
 
@@ -28,10 +38,17 @@ int main()
 
     try
     {
-        Stoico + dragon1;
+        Stoico + guerrero1;
+        Stoico + guerrero2;
         Stoico + jinete1;
         Stoico + guerrero1;
         Stoico + jinete2;
+
+        Stoico + dragon1;
+        Stoico + dragon2;
+        Stoico + dragon3;
+        Stoico + dragon4;
+
         Stoico.crearInteraccion();
         Stoico.imprimir();
     }
@@ -39,9 +56,6 @@ int main()
     {
         cout << e.what() << endl;
     }
-    Stoico + jinete1;
-    Stoico + jinete2;
-    Stoico.imprimir();
 
  /* 
  cout << jinete1 << endl;

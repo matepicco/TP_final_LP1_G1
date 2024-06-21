@@ -69,7 +69,7 @@ void cVikingo::trabajarEnBerk()
 {  
     if (caractFisicasV == Fortachon)
         set_posicionV(Leniador);
-    if (caractFisicasV == Matematico)
+    else if (caractFisicasV == Matematico)
         set_posicionV(Comerciante);
     else
         set_posicionV(Agricultor);

@@ -3,9 +3,8 @@
 #include "cAtaque.h"
 #include "cDefensa.h"
 #include "cGuerrero.h"
-
-class cGuerrero; 
-class cJinete;
+#include "cFormaCombate.h"
+class cFormaCombate;
 
 class cDragon
 {
@@ -19,11 +18,11 @@ private:
 	bool estadoD;
 	bool domadoD;
 
-	unsigned int vidaD;
+	int vidaD;
 
 	list <cFormaCombate*> listaFA;
 public:
-	//friend class cJinete;
+
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
 
@@ -35,15 +34,15 @@ public:
 	eColor get_color();
 	bool get_estado();
 	bool get_domado();
-	unsigned int getVidaD();
+	int getVidaD();
 	void set_nombre(string nombre);
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
 	void FAfuerteAdelante();
-
+		
 	list<cFormaCombate*> getListFA();
-	void ordenarFAsalvajes(cFormaCombate* objFA);
+	void ordenarFAsalvajes(cDragon* objD);
 	void bajaDragon();
 	void agregarFA(cFormaCombate* objD);
 
@@ -55,4 +54,5 @@ public:
 	string enumDtostring();
 	string enumColorTostring();
 	bool operator==(cDragon &drg);
+	void operator+(cFormaCombate* FC);
 };
