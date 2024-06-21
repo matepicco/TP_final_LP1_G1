@@ -41,7 +41,6 @@ int main()
         Stoico + guerrero1;
         Stoico + guerrero2;
         Stoico + jinete1;
-        Stoico + guerrero1;
         Stoico + jinete2;
 
         Stoico + dragon1;

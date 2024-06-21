@@ -242,6 +242,7 @@ void cStoico::crearInteraccion()
                 if (ptrJ != nullptr)
                 {
                     flagRD = ptrJ->RelacionarseConDragon((*itD));
+
                     if (flagRD)//logró domarlo
                     {
                         /*
@@ -255,34 +256,32 @@ void cStoico::crearInteraccion()
                             cout << e->what() << endl;
                         }
                         */
-                        listaDrgMatcheados.push_back(*itD);
-                        itD = listaDrgS.erase(itD);
-                        if(itD!= listaDrgS.end())
+                        listaDrgMatcheados.push_back((*itD));
+                        try
                         {
-                            try
-                            {
-                                ptrJ->manejarDragon(*itD, b);
-                                //esta b es porque hay que pasarle un indice para elegir un dragon
-                                b++;
-                            }
-                            catch (exception& e)
-                            {
-                                cout << e.what() << endl;
-                            }
+                            ptrJ->manejarDragon((*itD), b);
+                            //esta b es porque hay que pasarle un indice para elegir un dragon
+                            b++;
                         }
+                        catch (exception& e)
+                        {
+                            cout << e.what() << endl;
+                        }
+                        itD = listaDrgS.erase(itD);
                     }
-                    itD++;                    
+                    else
+                        itD++;
                 }
                 else
                 {
                     cGuerrero* ptrG = dynamic_cast<cGuerrero*>(*(itV));
                     //No chequeo si es nullptr porque si no es jinete si o si es Guerrero
                     //ojo q el null puede ser por no haber objetos en lista
-                        //implementacion: guerrero pelea uno por uno con los dragones de la lista.
+                    //implementacion: guerrero pelea uno por uno con los dragones de la lista.
                         flagRD = ptrG->RelacionarseConDragon((*itD));
                         if (flagRD)
                         {
-                            itD = listaDrgS.erase(itD);
+                            itD=listaDrgS.erase(itD);
                             /*
                             try
                             {
@@ -294,6 +293,7 @@ void cStoico::crearInteraccion()
                             }
                             */
                         }
+                        else
                         itD++;
                 }
                 break;

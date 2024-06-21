@@ -235,10 +235,10 @@ void quitarDragon(list<cDragon*> listaux, cDragon* drg)
     list<cDragon*>::iterator it = listaux.begin();
     while (it != listaux.end() && (*it) != drg) it++;
 
-    listaux.remove(*it);
+    listaux.erase(it);
 
-    if(it == listaux.end())
-        throw exception("El elemento a quitar no esta en la lista proporcionada");
+   /* if(it == listaux.end())
+        throw exception("El elemento a quitar no esta en la lista proporcionada");*/
 }
 
 void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])) 
