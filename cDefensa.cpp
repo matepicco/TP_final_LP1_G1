@@ -21,3 +21,13 @@ void cDefensa::cambiarDefensa(eTipoDefensa tipo)
 void cDefensa::combatir()
 {
 }
+
+string cDefensa::toStringFA()
+{
+	stringstream ss;
+
+	ss << ". El tipo de ataque: " << this->tipoDefensa << ", infligiendo una cantidad : " << this->tipoDanio <<
+		" de danio, cuantificado en : " << this->cantDanioD << endl;
+
+	return ss.str();
+}

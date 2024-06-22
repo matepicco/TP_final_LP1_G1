@@ -270,10 +270,22 @@ void cDragon::atacarDragon(cDragon* objD)
 		objD->set_estado(false);
 }
 
-string cDragon::to_string()
+string cDragon::toStringD()
 {
 	stringstream ss;
-	ss << "Nombre: " << this->nombreD << ", color: " << this->colorD<<", tipo de ataque: "<<enumAtostring()<<", tipo de defensa: "<<enumDtostring();
+	ss << "Nombre: " << this->nombreD << ", color: " << this->colorD<<", tipo de ataque: "<<enumAtostring()
+		<<", tipo de defensa: "<<enumDtostring();
+
+	list<cFormaCombate*>::iterator itFA = listaFA.begin();
+	while (itFA != listaFA.end()) {
+		cAtaque* ata = dynamic_cast<cAtaque*>(*itFA);
+		cDefensa* def = dynamic_cast<cDefensa*>(*itFA);
+		if(ata != nullptr)
+			ss << (*itFA)->toStringFA() << endl;
+		else
+			ss << (*itFA)->toStringFA() << endl;
+		itFA++;
+	}
 	return ss.str();
 }
 

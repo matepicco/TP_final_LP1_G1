@@ -8,8 +8,7 @@ protected:
 	eIntensidad tipoDanio;
 
 public:
-
-	 cFormaCombate(unsigned int danio, eIntensidad tipodanio);
+	cFormaCombate(unsigned int danio, eIntensidad tipodanio);
 	virtual ~cFormaCombate();
 
 	unsigned int getCantDanioD();
@@ -17,6 +16,6 @@ public:
 	void setCantDanio(unsigned int danio);
 	void cambiarIntensidad(eIntensidad danio);
 
+	virtual string toStringFA() = 0;
 	virtual void combatir() = 0; 
-
 };

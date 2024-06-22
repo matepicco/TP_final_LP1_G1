@@ -14,5 +14,6 @@ public:
 	void cambiarDefensa(eTipoDefensa tipo);
 
 	void combatir();
+	string toStringFA();
 };
 

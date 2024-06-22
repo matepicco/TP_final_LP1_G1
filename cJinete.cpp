@@ -53,7 +53,8 @@ string cJinete::toStringJ()
    
     list<cDragon*>::iterator itD = listaDragonesVivos.begin();
     while (itD != listaDragonesVivos.end()) {
-        ss << (*itD)->to_string()<< "\n";
+        ss << (*itD)->toStringD() << endl;
+        itD++;
     }
     return ss.str();
 }

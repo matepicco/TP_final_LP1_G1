@@ -21,3 +21,13 @@ void cAtaque::CambiarTipo(eTipoAtaque tipo)
 void cAtaque::combatir()
 {
 }
+
+string cAtaque::toStringFA()
+{
+	stringstream ss;
+
+	ss << ". El tipo de ataque: " << this->tipoAtaque << ", infligiendo una cantidad : " << this->tipoDanio << 
+		" de danio, cuantificado en : " << this->cantDanioD << endl;
+
+	return ss.str();
+}

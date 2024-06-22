@@ -42,13 +42,14 @@ int main()
         Stoico + dragon4;
 
         Stoico.crearInteraccion();
-        Stoico.toStringS();
     }
     catch (const exception& e)
     {
         cout << e.what() << endl;
     }
 
+    cout << guerrero1->toStringG();
+    cout << Stoico.toStringS();
     /*
     cout << jinete1 << endl;
     cout << Stoico;
