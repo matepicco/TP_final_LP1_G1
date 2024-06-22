@@ -39,11 +39,11 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 	this->cantVidaG = vidaAct;
 }
 
-string cGuerrero::toString()
+string cGuerrero::toStringG()
 {
 	stringstream ss;
 
-	ss << this->nombreV << " " << this->apellidoV << ". Trabaja de: " << this->posicion << " y su caracteristica fisica es: " << this->caractFisicasV << ". Tiene " <<
+	ss << this->nombreV << " " << this->apellidoV << ". Trabaja de: " << this->enumPtostring() << " y su caracteristica fisica es: " << this->enumCtostring() << ". Tiene " <<
 	this->DragonesEliminados <<"dragones eliminados" << endl;
 
 	return ss.str();

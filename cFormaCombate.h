@@ -8,7 +8,8 @@ protected:
 	eIntensidad tipoDanio;
 
 public:
-	cFormaCombate(unsigned int danio, eIntensidad tipodanio);
+
+	 cFormaCombate(unsigned int danio, eIntensidad tipodanio);
 	virtual ~cFormaCombate();
 
 	unsigned int getCantDanioD();

@@ -29,8 +29,7 @@ public:
 	void operator-(cVikingo* objV);
 
 	void imprimir();
-	//not necesario para friend xq main posee a stoico y << metodo public
-	string to_string();
+	string toStringS();
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
 	static int getcantVikCreados();
@@ -39,7 +38,6 @@ public:
 	void crearInteraccion();
 
 	//metodos objetivo de Stoico. funcion: listar
-	//metodo que modula el add a listaMatch. parametros lista y objeto
 	void DragonesDomados();
 	void JinetesxDragon();
 };

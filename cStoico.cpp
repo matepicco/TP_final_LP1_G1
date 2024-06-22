@@ -151,7 +151,7 @@ void cStoico::operator-(cVikingo* objV)
 
 void cStoico::imprimir()
 {
-    cout << this->to_string();
+    cout << this->toStringS();
     return;
 }
 
@@ -167,11 +167,11 @@ void cStoico::operator-(cDragon* objD)
 
 ostream& operator<<(ostream& out, cStoico* objS) {
 
-    out << objS->to_string();
+    out << objS->toStringS();
     return out;
 }
 
-string cStoico::to_string()
+string cStoico::toStringS()
 {
     stringstream ss;
 
@@ -183,15 +183,14 @@ string cStoico::to_string()
         if(jin!=nullptr)
         {
             ss << "El jinete es: ";
-            ss << jin->toString() << endl;
-            itV++;
+            ss << jin->toStringJ() << endl;
         }
         else if(guer!=nullptr)
         {
             ss << "El guerrero es: ";
-            ss << guer->toString() << endl;
-            itV++;
+            ss << guer->toStringG() << endl;
         }
+        itV++;
     }
         return ss.str();
 }

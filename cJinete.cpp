@@ -43,9 +43,8 @@ cDragon* cJinete::operator[](size_t index)
      return *it;
 }
 
-string cJinete::toString()
+string cJinete::toStringJ()
 {
-    //imprimo hijo y padre
     stringstream ss;
   
     ss << this->nombreV << " " << this->apellidoV<< ", trabaja de: " << enumPtostring() << ", su caracteristica es:  " << enumCtostring() << ". Su fecha de nacimiento es: "

@@ -131,7 +131,6 @@
     <ClCompile Include="cDefensa.cpp" />
     <ClCompile Include="cDragon.cpp" />
     <ClCompile Include="cFormaCombate.cpp" />
-    <ClCompile Include="cFormaCombate.h" />
     <ClCompile Include="cGuerrero.cpp" />
     <ClCompile Include="cJinete.cpp" />
     <ClCompile Include="cStoico.cpp" />
@@ -142,6 +141,7 @@
     <ClInclude Include="cAtaque.h" />
     <ClInclude Include="cDefensa.h" />
     <ClInclude Include="cDragon.h" />
+    <ClInclude Include="cFormaCombate.h" />
     <ClInclude Include="cGuerrero.h" />
     <ClInclude Include="cJinete.h" />
     <ClInclude Include="cStoico.h" />
