@@ -13,7 +13,7 @@ public:
 	eTipoDefensa getTipoDefensa();
 	void cambiarDefensa(eTipoDefensa tipo);
 
-	void combatir();
+	string enumTCtoString();
 	string toStringFA();
 };
 

@@ -19,7 +19,56 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 
 string cDragon::enumColorTostring()
 {
-	return string();
+	switch (this->colorD)
+	{
+	case Rojo:
+		return "Rojo";
+	case Negro:
+		return "Negro";
+	case Azul:
+		return "Azul";
+	case Naranja:
+		return "Naranja";
+	case Verde:
+		return "Verde";
+	case Blanco:
+		return "Blanco";
+	}
+}
+
+string cDragon::estadoToString()
+{
+	switch (this->estadoD)
+	{
+	case 0:
+		return "Muerto";
+	case 1:
+		return "Vivo";
+	}
+}
+
+string cDragon::domadoToString()
+{
+	switch (this->domadoD)
+	{
+	case 0:
+		return "Libre";
+	case 1:
+		return "Domado";
+	}
+}
+
+string cDragon::enumTamTostring()
+{
+	switch (this->tamanioD)
+	{
+	case Grande:
+		return "Grande";
+	case Mediano:
+		return "Mediano";
+	case Chico:
+		return "Chico";
+	}
 }
 
 bool cDragon::operator==(cDragon& drg)
@@ -271,11 +320,13 @@ void cDragon::atacarDragon(cDragon* objD)
 }
 
 string cDragon::toStringD()
-{
+{		
 	stringstream ss;
-	ss << "Nombre: " << this->nombreD << ", color: " << this->colorD<<", tipo de ataque: "<<enumAtostring()
-		<<", tipo de defensa: "<<enumDtostring();
-
+	ss << endl << this->nombreD << ", de ID: " << this->dragonID << ", carcaterizado como: "
+		<< this->enumHTostring() << ", por su color: " << this->enumColorTostring() << ", de tamanio: "
+		<< this->enumTamTostring() << endl << "Se encuentra: " << estadoToString() << " y " 
+		<< this->domadoToString() << " con un nivel de "<< this->vidaD << " de vida " << endl;
+	
 	list<cFormaCombate*>::iterator itFA = listaFA.begin();
 	while (itFA != listaFA.end()) {
 		cAtaque* ata = dynamic_cast<cAtaque*>(*itFA);
@@ -289,46 +340,20 @@ string cDragon::toStringD()
 	return ss.str();
 }
 
-string cDragon::enumAtostring()
+string cDragon::enumHTostring()
 {
-	cAtaque* ata = dynamic_cast<cAtaque*>(this->getListFA().front());
-	if (ata != nullptr)
+	switch (this->caracteristicaD)
 	{
-		switch (ata->getTipoAtaque()) {
-		case BolasFuego:
-			return "Bolas de Fuego";
-		case Araniar:
-			return "Araniar";
-		case Coletazo:
-			return "Coletazo";
-		case Mordidita:
-			return "Mordidita";
-		}
+	case Fogoso:
+		return "Fogoso";
+	case Garras:
+		return "Garras";
+	case Colilargo:
+		return "Colilargo";
+	case Dientes:
+		return "Dientes";
 	}
-	else if (ata == nullptr)
-		return " - ";
 }
-
-string cDragon::enumDtostring()
-{
-	cDefensa* def = dynamic_cast<cDefensa*>(this->getListFA().back());
-	if (def != nullptr)
-	{
-		switch (def->getTipoDefensa()) {
-		case ResisteFuego:
-			return "Resiste Fuego";
-		case EscamasResistentes:
-			return "Escamas Resistentes";
-		case Rapidez:
-			return "Rapidez";
-		case ArmaduraDrg:
-			return "Armadura de Dragon";
-		}
-	}
-	else if (def == nullptr)
-		return" - ";
-}
-
 
 void cDragon::agregarFA(cFormaCombate *objFA)
 {

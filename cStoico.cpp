@@ -175,7 +175,8 @@ string cStoico::toStringS()
 {
     stringstream ss;
 
-    ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " << cStoico::cantDrgCreados << endl;
+    ss << "Cantidad de Vikingos: " << cStoico::cantVikCreados << ", cantidad de Dragones: " 
+        << cStoico::cantDrgCreados << endl << endl;
     list<cVikingo*>::iterator itV = this->listaVikingos.begin();
     while (itV != listaVikingos.end()) {        
         cJinete* jin = dynamic_cast<cJinete*>((*itV));   

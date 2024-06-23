@@ -18,16 +18,27 @@ void cDefensa::cambiarDefensa(eTipoDefensa tipo)
 	this->tipoDefensa = tipo;
 }
 
-void cDefensa::combatir()
+string cDefensa::enumTCtoString()
 {
+	switch (this->tipoDefensa)
+	{
+	case ResisteFuego:
+		return "Resiste Fuego";
+	case EscamasResistentes:
+		return "Escamas Resistentes";
+	case Rapidez:
+		return "Rapidez";
+	case ArmaduraDrg:
+		return "Armadura de Dragon";
+	}
 }
 
 string cDefensa::toStringFA()
 {
 	stringstream ss;
 
-	ss << ". El tipo de ataque: " << this->tipoDefensa << ", infligiendo una cantidad : " << this->tipoDanio <<
-		" de danio, cuantificado en : " << this->cantDanioD << endl;
+	ss << ". Su forma de combate: " << this->enumTCtoString() << ", inflige una cantidad : " 
+		<< this->enumTItoString() <<" de danio, cuantificada en : " << this->cantDanioD << endl;
 
 	return ss.str();
 }

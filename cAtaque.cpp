@@ -18,16 +18,26 @@ void cAtaque::CambiarTipo(eTipoAtaque tipo)
 	this->tipoAtaque = tipo;
 }
 
-void cAtaque::combatir()
+string cAtaque::enumTCtoString()
 {
+	switch (this->tipoAtaque) {
+	case BolasFuego:
+		return "Bolas de Fuego";
+	case Araniar:
+		return "Araniar";
+	case Coletazo:
+		return "Coletazo";
+	case Mordidita:
+		return "Mordidita";
+	}
 }
 
 string cAtaque::toStringFA()
 {
 	stringstream ss;
 
-	ss << ". El tipo de ataque: " << this->tipoAtaque << ", infligiendo una cantidad : " << this->tipoDanio << 
-		" de danio, cuantificado en : " << this->cantDanioD << endl;
+	ss << ". Su forma de combate: " << this->enumTCtoString() << ", inflige una cantidad : " << this->enumTItoString()
+		<<" de danio, cuantificado en : " << this->cantDanioD << endl;
 
 	return ss.str();
 }

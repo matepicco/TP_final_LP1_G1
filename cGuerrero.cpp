@@ -44,7 +44,7 @@ string cGuerrero::toStringG()
 	stringstream ss;
 
 	ss << this->nombreV << " " << this->apellidoV << ". Trabaja de: " << this->enumPtostring() << " y su caracteristica fisica es: " << this->enumCtostring() << ". Tiene " <<
-	this->DragonesEliminados <<"dragones eliminados" << endl;
+	this->DragonesEliminados <<" dragon/es eliminados" << endl;
 
 	return ss.str();
 }

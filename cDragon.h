@@ -49,10 +49,14 @@ public:
 	friend bool cGuerrero::PelearDragon(cDragon* objD);
 	friend bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo);
 	void atacarDragon(cDragon* objD);
+
 	string toStringD();
-	string enumAtostring();
-	string enumDtostring();
+	string enumHTostring();
+	string enumTamTostring();
 	string enumColorTostring();
+	string estadoToString();
+	string domadoToString();
+
 	bool operator==(cDragon &drg);
 	void operator+(cFormaCombate* FC);
 };

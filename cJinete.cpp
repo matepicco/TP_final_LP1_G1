@@ -46,16 +46,21 @@ cDragon* cJinete::operator[](size_t index)
 string cJinete::toStringJ()
 {
     stringstream ss;
-  
-    ss << this->nombreV << " " << this->apellidoV<< ", trabaja de: " << enumPtostring() << ", su caracteristica es:  " << enumCtostring() << ". Su fecha de nacimiento es: "
-       << this->apodoJ << " " << to_string(this->fechaNac.tm_mday) << "/" << to_string(this->fechaNac.tm_mon + 1) << "/"
-       << to_string(this->fechaNac.tm_year + 1900) << ". Resultado de entrenamiento: " << enumRtostring() << ". Cantidad de dragones eliminados: " << this->DragonesEliminados << "Sus dragones de combate son: "<<endl;
+
+    ss << this->nombreV << " " << this->apellidoV << ", trabaja de: " << enumPtostring() << ", su caracteristica es: "
+       << enumCtostring() << ". Su fecha de nacimiento es: "<< this->apodoJ << " " << to_string(this->fechaNac.tm_mday) 
+        << "/" << to_string(this->fechaNac.tm_mon + 1) << "/"<< to_string(this->fechaNac.tm_year + 1900) 
+        << endl << "Resultado de entrenamiento: " << enumRtostring() << ". Cantidad de dragones eliminados: " 
+        << this->DragonesEliminados << ". Sus dragones de combate son: ";
    
+    if (listaDragonesVivos.size() == 0)
+        ss << "0" << endl;
     list<cDragon*>::iterator itD = listaDragonesVivos.begin();
     while (itD != listaDragonesVivos.end()) {
         ss << (*itD)->toStringD() << endl;
         itD++;
     }
+
     return ss.str();
 }
 
