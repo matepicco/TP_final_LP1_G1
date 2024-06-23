@@ -14,6 +14,7 @@ private:
 public:
 	cStoico();
 	~cStoico();
+	friend ostream& operator<<(ostream& out, cStoico stoico);
 
 	void agregarVikingo(cVikingo* objV);
 	void agregarDragon(cDragon* objD);
@@ -22,7 +23,6 @@ public:
 	void eliminarVikingo(cVikingo* objV);
 	void eliminarDragon(cDragon* objD);
 	
-	friend ostream& operator<<(ostream& out, cStoico* objS);
 	void operator-(cDragon* objD);
 	void operator+(cVikingo* objV);
 	void operator+(cDragon* objD);

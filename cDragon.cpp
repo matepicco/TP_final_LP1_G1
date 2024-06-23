@@ -323,7 +323,7 @@ string cDragon::toStringD()
 {		
 	stringstream ss;
 	ss << endl << this->nombreD << ", de ID: " << this->dragonID << ", carcaterizado como: "
-		<< this->enumHTostring() << ", por su color: " << this->enumColorTostring() << ", de tamanio: "
+		<< this->enumHTostring() << ", de color: " << this->enumColorTostring() << " y tamanio: "
 		<< this->enumTamTostring() << endl << "Se encuentra: " << estadoToString() << " y " 
 		<< this->domadoToString() << " con un nivel de "<< this->vidaD << " de vida " << endl;
 	

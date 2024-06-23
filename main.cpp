@@ -26,8 +26,8 @@ int main()
     cJinete* jinete1 = new cJinete("Malau", "Raro", "04/10/2002", Fortachon);
     cJinete* jinete2 = new cJinete("Elsa", "Pato", "10/10/2010", Matematico);
 
-    cGuerrero* guerrero1 = new cGuerrero("Malau", "Raro", Fortachon, 60);
-    cGuerrero* guerrero2 = new cGuerrero("Elsa", "Pato", Matematico, 50);
+    cGuerrero* guerrero1 = new cGuerrero("Andrew", "Hubberman", Fortachon, 60);
+    cGuerrero* guerrero2 = new cGuerrero("Joe", "Rogan", Matematico, 50);
 
     try
     {
@@ -47,15 +47,7 @@ int main()
     {
         cout << e.what() << endl;
     }
-
-    cout << guerrero1->toStringG();
-    cout << Stoico.toStringS();
-    /*
-    cout << jinete1 << endl;
     cout << Stoico;
-    no se porque tira error, como si no hubiese sobrecarga
-   cout << dragon1 << endl;
-     */
 
     delete ata1;
     delete def1;

@@ -307,19 +307,19 @@ void cJinete::altaNombre(cDragon* drg)
     int i = 0;
     string s;
     if (drg->get_caracteristica() == Fogoso) {
-        s = nombreV + "'s Fueguin" + aux;
+        s = nombreV + "'s Fueguin " + aux;
         drg->set_nombre(s);
     }
     else if (drg->get_caracteristica() == Garras) {
-        s=nombreV+"'s Garritas" + aux;
+        s=nombreV+"'s Garritas " + aux;
         drg->set_nombre(s);
     }
     else if (drg->get_caracteristica() == Colilargo){
-        s = nombreV + "'s Colilargo" + aux;
+        s = nombreV + "'s Colilargo " + aux;
         drg->set_nombre(s);
     }
     else {
-        s=nombreV+"'s Dientudo" + aux;
+        s=nombreV+"'s Dientudo " + aux;
         drg->set_nombre(s);
     }
 }

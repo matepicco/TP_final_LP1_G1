@@ -10,6 +10,11 @@ cStoico::cStoico()
     this->listaDrgS = list<cDragon*>();
 }
 
+ostream& operator<<(ostream& out, cStoico stoico) {
+    out << stoico.toStringS();
+    return out;
+}
+
 void cStoico::agregarVikingo(cVikingo* objV)
 {
     this->listaVikingos.push_back(objV);
@@ -165,11 +170,8 @@ void cStoico::operator-(cDragon* objD)
     return;
 }
 
-ostream& operator<<(ostream& out, cStoico* objS) {
 
-    out << objS->toStringS();
-    return out;
-}
+
 
 string cStoico::toStringS()
 {

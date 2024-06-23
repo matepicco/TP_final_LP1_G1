@@ -40,10 +40,10 @@ string cFormaCombate::enumTItoString()
 	switch (this->tipoDanio)
 	{
 	case Poco:
-		return "Poco";
+		return "Poca";
 	case Moderado:
-		return "Moderado";
+		return "Moderada";
 	case Mucho:
-		return "Mucho";
+		return "Mucha";
 	}
 }	
