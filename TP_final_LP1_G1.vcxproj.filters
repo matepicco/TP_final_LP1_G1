@@ -18,10 +18,7 @@
     <ClCompile Include="cDragon.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="cFormaAtaque.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClCompile>
-    <ClCompile Include="cFormaAtaque.cpp">
+    <ClCompile Include="cFormaCombate.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="cJinete.cpp">
@@ -48,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDragon.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="cFormaCombate.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="cVikingo.h">

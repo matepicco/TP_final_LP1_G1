@@ -7,7 +7,7 @@ class cGuerrero :public cVikingo
 {
 protected:
 	unsigned int cantDanioG;
-	unsigned int cantVidaG;
+	int cantVidaG;
 	bool estadoG;
 
 public:
@@ -15,14 +15,14 @@ public:
 	~cGuerrero();
 
 	unsigned int getCantDanioG();
-	unsigned int getCantVidaG();
+	int getCantVidaG();
 	void setEstadoG(bool VM);
 	void setCantDanioG(unsigned int danioAct);
 	void setCantVidaG(unsigned int vidaAct);
 
 	bool RelacionarseConDragon(cDragon* drgNuevo);
-	bool TerminarDragon(cDragon* objD);
+	bool PelearDragon(cDragon* objD);
 
-	string toString();
+	string toStringG();
 };
 

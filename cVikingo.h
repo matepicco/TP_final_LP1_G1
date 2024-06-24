@@ -15,7 +15,7 @@ protected:
 
 public:
 	cVikingo(string nombrev, string apellidov,eCaract caracteristicasfisicas);
-	~cVikingo();
+	virtual ~cVikingo();
 
 	const string getVikiID();
 	const string get_nombreV();
@@ -25,6 +25,9 @@ public:
 	void set_DragonesEliminados(unsigned int cant);
 	ePos get_posicionV();
 	void set_posicionV(ePos pos);
+
+	 string enumPtostring();
+	 string enumCtostring();
 
 	void trabajarEnBerk();
 

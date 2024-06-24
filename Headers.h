@@ -8,10 +8,8 @@
 #include <random>
 #include <cstdlib>
 
-
 using namespace std;
 
-//mantenemos eHab para caracteristicas sea Ata/Def
 enum eHabilidad { Fogoso, Garras, Colilargo, Dientes};
 enum eIntensidad { Poco, Moderado, Mucho };
 enum eTipoAtaque { BolasFuego, Araniar, Coletazo, Mordidita};

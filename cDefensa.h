@@ -1,7 +1,7 @@
 #pragma once
-#include "cFormaAtaque.h"
+#include "cFormaCombate.h"
 
-class cDefensa: public cFormaAtaque
+class cDefensa: public cFormaCombate
 {
 protected:
 	eTipoDefensa tipoDefensa;
@@ -13,6 +13,7 @@ public:
 	eTipoDefensa getTipoDefensa();
 	void cambiarDefensa(eTipoDefensa tipo);
 
-	void combatir();
+	string enumTCtoString();
+	string toStringFA();
 };
 

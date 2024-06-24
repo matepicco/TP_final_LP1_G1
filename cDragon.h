@@ -3,9 +3,8 @@
 #include "cAtaque.h"
 #include "cDefensa.h"
 #include "cGuerrero.h"
-
-class cGuerrero; 
-class cJinete;
+#include "cFormaCombate.h"
+class cFormaCombate;
 
 class cDragon
 {
@@ -19,14 +18,15 @@ private:
 	bool estadoD;
 	bool domadoD;
 
-	unsigned int vidaD;
+	int vidaD;
 
-	list <cFormaAtaque*> listaFA;
+	list <cFormaCombate*> listaFA;
 public:
-	//friend class cJinete;
+
 	cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord);
 	~cDragon();
 
+	cFormaCombate* get_FormaCombateXIndice(int i);
 	const int getDragonID();
 	string get_nombre();
 	eHabilidad get_caracteristica();
@@ -34,22 +34,30 @@ public:
 	eColor get_color();
 	bool get_estado();
 	bool get_domado();
-	unsigned int getVidaD();
+	int getVidaD();
 	void set_nombre(string nombre);
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
-	
-	void getFAfuerte();
 
-	list<cFormaAtaque*> getListFA();
-	void ordenarFAsalvajes(cFormaAtaque* objFA);
+	void FAfuerteAdelante();
+		
+	list<cFormaCombate*> getListFA();
+	void ordenarFAsalvajes(cDragon* objD);
 	void bajaDragon();
-	void agregarFA(cFormaAtaque* objD);
+	void agregarFA(cFormaCombate* objD);
 
-	friend bool cGuerrero::TerminarDragon(cDragon* objD);
+	friend bool cGuerrero::PelearDragon(cDragon* objD);
 	friend bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo);
 	void atacarDragon(cDragon* objD);
 
+	string toStringD();
+	string enumHTostring();
+	string enumTamTostring();
+	string enumColorTostring();
+	string estadoToString();
+	string domadoToString();
+
 	bool operator==(cDragon &drg);
+	void operator+(cFormaCombate *FC);
 };

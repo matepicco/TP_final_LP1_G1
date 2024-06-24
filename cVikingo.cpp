@@ -42,11 +42,34 @@ void cVikingo::set_posicionV(ePos pos)
     this->posicion = pos;
 }
 
+string cVikingo::enumPtostring(){
+    switch (this->posicion) {
+    case Leniador:
+        return "Leniador";
+    case Comerciante:
+        return "Comerciante";
+    case Agricultor:
+        return "Agricultor";
+    }
+}
+
+string cVikingo::enumCtostring()
+{
+    switch (this->caractFisicasV) {
+    case Fortachon:
+        return "Fortachon";
+    case Matematico:
+        return "Matematico";
+    case Botanico:
+        return "Camperito";
+    }
+}
+
 void cVikingo::trabajarEnBerk()
 {  
     if (caractFisicasV == Fortachon)
         set_posicionV(Leniador);
-    if (caractFisicasV == Matematico)
+    else if (caractFisicasV == Matematico)
         set_posicionV(Comerciante);
     else
         set_posicionV(Agricultor);

@@ -4,23 +4,60 @@
 int main()
 {
     cStoico Stoico = cStoico();
-    cDragon* dragon1 = new cDragon(ResisteFuego,Grande,Rojo);
-    cDragon* dragon2 = new cDragon(Rapidez,Mediano,Negro);
-    cDragon* dragon3 = new cDragon(CuraFacil,Chico,Verde);
-    cDragon* dragon4 = new cDragon(PatasLargas,Grande,Blanco);
+    cAtaque* ata1 = new cAtaque(BolasFuego, Moderado, 60);
+    cDefensa* def1 = new cDefensa(ArmaduraDrg, Moderado, 60);
 
-    cJinete* jinete1 = new cJinete("Malau","Raro",04/10/2002,Fortachon);
-    cJinete* jinete2 = new cJinete("Elsa","Pato",10/10/2010,Matematico);
+    cDragon* dragon1 = new cDragon(Fogoso, Grande, Rojo);
+    cDragon* dragon2 = new cDragon(Garras, Mediano, Negro);
+    cDragon* dragon3 = new cDragon(Colilargo, Chico, Verde);
+    cDragon* dragon4 = new cDragon(Dientes, Grande, Blanco);
 
+    dragon1->agregarFA(def1);
+    dragon1->agregarFA(ata1);
+    dragon2->agregarFA(ata1);
+    dragon2->agregarFA(def1);
+    dragon3->agregarFA(ata1);
+    dragon3->agregarFA(def1);
+    dragon4->agregarFA(ata1);
+    dragon4->agregarFA(def1);
+
+    cJinete* jinete1 = new cJinete("Malau", "Raro", "04/10/2002", Fortachon);
+    cJinete* jinete2 = new cJinete("Elsa", "Pato", "10/10/2010", Matematico);
+
+    cGuerrero* guerrero1 = new cGuerrero("Andrew", "Hubberman", Fortachon, 60);
+    cGuerrero* guerrero2 = new cGuerrero("Joe", "Rogan", Matematico, 50);
+
+    Stoico + guerrero1;
+    Stoico + guerrero2;
     Stoico + jinete1;
     Stoico + jinete2;
-    Stoico.imprimir();
-    cout << jinete1 << endl;
-    cout << dragon1 << endl;
 
-    //cout << Stoico << endl; //porqué no?
+    Stoico + dragon1;
+    Stoico + dragon2;
+    Stoico + dragon3;
+    Stoico + dragon4;
 
-//aca luego de instanciar a los jinetes y vikingos,
-//se llama a ingresar dragon, se pasa el puntero y ahi empieza el programa llamando a entrenar
-//luego se llamaria a atacar dragon y eso haria que dos peleen
+    try
+    {
+        Stoico.crearInteraccion();
+    }
+    catch (const exception& e)
+    {
+        cout << e.what() << endl;
+    }
+
+    cout << Stoico;
+
+    delete ata1;
+    delete def1;
+    delete dragon1;
+    delete dragon2;
+    delete dragon3;
+    delete dragon4;
+    delete jinete1;
+    delete jinete2;
+    delete guerrero1;
+    delete guerrero2;
+
+    return 0;
 }

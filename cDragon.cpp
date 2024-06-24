@@ -4,7 +4,6 @@ int cDragon::dragonesCreados = 0;
 
 cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): dragonID(dragonesCreados)
 {
-	//paso x parametro FA, igualo al parametro. sobrecargo en main 
 	this->nombreD = "";
 	this->caracteristicaD = caracteristicad;
 	this->tamanioD = tamaniod;
@@ -12,15 +11,63 @@ cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): 
 	this->estadoD = true;
 	this->domadoD = false;
 	this->vidaD = 100;
-
-	//plantear dos opciones
-	/*
-	cFormaAtaque* at1= objA(Resistente);
-	this->listaFA = listaFA.push_back(at1)
 	
-	this->listaFA = list<cFormaAtaque*>();
-	*/
+	this->listaFA = list<cFormaCombate*>();
 	dragonesCreados++;
+}
+
+string cDragon::enumColorTostring()
+{
+	switch (this->colorD)
+	{
+	case Rojo:
+		return "Rojo";
+	case Negro:
+		return "Negro";
+	case Azul:
+		return "Azul";
+	case Naranja:
+		return "Naranja";
+	case Verde:
+		return "Verde";
+	case Blanco:
+		return "Blanco";
+	}
+}
+
+string cDragon::estadoToString()
+{
+	switch (this->estadoD)
+	{
+	case 0:
+		return "Muerto";
+	case 1:
+		return "Vivo";
+	}
+}
+
+string cDragon::domadoToString()
+{
+	switch (this->domadoD)
+	{
+	case 0:
+		return "Libre";
+	case 1:
+		return "Domado";
+	}
+}
+
+string cDragon::enumTamTostring()
+{
+	switch (this->tamanioD)
+	{
+	case Grande:
+		return "Grande";
+	case Mediano:
+		return "Mediano";
+	case Chico:
+		return "Chico";
+	}
 }
 
 bool cDragon::operator==(cDragon& drg)
@@ -32,19 +79,24 @@ bool cDragon::operator==(cDragon& drg)
 				if (this->estadoD == drg.estadoD && this->domadoD == drg.domadoD)
 					flag = true;
 			}
-		return flag;
 	}
+	return flag;
 }
 
-void cDragon::getFAfuerte()
+void cDragon::operator+(cFormaCombate *FC)
+{
+	agregarFA(FC);
+}
+
+void cDragon::FAfuerteAdelante()
 {
 	//metodo available para dragones pertenecientes a jinete
 	if (this->domadoD != true)
 		return;
 
-	list<cFormaAtaque*>::iterator itFA = this->listaFA.begin();
+	list<cFormaCombate*>::iterator itFA = this->listaFA.begin();
 	bool flag = true;
-	int maxDanio = 0;
+	unsigned int maxDanio = 0;
 
 	while (itFA != listaFA.end())
 	{
@@ -59,32 +111,43 @@ void cDragon::getFAfuerte()
 		}
 		itFA++;
 	}
-	return;
 }
 
-list<cFormaAtaque*> cDragon::getListFA()
+list<cFormaCombate*> cDragon::getListFA()
 {
 	return this->listaFA;
 }
 
-void cDragon::ordenarFAsalvajes(cFormaAtaque* objFA)
-{
+void cDragon::ordenarFAsalvajes(cDragon* objD)
+{	
 	//dragon salvaje
-	if (this->domadoD != true)
-	{
-		if (dynamic_cast<cAtaque*>(objFA) != nullptr)
+	//metodo ordena todas las defensas atras, ataques adelante
+	if (objD->domadoD == false)
+	{	
+		list <cFormaCombate*> ::iterator itFC = objD->listaFA.begin();
+		list <cFormaCombate*> ::iterator itFC1 = objD->listaFA.end();
+
+		while (itFC != objD->listaFA.end())
 		{
-			listaFA.push_front(objFA);
-			//defensa queda en back: segundo
+			if (dynamic_cast<cAtaque*>(*itFC) != nullptr)
+			{
+				objD->listaFA.push_front(*itFC);
+				//si 2 FC: defensa queda en back: segundo
+			}
+			else if (dynamic_cast<cDefensa*>(*itFC) != nullptr)
+			{
+				objD->listaFA.splice(itFC, listaFA, itFC1);
+			}
+			itFC++;
 		}
+
 	}
 	return;
 }
 
-bool cGuerrero::TerminarDragon(cDragon* objD)
+bool cGuerrero::PelearDragon(cDragon* objD)
 {
 	bool terminado = false;
-	//double check: innecesario? Solo necesario si ejecuto directo este metodo
 	if (objD->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
@@ -103,18 +166,16 @@ bool cGuerrero::TerminarDragon(cDragon* objD)
 			objD->setVidaD(objD->getVidaD() - this->getCantDanioG());
 			break;
 		case 1: //ataca solo dragon
-			this->cantVidaG = this->cantVidaG - objD->getListFA().front()->getCantDanioD();
+			this->cantVidaG = this->cantVidaG - objD->getListFA().front()->getCantDanioD();//agarra el frente porque es el del ataque
 			break;
 		}
 	}
 
-	if (this->getCantVidaG() > 0)
+	if (this->cantVidaG > 0)
 	{
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
-		!terminado;
-		//pendiente: metodo que llame, dependiendo el return 
-		//settea dragon muerto en listaDraognes muertos
+		terminado =!terminado;
 	}
 	else if (objD->getVidaD() > 0)
 		this->setEstadoG(false);
@@ -125,23 +186,24 @@ bool cGuerrero::TerminarDragon(cDragon* objD)
 bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
 {
 	bool terminado = false;
-	if (drgNuevo->get_estado() == false)
-		throw exception("Este Dragon esta muerto");
-	else if (drgNuevo->get_domado() == true)
-		throw exception("Este Dragon es bueno");
+	if (drgNuevo->get_estado() == false || drgNuevo->get_domado() == true)
+		return terminado;
 	else
-		terminado = this->TerminarDragon(drgNuevo);
+		terminado = this->PelearDragon(drgNuevo);
 	return terminado;
 }
 
-void cDragon::atacarDragon(cDragon * objD)
+void cDragon::atacarDragon(cDragon* objD)
 {
-	this->getFAfuerte(); //retorna ataque mayor intensidad al principio
-	ordenarFAsalvajes(objD->getListFA().front());
-	//dragones salvajes tienen Ataque primero, defensa segundo
+	this->FAfuerteAdelante();
+	/*
+	* mueve el ataque de mas intensidad al principio
+	*ordenarFAsalvajes(objD);//Envia a la forma de ataque adelante
+	*dragones salvajes tienen Ataque primero, defensa segundo por el metodo de arriba
+	*/
 
-	list <cFormaAtaque*> ::iterator itFA = listaFA.begin();
-	while (objD->getVidaD() > 0 || this->getVidaD() > 0)
+	list <cFormaCombate*> ::iterator itFA = listaFA.begin();
+	while ((objD->getVidaD() > 0) && ((this->getVidaD()) >= 0))
 	{
 		random_device rd;
 		mt19937 gen(rd());
@@ -149,99 +211,149 @@ void cDragon::atacarDragon(cDragon * objD)
 		int numAleato = dis(gen);
 		switch (numAleato)
 		{
-		case 0:
-			//ataca solo domado
-			//chequeo nerf de ataque
-			cAtaque* ataAux = dynamic_cast<cAtaque*>((*itFA));
-			cDefensa* defObj = dynamic_cast<cDefensa*>(objD->getListFA().back());
-
-			if (ataAux != nullptr && defObj !=nullptr)
+			case 0:
 			{
-				//cuando encuentro ataque y defensa equivalente: varío la cantidad daño aplicada
-				if (ataAux->getTipoAtaque() == BolasFuego && defObj->getTipoDefensa() == ResisteFuego)
-				{
-					objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
-					itFA++;
-					break;
-				}
-				else if (ataAux->getTipoAtaque() == Araniar && defObj->getTipoDefensa() == EscamasResistentes)
-				{
-					objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
-					itFA++;
-					break;
-				}
-				else if (ataAux->getTipoAtaque() == Coletazo && defObj->getTipoDefensa() == Rapidez)
-				{
-					objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
-					itFA++;
-					break;
-				}
-				else if (ataAux->getTipoAtaque() == Mordidita && defObj->getTipoDefensa() == ArmaduraDrg)
-				{
-					objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
-					itFA++;
-					break;
-				}
-				else
-					objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD());
-				break;
-			}
-		case 1://ataca solo salvaje
-			list <cFormaAtaque*> ::iterator itFAD = listaFA.begin();
-			while (itFAD != listaFA.end()) {
-				cDefensa* def = dynamic_cast<cDefensa*>(*itFAD);
-				if (def != nullptr)
-					break;
-				itFAD++;
-			}
+				//ataca solo domado
+				//chequeo nerf de ataque
+				cAtaque* ataAux = dynamic_cast<cAtaque*>((*itFA));
+				cDefensa* defObj = dynamic_cast<cDefensa*>(objD->getListFA().back());
 
-			cDefensa * defAux = dynamic_cast<cDefensa*>((*itFAD));
-			cAtaque* ataObj = dynamic_cast<cAtaque*>(objD->getListFA().front());
-
-			if (defAux != nullptr)
+				if (ataAux != nullptr && defObj != nullptr)
+				{
+					//cuando encuentro ataque y defensa equivalente: varío la cantidad daño aplicada
+					if (ataAux->getTipoAtaque() == BolasFuego && defObj->getTipoDefensa() == ResisteFuego)
+					{
+						objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else if (ataAux->getTipoAtaque() == Araniar && defObj->getTipoDefensa() == EscamasResistentes)
+					{
+						objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else if (ataAux->getTipoAtaque() == Coletazo && defObj->getTipoDefensa() == Rapidez)
+					{
+						objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else if (ataAux->getTipoAtaque() == Mordidita && defObj->getTipoDefensa() == ArmaduraDrg)
+					{
+						objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else
+						objD->setVidaD(objD->getVidaD() - this->listaFA.front()->getCantDanioD());
+					break;
+				}
+			}
+			case 1://ataca solo salvaje
 			{
-				//cuando encuentro ataque y defensa equivalente: varío la cantidad daño aplicada
-				if( ataObj->getTipoAtaque() == BolasFuego && defAux->getTipoDefensa() == ResisteFuego)
-				{
-					this->vidaD = (vidaD - ataObj->getCantDanioD()/2);
-					itFA++;
-					break;
+				bool flagDef = true;
+				list <cFormaCombate*> ::iterator itFAD = listaFA.begin();
+				while (itFAD != listaFA.end() && flagDef) {
+					cDefensa* def = dynamic_cast<cDefensa*>(*itFAD);
+					if (def != nullptr)
+						flagDef=false;
+					else
+						itFAD++;
 				}
-				else if (ataObj->getTipoAtaque() == Araniar && defAux->getTipoDefensa() == EscamasResistentes)
-				{
-					this->vidaD = (vidaD - ataObj->getCantDanioD()/2);
-					itFA++;
-					break;
-				}
-				else if (ataObj->getTipoAtaque() == Coletazo && defAux->getTipoDefensa() == Rapidez)
-				{
-					this->vidaD = (vidaD - ataObj->getCantDanioD()/2);
-					itFA++;
-					break;
-				}
-				else if (ataObj->getTipoAtaque() == Mordidita && defAux->getTipoDefensa() == ArmaduraDrg)
-				{
-					this->vidaD = (vidaD - ataObj->getCantDanioD()/2);
-					itFA++;
-					break;
-				}
-				else
-					this->vidaD=(vidaD - ataObj->getCantDanioD());
-				break;
-			}
 
+				bool flagAta = true;
+				list <cFormaCombate*> ::iterator itFA = objD->listaFA.begin();
+				while (itFA != objD->listaFA.end() && flagAta) {
+					cAtaque* ata = dynamic_cast<cAtaque*>(*itFA);
+					if (ata != nullptr)
+						flagAta = false;
+					else
+						itFA++;
+				}
+				cDefensa* defAux = dynamic_cast<cDefensa*>(*itFAD);
+				cAtaque* ataObj = dynamic_cast<cAtaque*>(*itFA);
+
+				if (defAux != nullptr)
+				{
+					//cuando encuentro ataque y defensa equivalente: varío la cantidad daño aplicada
+					if (ataObj->getTipoAtaque() == BolasFuego && defAux->getTipoDefensa() == ResisteFuego)
+					{
+						this->vidaD = (vidaD - ataObj->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else if (ataObj->getTipoAtaque() == Araniar && defAux->getTipoDefensa() == EscamasResistentes)
+					{
+						this->vidaD = (vidaD - ataObj->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else if (ataObj->getTipoAtaque() == Coletazo && defAux->getTipoDefensa() == Rapidez)
+					{
+						this->vidaD = (vidaD - ataObj->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else if (ataObj->getTipoAtaque() == Mordidita && defAux->getTipoDefensa() == ArmaduraDrg)
+					{
+						this->vidaD = (vidaD - ataObj->getCantDanioD() / 2);
+						itFA++;
+						break;
+					}
+					else
+						this->vidaD = (vidaD - ataObj->getCantDanioD());
+					break;
+				}
+			}
 		}
 	}
 
-		/*
-		cambio de relacion entre D y FA -> COMPOSICION. Dragon nace con FA. Sino, alternativa para asignarla?
-		Drg nace con ataque y defensa. ambas dos. todos drg sobrecargados salvajes tambien.
-		*/
+	if (this->vidaD <= 0) {
+		this->estadoD = false;
+	}
+	else if (objD->getVidaD() <= 0)
+		objD->set_estado(false);
 }
 
-void cDragon::agregarFA(cFormaAtaque *objFA)
+string cDragon::toStringD()
+{		
+	stringstream ss;
+	ss << endl << this->nombreD << ", de ID: " << this->dragonID << ", carcaterizado como: "
+		<< this->enumHTostring() << ", de color: " << this->enumColorTostring() << " y tamanio: "
+		<< this->enumTamTostring() << endl << "Se encuentra: " << estadoToString() << " y " 
+		<< this->domadoToString() << " con un nivel de "<< this->vidaD << " de vida " << endl;
+	
+	list<cFormaCombate*>::iterator itFA = listaFA.begin();
+	while (itFA != listaFA.end()) {
+		cAtaque* ata = dynamic_cast<cAtaque*>(*itFA);
+		cDefensa* def = dynamic_cast<cDefensa*>(*itFA);
+		if(ata != nullptr)
+			ss << (*itFA)->toStringFA() << endl;
+		else
+			ss << (*itFA)->toStringFA() << endl;
+		itFA++;
+	}
+	return ss.str();
+}
+
+string cDragon::enumHTostring()
 {
-	//proviene de entrenarDrg
+	switch (this->caracteristicaD)
+	{
+	case Fogoso:
+		return "Fogoso";
+	case Garras:
+		return "Garras";
+	case Colilargo:
+		return "Colilargo";
+	case Dientes:
+		return "Dientes";
+	}
+}
+
+void cDragon::agregarFA(cFormaCombate *objFA)
+{
 	this->listaFA.push_back(objFA);
 }
 
@@ -250,7 +362,7 @@ bool cDragon::get_domado()
 	return this->domadoD;
 }
 
-unsigned int cDragon::getVidaD()
+int cDragon::getVidaD()
 {
 	return this->vidaD;
 }
@@ -273,6 +385,17 @@ void cDragon::set_nombre(string nombre)
 eHabilidad cDragon::get_caracteristica()
 {
 	return this->caracteristicaD;
+}
+
+cFormaCombate* cDragon::get_FormaCombateXIndice(int i)
+{
+	list<cFormaCombate*>::iterator it = listaFA.begin();
+	int a = 0;
+	while (it != listaFA.end()&& a<i) {
+		it++;
+		a++;
+	}
+	return (*it);
 }
 
 const int cDragon::getDragonID()
