@@ -1,7 +1,7 @@
 #include "cGuerrero.h"
 
 cGuerrero::cGuerrero(string nombreG, string apellidoG, eCaract caracfisic, unsigned int danioG):cVikingo(nombreG,apellidoG,caracfisic)
-{//tira verde porque cantDanioG esta dentro del trycatch
+{
 	this->cantVidaG = 100;
 	this->estadoG = true;
 
@@ -39,12 +39,12 @@ void cGuerrero::setCantVidaG(unsigned int vidaAct)
 	this->cantVidaG = vidaAct;
 }
 
-string cGuerrero::toString()
+string cGuerrero::toStringG()
 {
 	stringstream ss;
 
-	ss << this->nombreV << " " << this->apellidoV << ". Trabaja de: " << this->posicion << " y su caracteristica fisica es: " << this->caractFisicasV << ". Tiene " <<
-	this->DragonesEliminados <<"dragones eliminados" << endl;
+	ss << this->nombreV << " " << this->apellidoV << ". Trabaja de: " << this->enumPtostring() << " y su caracteristica fisica es: " << this->enumCtostring() << ". Tiene " <<
+	this->DragonesEliminados <<" dragon/es eliminados" << endl;
 
 	return ss.str();
 }

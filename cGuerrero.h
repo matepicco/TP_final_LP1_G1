@@ -23,6 +23,6 @@ public:
 	bool RelacionarseConDragon(cDragon* drgNuevo);
 	bool PelearDragon(cDragon* objD);
 
-	string toString();
+	string toStringG();
 };
 

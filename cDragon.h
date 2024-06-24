@@ -39,6 +39,7 @@ public:
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
+
 	void FAfuerteAdelante();
 		
 	list<cFormaCombate*> getListFA();
@@ -49,10 +50,14 @@ public:
 	friend bool cGuerrero::PelearDragon(cDragon* objD);
 	friend bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo);
 	void atacarDragon(cDragon* objD);
-	string to_string();
-	string enumAtostring();
-	string enumDtostring();
+
+	string toStringD();
+	string enumHTostring();
+	string enumTamTostring();
 	string enumColorTostring();
+	string estadoToString();
+	string domadoToString();
+
 	bool operator==(cDragon &drg);
-	void operator+(cFormaCombate* FC);
+	void operator+(cFormaCombate *FC);
 };

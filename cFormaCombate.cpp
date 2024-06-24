@@ -34,3 +34,16 @@ void cFormaCombate::cambiarIntensidad(eIntensidad danio)
 {
 	this->tipoDanio = danio;
 }
+
+string cFormaCombate::enumTItoString()
+{
+	switch (this->tipoDanio)
+	{
+	case Poco:
+		return "Poca";
+	case Moderado:
+		return "Moderada";
+	case Mucho:
+		return "Mucha";
+	}
+}	

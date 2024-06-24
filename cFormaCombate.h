@@ -16,6 +16,7 @@ public:
 	void setCantDanio(unsigned int danio);
 	void cambiarIntensidad(eIntensidad danio);
 
-	virtual void combatir() = 0; 
-
+	virtual string toStringFA() = 0;
+	virtual string enumTCtoString() = 0;
+	string enumTItoString();
 };

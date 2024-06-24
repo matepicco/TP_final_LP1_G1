@@ -32,5 +32,5 @@ public:
 
 	string enumRtostring();
 	cDragon* operator[](size_t index);
-	string toString();	
+	string toStringJ();	
 };
