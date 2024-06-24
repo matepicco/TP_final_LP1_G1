@@ -1,7 +1,7 @@
 #include "cGuerrero.h"
 
 cGuerrero::cGuerrero(string nombreG, string apellidoG, eCaract caracfisic, unsigned int danioG):cVikingo(nombreG,apellidoG,caracfisic)
-{//tira verde porque cantDanioG esta dentro del trycatch
+{
 	this->cantVidaG = 100;
 	this->estadoG = true;
 

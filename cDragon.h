@@ -39,6 +39,7 @@ public:
 	void setVidaD(unsigned int vidaAct);
 	void set_estado(bool estado);
 	void set_domado(bool domado);
+
 	void FAfuerteAdelante();
 		
 	list<cFormaCombate*> getListFA();
@@ -58,5 +59,5 @@ public:
 	string domadoToString();
 
 	bool operator==(cDragon &drg);
-	void operator+(cFormaCombate* FC);
+	void operator+(cFormaCombate *FC);
 };

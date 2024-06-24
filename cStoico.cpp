@@ -133,19 +133,18 @@ void cStoico::eliminarDragon(cDragon* objD)
 
 void cStoico::operator+(cVikingo* objV)
 {
-    //exception si ya existente
     agregarVikingo(objV);
     return;
 }
 
 void cStoico::operator+(cDragon* objD)
-{    //exception
+{ 
     agregarDragon(objD);
     return;
 }
 
 void cStoico::operator-(cVikingo* objV)
-{//operator [], ==. si lo encuentra, lo elimina. sino exception
+{
     if (objV != nullptr)
         eliminarVikingo(objV);
     else
@@ -161,7 +160,7 @@ void cStoico::imprimir()
 }
 
 void cStoico::operator-(cDragon* objD)
-{///operator [], ==. si lo encuentra, lo elimina. sino exception
+{
     if (objD != nullptr)
         eliminarDragon(objD);
     else
@@ -169,9 +168,6 @@ void cStoico::operator-(cDragon* objD)
 
     return;
 }
-
-
-
 
 string cStoico::toStringS()
 {
@@ -200,8 +196,6 @@ string cStoico::toStringS()
 
 cVikingo* cStoico::get_vikingoxNom(string nombre)
 {
-    //Debe ir en un trycatch
-    //Sobrecargar
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
     while (nombre != (*it)->get_nombreV()&&it!=listaVikingos.end()) it++;
@@ -212,10 +206,8 @@ cVikingo* cStoico::get_vikingoxNom(string nombre)
     return *it;
 }
 
-cVikingo* cStoico::get_vikingoxPos(ePos pos)//Tambien debe ir en un trycatch
+cVikingo* cStoico::get_vikingoxPos(ePos pos)
 {
-    //Debe ir en un trycatch
-    //Sobrecargar
     list<cVikingo*>::iterator it = this->listaVikingos.begin();
 
     while (pos != (*it)->get_posicionV()&& it!= listaVikingos.end()) it++;
@@ -241,28 +233,18 @@ void cStoico::crearInteraccion()
             {
                 bool flagRD = false;
                 cJinete* ptrJ = dynamic_cast<cJinete*>(*(itV));
+                cGuerrero* ptrG = dynamic_cast<cGuerrero*>(*(itV));
                 if (ptrJ != nullptr)
                 {
                     flagRD = ptrJ->RelacionarseConDragon((*itD));
 
                     if (flagRD)//logró domarlo
                     {
-                        /*
-                        try
-                        {
-                            agregarDrgXlista(listaDrgMatcheados, (*itD));
-                            eliminarDrgXlista(listaDrgS, (*itD));
-                        }
-                        catch (exception *e)
-                        {
-                            cout << e->what() << endl;
-                        }
-                        */
                         listaDrgMatcheados.push_back((*itD));
                         try
                         {
                             ptrJ->manejarDragon((*itD), b);
-                            //esta b es porque hay que pasarle un indice para elegir un dragon
+                            //b = indice para elegir un dragon
                             b++;
                         }
                         catch (exception& e)
@@ -274,29 +256,16 @@ void cStoico::crearInteraccion()
                     else
                         itD++;
                 }
-                else
+                else if (ptrG != nullptr)
                 {
-                    cGuerrero* ptrG = dynamic_cast<cGuerrero*>(*(itV));
-                    //No chequeo si es nullptr porque si no es jinete si o si es Guerrero
-                    //ojo q el null puede ser por no haber objetos en lista
-                    //implementacion: guerrero pelea uno por uno con los dragones de la lista.
-                        flagRD = ptrG->RelacionarseConDragon((*itD));
-                        if (flagRD)
-                        {
-                            itD=listaDrgS.erase(itD);
-                            /*
-                            try
-                            {
-                                eliminarDrgXlista(listaDrgS, (*itD));
-                            }
-                            catch (exception* e)
-                            {
-                                cout << e->what() << endl;
-                            }
-                            */
-                        }
-                        else
+                    flagRD = ptrG->RelacionarseConDragon((*itD));
+                    if (flagRD)
+                    {
+                        itD = listaDrgS.erase(itD);
+                    }
+                    else
                         itD++;
+                 
                 }
                 break;
             }
@@ -309,7 +278,7 @@ void cStoico::crearInteraccion()
 
 void cStoico::MandarAAtacar()
 {
-    //particularizar
+    //particulariza dirigir a Jinete x a interactuar
 }
 
 int cStoico::getcantVikCreados()
@@ -320,10 +289,12 @@ int cStoico::getcantVikCreados()
 
 void cStoico::DragonesDomados()
 {
+    //genera un informe de la lista de ListaMatcheados
 }
 
 void cStoico::JinetesxDragon()
 {
+    //genera un informe de la lista de ListaMatcheados
 }
 
 cStoico::~cStoico()

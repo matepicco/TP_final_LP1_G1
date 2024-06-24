@@ -4,7 +4,6 @@ int cDragon::dragonesCreados = 0;
 
 cDragon::cDragon(eHabilidad caracteristicad, eTamanio tamaniod, eColor colord): dragonID(dragonesCreados)
 {
-	//paso x parametro FA, igualo al parametro. sobrecargo en main 
 	this->nombreD = "";
 	this->caracteristicaD = caracteristicad;
 	this->tamanioD = tamaniod;
@@ -84,7 +83,7 @@ bool cDragon::operator==(cDragon& drg)
 	return flag;
 }
 
-void cDragon::operator+(cFormaCombate* FC)
+void cDragon::operator+(cFormaCombate *FC)
 {
 	agregarFA(FC);
 }
@@ -120,10 +119,9 @@ list<cFormaCombate*> cDragon::getListFA()
 }
 
 void cDragon::ordenarFAsalvajes(cDragon* objD)
-{
-	//metodo ordena todas las defensas atras, ataques adelante
-	//La función splice de std::list mueve el elemento apuntado por el iterador fromIt a la posición antes del iterador toIt.
+{	
 	//dragon salvaje
+	//metodo ordena todas las defensas atras, ataques adelante
 	if (objD->domadoD == false)
 	{	
 		list <cFormaCombate*> ::iterator itFC = objD->listaFA.begin();
@@ -138,7 +136,7 @@ void cDragon::ordenarFAsalvajes(cDragon* objD)
 			}
 			else if (dynamic_cast<cDefensa*>(*itFC) != nullptr)
 			{
-				//objD->listaFA.splice(itFC, listaFA, itFC1);
+				objD->listaFA.splice(itFC, listaFA, itFC1);
 			}
 			itFC++;
 		}
@@ -150,7 +148,6 @@ void cDragon::ordenarFAsalvajes(cDragon* objD)
 bool cGuerrero::PelearDragon(cDragon* objD)
 {
 	bool terminado = false;
-	//double check: innecesario? Solo necesario si ejecuto directo este metodo
 	if (objD->get_estado() == false)
 		throw exception("Este Dragon esta muerto");
 	else if (objD->get_domado() == true)
@@ -179,8 +176,6 @@ bool cGuerrero::PelearDragon(cDragon* objD)
 		set_DragonesEliminados(1);
 		objD->bajaDragon();
 		terminado =!terminado;
-		//pendiente: metodo que llame, dependiendo el return 
-		//settea dragon muerto en listaDraognes muertos
 	}
 	else if (objD->getVidaD() > 0)
 		this->setEstadoG(false);
@@ -200,9 +195,12 @@ bool cGuerrero::RelacionarseConDragon(cDragon* drgNuevo)
 
 void cDragon::atacarDragon(cDragon* objD)
 {
-	this->FAfuerteAdelante();// mueve el ataque de mas intensidad al principio
-	//ordenarFAsalvajes(objD);//Envia a la forma de ataque adelante
-	//dragones salvajes tienen Ataque primero, defensa segundo por el metodo de arriba
+	this->FAfuerteAdelante();
+	/*
+	* mueve el ataque de mas intensidad al principio
+	*ordenarFAsalvajes(objD);//Envia a la forma de ataque adelante
+	*dragones salvajes tienen Ataque primero, defensa segundo por el metodo de arriba
+	*/
 
 	list <cFormaCombate*> ::iterator itFA = listaFA.begin();
 	while ((objD->getVidaD() > 0) && ((this->getVidaD()) >= 0))
@@ -254,7 +252,6 @@ void cDragon::atacarDragon(cDragon* objD)
 			}
 			case 1://ataca solo salvaje
 			{
-				//ambos bucles meten mano en que NECESITAMOS un ataque y una defensa. buscar otra manera
 				bool flagDef = true;
 				list <cFormaCombate*> ::iterator itFAD = listaFA.begin();
 				while (itFAD != listaFA.end() && flagDef) {
@@ -357,7 +354,6 @@ string cDragon::enumHTostring()
 
 void cDragon::agregarFA(cFormaCombate *objFA)
 {
-	//proviene de entrenarDrg
 	this->listaFA.push_back(objFA);
 }
 

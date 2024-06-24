@@ -18,6 +18,7 @@ public:
 
 	void agregarVikingo(cVikingo* objV);
 	void agregarDragon(cDragon* objD);
+
 	void agregarDrgXlista(list<cDragon*> lista, cDragon* drg);
 	void eliminarDrgXlista(list<cDragon*> lista, cDragon* drg);
 	void eliminarVikingo(cVikingo* objV);
@@ -30,14 +31,14 @@ public:
 
 	void imprimir();
 	string toStringS();
+
 	cVikingo* get_vikingoxNom(string nombre);
 	cVikingo* get_vikingoxPos(ePos pos);
 	static int getcantVikCreados();
 	
-	void MandarAAtacar();
 	void crearInteraccion();
 
-	//metodos objetivo de Stoico. funcion: listar
+	void MandarAAtacar();
 	void DragonesDomados();
 	void JinetesxDragon();
 };

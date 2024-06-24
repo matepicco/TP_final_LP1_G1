@@ -1,7 +1,8 @@
 #include "cJinete.h"
 vector<string> cJinete::PosicionNombres = {"Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto"};
 int cJinete::iterador = 0;
-int cJinete::i = 0;// un i para ir avanzando las formas de ataque en entrenar
+int cJinete::i = 0;
+// un i para ir avanzando las formas de ataque en entrenar
 
 cJinete::cJinete(string nom, string ape, string fecha,eCaract caracfisic):cVikingo(nom,ape,caracfisic)
 {
@@ -18,14 +19,18 @@ cJinete::cJinete(string nom, string ape, string fecha,eCaract caracfisic):cVikin
 	getline(fechaIngresada, aux);
 	auxF.anio = stoi(aux);
 
-	// Pasamos lo guardado a un struct tm
+    /*
+    // Pasamos lo guardado a un struct tm
 	// el -1900 en anio es porque tm tiene en cuenta los anios pasados desde el 1900
 	// el -1 en mes es porque el rango va de 0 a 11
+    */
+
 	this->fechaNac = { 0, 0, 0, auxF.dia, auxF.mes - 1, auxF.anio - 1900 };
    
     this->TrainResult = NoAsistio;
-    //el apodo se asignará gracias al dragon que dome. inicializado en cVikingo
     this->listaDragonesVivos = list<cDragon*>();
+    //apodo será asignado gracias al dragon que dome. inicializado en cVikingo
+
 }
 
 cDragon* cJinete::operator[](size_t index)
@@ -34,10 +39,8 @@ cDragon* cJinete::operator[](size_t index)
         throw out_of_range("El jinete tiene menos dragones que el numero ingresado");
     list<cDragon*>::iterator it = this->listaDragonesVivos.begin();
     int i = 0;
-    while (i < index&& it!= listaDragonesVivos.end()) {
+    while (i < index && it!= listaDragonesVivos.end()) {
          it++;
-         //error producido acá se debe a que no agrega en la lista de DrgVivos
-         //entonces cuando it intenta sumar, no puedo, obvio, no hay qué, ni a dondes avanzar
          i++;
     }
      return *it;
@@ -113,7 +116,8 @@ bool cJinete::entrenarDragon()
                     break;
                 }
                 else if (defaux != nullptr) {
-                    defaux->cambiarDefensa(ResisteFuego);//En el caso de la defensa no hay un numero que la represente, pero si sirve para hacer la cuenta del danio en ataque
+                    defaux->cambiarDefensa(ResisteFuego);
+                    //En el caso de la defensa no hay un numero que la represente, pero si sirve para hacer la cuenta del danio en ataque
                     if (ptrDragon->get_tamanio() == Grande && this->TrainResult == Primero) {
                         defaux->cambiarIntensidad(Mucho);
                     }
@@ -246,7 +250,7 @@ void quitarDragon(list<cDragon*> listaux, cDragon* drg)
         throw exception("El elemento a quitar no esta en la lista proporcionada");*/
 }
 
-void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])) 
+void cJinete::manejarDragon(cDragon* ptrD, int index)
 {      
     cDragon* midragon = nullptr;//Creo el objeto de dragon que voy a usar 
     if (this->listaDragonesVivos.size() == 0)
@@ -257,14 +261,15 @@ void cJinete::manejarDragon(cDragon* ptrD, int index)//manejardragon(jinete1[3])
         try
         {
              midragon = this->operator[](index);
-            // se trae el dragon de cierta posicion de la lista para que luche
+            //dragon de cierta posicion de la lista para que luche
         }
          catch (exception& e) { cout << e.what() << endl; }
 
     if ((midragon)->get_estado())
     {
         if (ptrD->get_domado() == false)
-            (midragon)->atacarDragon(ptrD);//llama al atacar del dragon que esta montando y le pasa el otro para la pelea
+            (midragon)->atacarDragon(ptrD);
+        //llamado a atacar del dragon que esta montando y le pasa el otro para la pelea
         else {//si con midragon no ataca, ataca con el proximo vivo que encuentre en la lista y mete el otro en los muertos
             quitarDragon(listaDragonesVivos, midragon);
 
@@ -291,7 +296,7 @@ string cJinete::get_apodoJ()
 }
 
 void cJinete::domar()
-{//agregar si lista vacia, exception.tambien para entrenar dragon
+{
     if (listaDragonesVivos.empty())
         throw exception("Lista vacía");
     else
@@ -301,7 +306,8 @@ void cJinete::domar()
 void cJinete::altaNombre(cDragon* drg)
 {
     if (iterador == 7)
-        throw exception("No hay mas nombres para Dragones");// Y si, lo fije en 7 porque dale que va a tener mas de 7 dragones bobo no da
+        throw exception("No hay mas nombres para Dragones");
+
     string aux = cJinete::PosicionNombres[iterador];//vector static para nombres
     cJinete::iterador++;// avanzo el iterador static, como una variable global
     int i = 0;
@@ -331,7 +337,7 @@ bool cJinete::incorporarDragon(cDragon* ptrDragon)
     {
         this->altaNombre(ptrDragon);
         this->listaDragonesVivos.push_back(ptrDragon);
-        this->domar();//settea domado al drg
+        this->domar();
         flagTrain= this->entrenarDragon();
     }catch(exception &e)
     {
@@ -361,7 +367,7 @@ bool cJinete::RelacionarseConDragon(cDragon* drgNuevo) {
         flag = incorporarDragon(drgNuevo);
         break;
     case 4:
-        set_trainresult(Ultimo);//no es que no aprobo, sino que aprobo justo
+        set_trainresult(Ultimo);//aprueba con lo justo
         flag = incorporarDragon(drgNuevo);
         break;
     }

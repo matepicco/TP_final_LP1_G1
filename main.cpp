@@ -12,8 +12,6 @@ int main()
     cDragon* dragon3 = new cDragon(Colilargo, Chico, Verde);
     cDragon* dragon4 = new cDragon(Dientes, Grande, Blanco);
 
-    //dragon1 + ata1;
-    //no me permite con operator+ de dragon entonces
     dragon1->agregarFA(def1);
     dragon1->agregarFA(ata1);
     dragon2->agregarFA(ata1);
@@ -29,24 +27,25 @@ int main()
     cGuerrero* guerrero1 = new cGuerrero("Andrew", "Hubberman", Fortachon, 60);
     cGuerrero* guerrero2 = new cGuerrero("Joe", "Rogan", Matematico, 50);
 
+    Stoico + guerrero1;
+    Stoico + guerrero2;
+    Stoico + jinete1;
+    Stoico + jinete2;
+
+    Stoico + dragon1;
+    Stoico + dragon2;
+    Stoico + dragon3;
+    Stoico + dragon4;
+
     try
     {
-        Stoico + guerrero1;
-        Stoico + guerrero2;
-        Stoico + jinete1;
-        Stoico + jinete2;
-
-        Stoico + dragon1;
-        Stoico + dragon2;
-        Stoico + dragon3;
-        Stoico + dragon4;
-
         Stoico.crearInteraccion();
     }
     catch (const exception& e)
     {
         cout << e.what() << endl;
     }
+
     cout << Stoico;
 
     delete ata1;
