@@ -6,6 +6,12 @@ int main()
     cStoico Stoico = cStoico();
     cAtaque* ata1 = new cAtaque(BolasFuego, Moderado, 60);
     cDefensa* def1 = new cDefensa(ArmaduraDrg, Moderado, 60);
+    cAtaque* ata2 = new cAtaque(Araniar, Poco, 40);
+    cDefensa* def2 = new cDefensa(Rapidez, Poco, 40);
+    cAtaque* ata3 = new cAtaque(Mordidita, Moderado, 70);
+    cDefensa* def3 = new cDefensa(ResisteFuego, Moderado, 70);
+    cAtaque* ata4 = new cAtaque(Coletazo, Poco, 40);
+    cDefensa* def4 = new cDefensa(EscamasResistentes, Poco, 40);
 
     cDragon* dragon1 = new cDragon(Fogoso, Grande, Rojo);
     cDragon* dragon2 = new cDragon(Garras, Mediano, Negro);
@@ -14,12 +20,12 @@ int main()
 
     dragon1->agregarFA(def1);
     dragon1->agregarFA(ata1);
-    dragon2->agregarFA(ata1);
-    dragon2->agregarFA(def1);
-    dragon3->agregarFA(ata1);
-    dragon3->agregarFA(def1);
-    dragon4->agregarFA(ata1);
-    dragon4->agregarFA(def1);
+    dragon2->agregarFA(ata2);
+    dragon2->agregarFA(def2);
+    dragon3->agregarFA(ata3);
+    dragon3->agregarFA(def3);
+    dragon4->agregarFA(ata4);
+    dragon4->agregarFA(def4);
 
     cJinete* jinete1 = new cJinete("Malau", "Raro", "04/10/2002", Fortachon);
     cJinete* jinete2 = new cJinete("Elsa", "Pato", "10/10/2010", Matematico);
